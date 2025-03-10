@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiddi - inicio de sesion</title>
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/inicio-sesion.css">
+    <!-- Fuentes de google -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inder&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">    
+</head>
+<body>
+    <header class="header">
+        <nav class="header-nav">
+            <a href="#" class="nav-logo">
+                <img src="/assets/footer.logo.nombre.png" alt="Logo de tiddi con nombre">
+            </a>
+            <ul class="nav-items">
+                <li><a href="/index.html" class="item-link">Inicio</a></li>
+                <li><a href="/inicio-sesion.html" class="item-link">Ingresar</a></li>
+                <li><a href="/registro.html" class="item-link">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="sesion-contenedor">
+        <section class="sesion">
+            <article class="sesion-mensaje">
+                <picture class="contenido-logo">
+                    <img src="/assets/letra-mas-logo.png" alt="logo de tiddi">
+                </picture>
+                <h2>¡Bienvenido!</h2>
+                <p>Inicia sesión ahora para continuar gestionando tus tareas y mantener tu productividad al máximo.</p>
+            </article>
+            <article class="sesion-acceso">
+                <form class="acceso-form">
+                    <h2>Iniciar sesión</h2>
+                    <input type="email" name="email"  placeholder="Correo electronico" title="Correo incorrecto" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" autofocus required >
+                    <input type="password" name="password"  placeholder="Contraseña" title="Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo especial" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$"  required >
+                    <input type="submit" value="Ingresar">
+                    <a href="#" class="enlace">¿Olvidaste tu contraseña?</a>
+                    <a href="/registro.html" class="enlace enlace-linea1">¿No tienes una cuenta?</a>
+                    <a href="/registro.html" class="bton-registro">Registrate</a>  
+                    <a href="#" class="enlace enlace-linea2">o accede con</a>
+                    <div class="redes">
+                        <a href="#" class="redes-icon">
+                            <img src="/assets/facebook-color.png" alt="icono de Facebook">
+                            <span>Facebook</span>
+                        </a>
+                        <a href="#" class="redes-icon">
+                            <img src="/assets/google.png" alt="icono de Google">
+                            <span>Google</span>
+                        </a>
+                    </div>
+
+                </form>
+
+            </article>
+        </section>
+    </main>
+    <script src="./js/inicio.sesion.js" type="module"></script>
+</body>
+</html>

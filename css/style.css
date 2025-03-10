@@ -1,0 +1,424 @@
+:root{
+    --color-main: #93EB96;
+    --color-form:#19651C;
+    --color-footer: #BFE9A5;
+    --color-buttom:#FCCA4C;
+    --color-bolls-float: #218625;
+    --color-tittle: #073509;
+    --font-size: "Inter";
+
+}
+/* Reseteo de propiedades por defecto */
+html{
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: var(--font-size);
+    scroll-behavior: smooth;
+}
+*, *::after, *::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    /* outline: thin solid; */
+
+}
+body{
+    font-size: 1.6rem;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+a{
+    text-decoration: none;
+}
+body::selection{
+    background-color: var(--color-buttom);
+}
+/* ---------------------------------------Inicio de los estilos de Tiddi---------------------------------------- */
+/* ---------------------------------------Tiddi header---------------------------------------- */
+.header{
+    position: fixed;
+    top: 0;
+    z-index: 998;
+    width: 100%;
+    height: 10vh;
+
+    transition: background-color 0.5s ease-in-out;
+}
+.header-nav{
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5rem;
+}
+.nav-logo{
+    width: 120px;
+}
+.nav-items{
+    display: flex;
+    list-style-type: none;
+}
+
+.item-link{
+    margin-right: 4rem;
+    color: var(--color-tittle);
+    font-size: 2rem;
+    text-align: center;
+}
+.nav-items li:hover , .nav-logo:hover{
+    transform: scale(1.1);
+}
+.item-link:hover{
+    color:  var(--color-bolls-float);
+}
+/* ------------------------------Estilos del cuerpo de la pagina--------------------------------------- */
+.secciones {
+    width: 100%;
+    height: 100vh;
+
+}
+/* ---------------------------------------Tiddi Primera seccion---------------------------------------- */
+
+.seccion-uno{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-image: url(/assets/Bienvenida-fondo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.seccion-informacion{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    color: var(--color-tittle);
+
+}
+.informacion-titulo{
+    width: 70%;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+.informacion-parrafo{
+    width: 70%;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+
+}
+.seccion-informacion a{
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    padding-top: 0.5rem;
+    margin-left: 8.5rem;
+    align-self: flex-start;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    background-color: var(--color-bolls-float);
+}
+
+.seccion-informacion a:hover {
+    background-color: var(--color-footer);
+    color: var(--color-bolls-float);
+}
+
+.seccion-img{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* -------------------------------------Tiddi segunda seccion---------------------------------------- */
+.seccion-dos {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 130vh;
+    background-color: var(--color-main);
+}
+.seccion-descripcion{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    color: var(--color-tittle);
+}
+.descripcion-img{
+    width: 40%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.descripcion-picture{
+   
+    border-radius: 50%;
+}
+.descripcion-picture img{
+    height: 30rem;
+    width: 30rem;
+    border-radius: 100%;
+    object-fit: cover;
+}
+.descripcion-parrafo{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 5rem;
+}
+.descripcion-parrafo h2{
+    margin-bottom: 2rem;
+}
+
+
+
+.seccion-opinion{
+    position: absolute;
+    bottom: 5rem;
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    padding-left:5rem;
+    background-color: white;
+
+}
+.contenedor-opinion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.contenedor-opinion >* {
+    /* padding: 2rem; */
+    margin-right: 5rem;
+}
+.opinion-titulo >*{
+    display: block;
+    text-align: center;
+    padding-left: 5rem;
+    margin-bottom: 5rem;
+    /* text-align: center;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+}
+.opinion-comentario{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+.opinion-comentario p {
+    width: 40%;
+    text-align: center;
+    margin-right: 2rem;
+}
+.comentario-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+}
+.comentario-picture img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* -------------------------------------Tiddi Tercera seccion---------------------------------------- */
+.seccion-contacto{
+    position: relative;
+    /* border: thin solid; */
+    display: flex;
+    height: 90vh;
+}
+.contacto-anuncio {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-tittle);
+}
+.anuncio-titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+.anuncio-titulo img{
+    width: 50px;
+    height: 50px;
+    margin-right: 2rem;
+}
+.anuncio-parrafo {
+    width: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin-top: 3rem;
+}
+.anuncio-parrafo p{
+    display: inline-block;
+    width: 40rem;
+}
+.anuncio-parrafo img{
+    width: 40px;
+    height: 40px;
+    margin-left: 2rem;
+}
+
+
+
+.contacto-formulario{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formulario {
+    position: absolute;
+    top: 10rem;
+    right: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 400px;
+    min-height: 80vh;
+    border-radius: 5px;
+    background-color: var(--color-form) ;
+
+}
+.formulario-titulo {
+    text-align: center;
+    font-size: 2.7rem;
+    margin-bottom: 4rem;
+    color: white;
+    align-self: flex-start;
+    padding-left: 4rem;
+}
+.formulario input{
+    width: 80%;
+    height: 40px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 7px;
+    border: none;
+    font-size: 1.6rem;
+    font-family: "inder";
+}
+.formulario textarea {
+    padding: 1.5rem;
+    border-radius: 7px;
+    margin-bottom: 2rem;
+    border: none;
+    font-size: 1.6rem;
+    font-family: var(--font-size);
+    resize: none;
+}
+.formulario input[type="submit"]{
+    width: 130px;
+    height: 40px;
+    align-self: self-start;
+    margin-left: 4.5rem;
+    padding: 0;
+    background-color: var(--color-buttom);
+    cursor: pointer;
+}
+.formulario input[type="submit"]:hover{
+    background-color: #FFD95F;
+    color: #d08815;
+}
+.formulario [required]:valid {
+    border: thin solid var(--color-main);
+}
+/* validaciones */
+.formulario-error {
+    margin-top: -2rem;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 80%;
+    background-color: red;
+    margin-bottom: 1rem;
+    color: white;
+    transition: all 800ms ease;
+}
+.none {
+    display: none;
+}
+.formulario-error.is-active {
+    display: block;
+    animation: show-message 1s 1 normal 0s ease-out both;
+}
+@keyframes show-message {
+    0% {
+      visibility: hidden;
+      opacity: 0;
+    }
+  
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+
+
+
+
+
+
+.footer {
+    display: flex;
+    width: 100%;
+    height: 20vh;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 5rem;
+    background-color: var(--color-footer);
+}
+.redes {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5rem;
+    text-align: center;
+}
+.redes-picture{
+    display: flex;
+    margin-top: 1rem;
+    
+}
+.redes-picture a {
+    margin-right: 1rem;
+    cursor: pointer;
+}
+.redes-picture a:hover {
+    transform: scale(1.1);
+}
