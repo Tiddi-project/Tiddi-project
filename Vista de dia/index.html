@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vista de día</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id="body">
+    <main>
+    </main>
+
+    <!-- Vista de día-->
+     <div class="vistaDeDia">
+        <div>
+            <h1 class="bienvenida">Bienvenida, Laura.</h1> 
+        </div>
+        <div class="filtros">
+            <div>
+                <p>Filtrar por estado</p>
+                <button class="botonFiltro">Todas</button>
+                <button class="botonFiltro">En proceso</button>
+                <button class="botonFiltro">Completadas</button>
+            </div>
+            <div>
+                <p>Filtrar por prioridad</p>
+                <button class="botonFiltro">Normal</button>
+                <button class="botonFiltro">Media</button>
+                <button class="botonFiltro">Alta</button>
+            </div>
+        </div>
+        <div class="divFecha">
+            <button class="diaAnterior">
+                <img src="flecha-left.png" alt="Anterior">
+            </button>
+            <h2>Miercoles, 1 de enero de 2025</h2>
+            <button class="diaSiguiente">
+                <img src="Flecha-right.png" alt="Siguiente">
+            </button>
+            <button class="calendario" id="abrirCalendario">
+                <img src="calendario.png" alt="Calendario">
+            </button> 
+        </div>
+        <div class="divTareasYProgreso">
+            <div class="misTareas">
+                <div class="tareas">
+                    <div >Tarea</div>
+                    <div >Tarea</div>
+                    <div >Tarea</div>
+                    <div >Tarea</div>
+                    <div >Tarea</div>
+                    <div >Tarea</div>
+                    <div >Tarea</div>
+                    <div >Tarea</div>
+                </div>
+            </div>
+            <div class="miProgreso">
+                <h2>Mi progreso hoy</h2>
+                <div></div>
+                <p>Completa todas tus tareas y logra tu meta del día.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para abrir la barra lateral -->
+    <button class="open-btn" onclick="mostrarBarraIzq()">☰</button>
+    <!-- Mini boton de nueva tarea -->
+    <button class="nuevaTareaMini" onclick="mostrarCreacionTarea()">
+        <img src="mas.png" alt="+">
+    </button>
+
+    <!-- Barra lateral -->
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="mostrarBarraIzq()">
+            <img src="flecha izq.png" alt="Ocultar">
+        </button>
+        <img src="Logo Tiddi.png" alt="logo Tiddi" class="logo">
+        <button class="nuevaTarea" onclick="mostrarCreacionTarea()">
+            <img src="mas.png" alt="+">
+            Nueva tarea
+        </button>
+        <a href="#">Día</a>
+        <a href="#">Semana</a>
+        <a href="#">Mes</a>
+        <a href="#">
+            <img src="estadistico.png" alt="Icono" class="icono">
+            Mi desempeño
+        </a>
+        <a href="#">
+            <img src="ajuste.png" alt="Icono" class="icono">
+            Ajustes
+        </a>
+        <div class="contenedorPerfil">
+            <button class="perfil" id="perfil" onclick="toggleMenu()">
+                <img src="foto de perfil.jpg" alt="Foto de perfil" class="fotoDePerfil">
+            </button>
+            <p>Laura G.</p>
+            <!-- Mini menu de perfil -->
+            <div id="perfilMenu" class="menu-perfil">
+                <a href="#">
+                    <img src="usuario.png" alt="Icono" class="icono">
+                    Mi perfil
+                </a>
+                <a href="#">
+                    <img src="cerrar-sesion.png" alt="Icono" class="icono">
+                    Cerrar sesión
+                </a>
+            </div>
+        </div> 
+    </div>
+
+    <!-- Menu de creación tarea -->
+    <div class="creacionTarea" id="creacionTarea">
+        <div>
+            <button class="botonCancelar" onclick="mostrarCreacionTarea()">Cancelar</button>
+            <button class="botonGuardar">Guardar</button>
+        </div>
+        <input type="text" placeholder="Título" class="nombreTarea">
+        <textarea placeholder="Descripción" class="descripcionTarea"></textarea>
+        <button class="adjuntarImagenes">
+            <img src="adjunto-archivo.png" alt="Adjuntar" class="icono">
+            Adjuntar iamgenes
+        </button>
+        <div>
+            <div>
+                <p>Fecha:</p>
+                <input type="date">
+            </div>
+            <div>
+                <p>Hora:</p>
+                <input type="time">
+            </div>
+        </div>
+        <!-- Lista desplegable❗❗❗ -->
+         <div class="recordar">
+                <label for="opciones">Recordatorio:</label>
+                <select id="opciones">
+                    <option value="Opción 1">A la hora de la tarea</option>
+                    <option value="Opción 1">5 minutos antes</option>
+                    <option value="Opción 3">15 minutos antes</option>
+                    <option value="Opción 3">30 minutos antes</option>
+                    <option value="Opción 3">1 hora antes</option>
+                    <option value="Opción 3">24 horas antes</option>
+                    <option value="Opción 3">Personalizado...</option>
+                </select>
+        </div>
+        <p>Prioridad:</p>
+        <div class="prioridad">
+            <p>Baja</p>
+            <button class="pBaja"></button>
+            <p>Media</p>
+            <button class="pMedia"></button>
+            <p>Alta</p>
+            <button class="pAlta"></button>
+        </div>
+        <p>Color</p>
+        <div class="divColor">
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <button class="agregarSubtareas">
+            <img src="subtarea.png" alt="Agregar">
+            Agregar subtareas
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
