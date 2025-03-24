@@ -1,12 +1,13 @@
 import express from "express"
+import session from "express-session"
 import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
-import session from "express-session"
 import path from "path"
 import { fileURLToPath } from "url"
 import routesTask from "./routes/rTasks.js"
 import error from "./middlewares/error.js"
+import routesUser from "./routes/rUsers.js"
 
 
 // crear el servidor
@@ -25,13 +26,26 @@ app.use(morgan("dev"))
 app.use(express.static(path.join(__dirname, "../frontend")))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
+app.use(
+    session({
+      secret: "mi_llave",
+      resave: true,
+      saveUninitialized: true,
+    })
+  );
+
+
 app.use(routesTask)
+app.use(routesUser)
 
 
 app.use(error.e404);
 
 // 📌 Middleware de manejo de errores (debe ir al final)
 app.use(error.e400);
+app.use(error.e401);
+app.use(error.e403);
 app.use(error.e500);
 
 app.listen(PORT, ()=>{

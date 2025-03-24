@@ -13,8 +13,10 @@ d.addEventListener("DOMContentLoaded", (e)=>{
     validacionRegistro($form)    //complete
 
     d.addEventListener("submit", (e)=>{
+        e.preventDefault()
         // Metodo AJAX
         aUser.signinUser($form) 
+        window.location.reload()
     })
     
 })

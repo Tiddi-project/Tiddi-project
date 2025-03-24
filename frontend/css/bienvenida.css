@@ -87,7 +87,7 @@ body::selection{
     justify-content: center;
     align-items: center;
     
-    background-image: url(/frontend/assets/Bienvenida-fondo.png);
+    background-image: url(../assets/Bienvenida-fondo.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

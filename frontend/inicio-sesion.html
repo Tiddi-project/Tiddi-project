@@ -33,14 +33,14 @@
                 <p>Inicia sesión ahora para continuar gestionando tus tareas y mantener tu productividad al máximo.</p>
             </article>
             <article class="sesion-acceso">
-                <form class="acceso-form">
+                <form class="acceso-form" method="post" action="#">
                     <h2>Iniciar sesión</h2>
                     <input type="email" name="email" id="email" placeholder="Correo electronico"  autofocus required >
                     <span class="testFail"></span>
 
                     <input type="password" name="password" id="password"  placeholder="Contraseña"  required >
                     
-                    <input type="submit" value="Ingresar">
+                    <input type="submit" class="envio" value="Ingresar">
                     <a href="#" class="enlace">¿Olvidaste tu contraseña?</a>
                     <p class="enlace enlace-linea1">¿No tienes una cuenta?</p>
                     <a href="./registro.html" class="bton-registro">Registrate</a>  
@@ -55,7 +55,6 @@
                             <span>Google</span>
                         </a>
                     </div>
-
                 </form>
 
             </article>
