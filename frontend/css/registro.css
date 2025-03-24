@@ -31,9 +31,7 @@ img{
 a{
     text-decoration: none;
 }
-body::selection{
-    background-color: var(--color-buttom);
-}
+
 /* ---------------------------------------Inicio de los estilos de Tiddi---------------------------------------- */
 /* ---------------------------------------Tiddi header---------------------------------------- */
 .header{
@@ -175,6 +173,12 @@ body::selection{
     text-align: center;
     color: white;
 }
+.testFail {
+    width: 70%;
+    font-size: 1.2rem;
+    color: #ff0000  ;
+    margin-top: 0.5rem;
+}
 .registro-form input[type="submit"]:hover {
     background-color: var(--color-form);
     color: var(--color-tittle);
@@ -236,7 +240,7 @@ body::selection{
     color: black;
 }
 .redes-icon:hover{
-    transform: scale(1.1);
+    transform: scale(1.02);
 
 }
 .redes-icon img{

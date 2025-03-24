@@ -1,0 +1,237 @@
+html {
+    font-size: 62.5%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* outline: thin solid; */
+}
+body{
+    width: 100%;   
+    height: 100vh;
+    overflow-x: hidden;
+}
+.container-main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    backdrop-filter: blur(15px);
+}
+.main {
+    width: 50%;
+    height: 100vh;
+    padding-top: 2rem;
+}
+/* ------------------------------------------------------ boton de agregar tarea */
+.title-main{
+    margin: 2rem 0;
+}
+.addTask {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: thin solid red; */
+    padding: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    /* border-bottom: thin solid #b6b6b6; */
+
+}
+.addTask img {
+    width: 2rem;
+    height: 2rem;
+}
+.addTask button {
+    border: none;
+    width: 95%;
+    text-align: start;
+    padding-left: 2rem;
+    background-color: #ffffff;
+    color: #B1B1B1;
+    cursor: pointer;
+}
+/* ------------------------------------------------------ panel de agregar tarea */
+
+.task-form {
+    position: fixed;
+    width: 34rem;
+    top: 1vh;
+    right: 0;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    /* margin-bottom: 2rem; */
+    border-bottom: thin solid #606060;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0rem 0rem 1rem 0rem #606060;
+    transform: translate(110%, 0);
+    transition: transform 0.3s ease;
+}
+.isActive{
+    /* display: flex; */
+    transform: translate(-4%,0);
+
+}
+.task-form legend{
+    font-size: 2rem;
+    align-self: flex-start;
+    padding-left: 2rem;
+    color: #505050;
+}
+.title-task {
+    width: 90%;
+    height: 5rem;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+    border: none;
+    font-size: 1.3rem;
+    background-color: #eeeeee;
+    border-top: #5c5c5c;
+}
+.title-task:focus {
+    outline: none;
+}
+.description-task{
+    width: 90%;
+    height: 15rem;
+    padding: 1rem 0 0 2rem;
+    border: none;
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eeeeee;
+    resize: none;
+    outline: none;
+}
+
+.buttons {
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.buttons button{
+    width: 10rem;
+    height: 3rem;
+    background-color: #16C47F;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.buttons button:hover{
+    background-color: #ffffff;
+    color: #16C47F;
+}
+.buttons button:last-child{
+    background-color: #F93827;
+}
+.buttons button:last-child:hover{
+    background-color: #ffffff;
+    color: #F93827;
+}
+.button-cancel {
+    width: 75%;
+    height: 3rem;
+    color: #565656;
+    border: thin solid #b6b6b6;
+    background-color: #b0b0b0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button-cancel:hover {
+    color: #5c5c5c;
+    background-color: #ffffff;
+    border: none;
+}
+
+/* ------------------------------------------------------ Listado de tareas */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #b0b0b0;
+    margin-bottom: 2rem;
+}
+.task-list {
+    height: 70vh;
+    padding-top: 1rem;  
+    padding-left: 4rem;
+    border-top: #b0b0b0;
+    /* outline: thin solid; */
+}
+/*--------------------------------------------------------- vista de tareas*/
+/* .task-container >*{
+    outline: thin solid;
+    
+} */
+.task-container {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-bottom: 1.5rem;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    border-bottom: thin solid #d3d3d3;
+    /* border: thin solid; */
+}
+.task {
+    width: 90%;
+    padding-left: 1rem;
+    color: rgb(65, 65, 65);
+    /* border: thin solid; */
+} 
+.task p {
+    color: #5c5c5c;
+}
+.completed {
+    /* background-color: #ccc; */
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+.btn-edit{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.task-container img {
+    width: 2rem;
+}
+.mensaje {
+    font-size: 1.6rem;
+    color: rgb(65, 65, 65);
+
+}
+/*---------------------------------------------------- estilos en el checkbox*/
+
+input[type="checkbox"] {
+    appearance: none;
+}
+input[type="checkbox"] + .newCheckbox::before {
+    content: "\2713";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 10px auto;
+    border: thin solid #d3d3d3;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 16px;
+    color: transparent;
+    cursor: pointer;
+}
+input[type="checkbox"]:checked +.newCheckbox::before {
+    border: thin solid #16C47F;;
+    color:  #16C47F;;
+}

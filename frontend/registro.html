@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiddi - registro</title>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/registro.css">
+    <!-- Fuentes de google -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inder&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">    
+</head>
+<body>
+    <header class="header">
+        <nav class="header-nav">
+            <a href="registro.html" class="nav-logo">
+                <img src="./assets/footer.logo.nombre.png" alt="Logo de tiddi con nombre">
+            </a>
+            <ul class="nav-items">
+                <li><a href="./bienvenida.html" class="item-link">Inicio</a></li>
+                <li><a href="./inicio-sesion.html" class="item-link">Ingresar</a></li>
+                <!-- <li><a href="#seccion-dos" class="item-link">Registrarse</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <main class="registro-contenedor">
+        <section class="registro">
+            <article class="registro-mensaje">
+                <picture class="contenido-logo-registro">
+                    <img src="./assets/letra-mas-logo.png" alt="logo de tiddi">
+                </picture>
+                <h2>¡Bienvenido!</h2>
+                <p>Regístrate para acceder a todas las funciones que te ayudarán a llevar el control de tus proyectos y tareas diarias. ¡Es rápido y sencillo!</p>
+            </article>
+            <article class="registro-acceso">
+                <form class="registro-form">
+                    <h2>Registro</h2>
+                    <input type="text" name="nameRegistro" placeholder="Nombre"  autofocus required >
+                    <span class="testFail nameSpan"></span>
+
+                    <input type="email" name="emailRegistro" placeholder="Correo electronico"  required >
+                    <span class="testFail emailSpan"></span>
+
+                    <input type="password" name="passwordRegistro" placeholder="Contraseña" required >
+                    <span class="testFail passSpan"></span>
+
+                    <input type="password" name="passwordConfirm"  placeholder="Confirmar contraseña" required >
+                    <span class="testFail confirmSpan"></span>
+
+                    <input type="submit" value="Registrarse">
+                        <p class="enlace enlace-linea1">¿Ya tienes una cuenta?</p>
+                    <a href="./inicio-sesion.html" class="bton-registro">Ingresar</a>
+                    <p class="enlace enlace-linea2">o accede con</p>
+                    <div class="redes">
+                        <a href="#" class="redes-icon">
+                            <img src="./assets/facebook-color.png" alt="icono de Facebook">
+                            <span>Facebook</span>
+                        </a>
+                        <a href="#" class="redes-icon">
+                            <img src="./assets/google.png" alt="icono de Google">
+                            <span>Google</span>
+                        </a>
+                    </div>
+
+                </form>
+
+            </article>
+        </section>
+    </main>
+    <script src="./js/registro.js" type="module"></script>
+</body>
+</html>
