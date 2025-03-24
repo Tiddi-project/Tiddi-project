@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperación de Contraseña</title>
+    <style>
+        *{ 
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            /* outline: thin solid; */
+        }
+        body {
+            height: 100vh;
+            overflow-y: hidden;
+            background-color: #f4f4f4;
+        }
+        .main {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h2 {
+            font-size: 12rem;
+        }
+        a {
+            text-decoration: none;
+            color: #119415;
+        }
+        .container {
+            text-align: center;
+        }
+        .logo {
+            width: 300px;
+            animation: blink 1.5s infinite, tilt 2s infinite alternate;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        @keyframes tilt {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <main class="main">
+
+        <div class="container">
+            <img src="./assets/footer-logo.png" alt="Logo Saltamontes" class="logo">
+            <h2>Ops</h2>
+            <a href="inicio-sesion.html">Regresar ↩️</a>
+        </div>
+    </main>
+</body>
+</html>

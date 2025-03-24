@@ -31,9 +31,10 @@ d.addEventListener("DOMContentLoaded",(e)=>{
         $template,
         $fragment
     })
-
+    
     // Metodos de insercion de datos
-    $form.addEventListener("submit", ()=>{
+    $form.addEventListener("submit", (e)=>{
+        e.preventDefault()
 
         if($form.id.value === ""){
             // metodo POST para agregar una tareas
@@ -42,6 +43,8 @@ d.addEventListener("DOMContentLoaded",(e)=>{
             // metodo PUT para editar una tarea
             aTask.editTask($form)
         }
+
+        window.location.reload()
     })
 
     // metodo PATCH para editar una sola propiedad en una tarea
@@ -49,17 +52,18 @@ d.addEventListener("DOMContentLoaded",(e)=>{
         let taskChecked = e.target.closest(".task-container").querySelector(".task")
         let idTask = e.target.dataset.id;
         let statusChecked = e.target.checked
-
+        
         aTask.editChecked(taskChecked, idTask, statusChecked)
     })
-        
+    
     // metodo DELETE para eliminar una tarea
     d.addEventListener("click", (e)=>{
         // console.log(e.target.dataset.id);
         if(e.target.matches("#delete")){
             let isConfirmed = confirm("¿Estas seguro de que deseas eliminar la tarea?")
-            if(confirm){
+            if(isConfirmed){
                 aTask.deleteTask($form)
+                window.location.reload()
             }else{
                 e.preventDefault()
             }

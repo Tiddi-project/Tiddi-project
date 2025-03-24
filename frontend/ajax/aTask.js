@@ -2,21 +2,27 @@
 const aTask = {
     getAll: async (option)=>{
         try {
-            let res = await fetch("http://localhost:3000/tareas")
+            let res = await fetch("http://localhost:3000/tasks")
             let data = await res.json()
             
             if(!res.ok){
                 throw {status: res.status, message: res.statusText, dir:res}
             }
-
+            
+            if(data.length === 0){
+                option.$taskList.innerHTML = `
+                    <h2>No tienes tareas por realizar</h2>
+                `
+                
+            }
             data.forEach((task, index) => {
                 // checkbox
                 option.$template.querySelector(".checkbox").dataset.id = task.id
                 option.$template.querySelector(".checkbox").setAttribute("id", index)
                 option.$template.querySelector(".newCheckbox").setAttribute("for", index)
                 option.$template.querySelector(".task").setAttribute("for", index)
-
-                if(task.completed === true){
+                
+                if(task.complete === 1){
                     option.$template.querySelector(".task").classList.add("completed")
                     option.$template.querySelector(".checkbox").checked = true
                 }else{
@@ -54,7 +60,7 @@ const aTask = {
     },
     addTask: async (form)=>{
         try {
-            let res = await fetch("http://localhost:3000/tareas", {
+            let res = await fetch("http://localhost:3000/task", {
                 method: "POST",
                 headers: {"content-type": "application/json; charset=utf-8"},
                 body: JSON.stringify({
@@ -78,16 +84,18 @@ const aTask = {
     },
     editTask: async (form)=>{
         try {
-            form.querySelector("legend").textContent = "Editar Tarea:"
             let idTask = form.id.value
-            let taskStatus = await fetch(`http://localhost:3000/tareas/${idTask}`)
+            if (!idTask) throw { status: 400, message: "El ID de la tarea es obligatorio" }
+
+            let taskStatus = await fetch(`http://localhost:3000/task/${idTask}`)
+            if(!taskStatus.ok) throw {status: res.status, message: res.statusText}
             let dataStatus = await taskStatus.json()
             let isCompleted  = dataStatus.completed
             
            
-            let res = await fetch(`http://localhost:3000/tareas/${idTask}`, {
+            let res = await fetch(`http://localhost:3000/edit/${idTask}`, {
                 method: "PUT",
-                headers: {"content-type": "application/json; charset= utf-8"},
+                headers: {"content-type": "application/json; charset=utf-8"},
                 body: JSON.stringify({
                     title: form.titleTask.value,
                     description: form.descriptionTask.value,
@@ -95,7 +103,7 @@ const aTask = {
                 })
             })
 
-            if(!res.ok) if(!res.ok)  throw {status: res.status, message: res.statusText, dir:res}
+            if(!res.ok) throw {status: res.status, message: res.statusText, dir:res}
             alert("Tarea editada con exito")
         } catch (error) {
             let message = error.statusText || "Se ha producido un error"
@@ -107,7 +115,7 @@ const aTask = {
         try {
             let idTask = form.id.value
 
-            let res = await fetch(`http://localhost:3000/tareas/${idTask}`, {
+            let res = await fetch(`http://localhost:3000/delete/${idTask}`, {
                 method:"DELETE"
             })
 
@@ -120,7 +128,7 @@ const aTask = {
     },
     editChecked: async (taskContainer, idTask, statusChecked)=>{
         try {
-            let res = await fetch(`http://localhost:3000/tareas/${idTask}`, {
+            let res = await fetch(`http://localhost:3000/complete/${idTask}`, {
                 method: "PATCH",
                 headers: {"content-type": "application/json; charset= utf-8"},
                 body: JSON.stringify({
