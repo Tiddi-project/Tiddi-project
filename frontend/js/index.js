@@ -5,6 +5,7 @@ import panelActive from "./exports/panel.js"
 import conexion from "./exports/conexion.js"
 import aUser from "../ajax/aUser.js"
 import { checkAuth } from "../ajax/auth.js"
+import circleProgress from "./exports/circleProgress.js"
 
 
 const d = document
@@ -15,7 +16,9 @@ const $taskList = d.querySelector(".task-list")
 const $taskContainer = d.querySelector(".task-container")
 const $template = d.querySelector("template").content
 const $fragment = d.createDocumentFragment()
-
+const $circle = d.getElementById("progress-circle")
+const $tCompleted = d.querySelector(".task-completed")
+const $tTotal = d.querySelector(".task-total")
 
 
 d.addEventListener("DOMContentLoaded",async (e)=>{
@@ -29,7 +32,10 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     checkbox()
     allocation($form)
     conexion()
-
+    let progress = await aTask.progressTasks()
+    console.log(progress.complete);
+    console.log(progress.totalTask);
+    circleProgress($circle, $tCompleted, $tTotal,progress)
     
     // metodo AJAX
     // metodo get para poder visualizar las tareas en la pag

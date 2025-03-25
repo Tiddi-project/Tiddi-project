@@ -16,9 +16,12 @@ routes.put("/edit/:id", cTask.updateTask)   // complete
 
 // Tareas completadas 
 routes.patch("/complete/:id", cTask.completeTask)
-routes.get("/uncomplete/:id", (req, res)=>{})
+// routes.get("/uncomplete/:id", (req, res)=>{})
 
 // Eliminacion de tareas
 routes.delete("/delete/:id", cTask.deleteTask)  // complete
+
+//
+routes.get("/progress", cTask.progressTasks)  // progess
 
 export default routes

@@ -26,6 +26,13 @@ const mTask = {
     completeTask: async (task)=>{
         await db.query("UPDATE tasks SET complete= ? WHERE id = ?;", [task.completed, task.id])
 
+    },
+    progressTasks: async ()=>{
+       
+            let [results] = await db.query("select count(*) as totalTask, count(case when complete = 1 then 1 end) as complete from tasks;")
+            
+            return results
+        
     }
 }
 

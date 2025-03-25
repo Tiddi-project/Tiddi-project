@@ -8,8 +8,8 @@
     "start": "node --watch app.js"
   },
   "keywords": [],
-  "author": "Luis Leones",
-  "license": "ISC",
+  "author": "Luis Leones / Jose Castilla",
+  "license": "MIT",
   "description": "Creacion del backend de tiddi",
   "dependencies": {
     "backend": "file:",

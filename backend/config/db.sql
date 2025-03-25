@@ -1,9 +1,5 @@
 create database  tiddi_db;
-
 use tiddi_db;
-
--- TABLA DE USUARIOS
-
 
 -- TABLA DE TAREAS
 create table tasks (
@@ -15,9 +11,9 @@ create table tasks (
 	created_t TIMESTAMP default CURRENT_TIMESTAMP,
 	updated_t TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 	-- foreign key (user_id) references users(id) on delete cascade
-	
 )
 
+-- TABLA DE USUARIOS
 create table users (
 	id INT auto_increment primary key,
 	name varchar(100) not null,

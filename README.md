@@ -13,11 +13,11 @@ Sigue estos pasos para ejecutar Tiddi en tu entorno local:
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/tiddi.git
+   git clone https://github.com/Tiddi-project/Tiddi-project
    ```
 2. Accede al directorio del proyecto:
    ```bash
-   cd tiddi
+   cd Tiddi-project
    ```
 3. Instala las dependencias:
    ```bash
@@ -31,6 +31,7 @@ Sigue estos pasos para ejecutar Tiddi en tu entorno local:
 ## Tecnologías Utilizadas
 - **HTML, CSS, JavaScript** - Para la estructura, diseño e interactividad de la aplicación.
 - **Node.js** - Para el desarrollo del backend.
+- **MySQL** - Para la base de datos.
 - **Git & GitHub** - Para el control de versiones.
 
 ## Nota

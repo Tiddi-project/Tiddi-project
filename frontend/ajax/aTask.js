@@ -142,6 +142,26 @@ const aTask = {
             let message = error.message || "Ha ocurrido un error en la eliminación"
             console.log(`Error ${error.status}: ${message}`);
         }
+    },
+    progressTasks: async ()=>{
+        try {
+            let res = await fetch("http://localhost:3000/progress")
+
+            if(!res.ok) throw {status: res.status, message: res.statusText}
+
+            let data = await res.json()
+            console.log(data[0]);
+            console.log(data[0].totalTask);
+            console.log(data[0].complete);
+            let infoTask = {
+                totalTask: data[0].totalTask,
+                totalComplete: data[0].complete
+            }
+            return infoTask
+        } catch (error) {
+            let message = error.message || "Ha ocurrido un error en la eliminación"
+            console.log(`Error ${error.status}: ${message}`);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "inder";
     /* outline: thin solid; */
 }
 body{
@@ -23,7 +24,7 @@ body{
     backdrop-filter: blur(15px);
 }
 .main {
-    width: 50%;
+    width: 60%;
     height: 100vh;
     padding-top: 2rem;
 }
@@ -50,7 +51,7 @@ body{
     margin: 2rem 0;
 }
 .addTask {
-    width: 100%;
+    width: 30%;
     height: 5rem;
     display: flex;
     justify-content: center;
@@ -95,7 +96,7 @@ body{
     border-radius: 15px;
     background-color: #ffffff;
     box-shadow: 0rem 0rem 1rem 0rem #606060;
-    transform: translate(110%, 0);
+    transform: translate(150%, 0);
     transition: transform 0.3s ease;
 }
 .isActive{
@@ -183,10 +184,11 @@ hr {
     margin-bottom: 2rem;
 }
 .task-list {
+    width: 80%;
     height: 70vh;
     padding-top: 1rem;  
     padding-left: 4rem;
-    border-top: #b0b0b0;
+    border-top: thin solid #b0b0b0;
     /* outline: thin solid; */
 }
 /*--------------------------------------------------------- vista de tareas*/
@@ -231,6 +233,50 @@ hr {
     font-size: 1.6rem;
     color: rgb(65, 65, 65);
 
+}
+/*--------------------------------------------------------- Barra de progreso*/
+.progress {
+    position: absolute;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    right: 7vw;
+    top: 30vh;
+    border-radius: 15px;
+    box-shadow: 6px 6px 10px -1px rgb(0, 0, 0, 0.15),
+                -6px -6px 10px -1px rgb(0, 0, 0, 0.15);
+}
+.progress h2{
+    text-align: center;
+    /* margin-top: 2rem; */
+    margin-bottom: 3rem;
+}
+.progress-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+}
+
+svg {
+    transform: rotate(-90deg);
+}
+
+/* Animación suave */
+#progress-circle {
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
 }
 /*---------------------------------------------------- estilos en el checkbox*/
 

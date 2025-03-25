@@ -57,6 +57,14 @@ const cTask = {
         } catch (error) {
             error.e400(err, req, res)
         }
+    },
+    progressTasks: async (req, res) =>{
+        try {
+            let results = await mTask.progressTasks()
+            res.json(results)
+        } catch (error) {
+            error.e500(err, req, res)
+        }
     }
 }
 
