@@ -28,6 +28,24 @@ body{
     padding-top: 2rem;
 }
 /* ------------------------------------------------------ boton de agregar tarea */
+.headers{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logout {
+    width: 10rem;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    cursor: pointer;
+}
+.logout:hover {
+    transform: scale(1.1);
+    color: #16C47F;
+}
+
 .title-main{
     margin: 2rem 0;
 }
@@ -60,7 +78,8 @@ body{
 /* ------------------------------------------------------ panel de agregar tarea */
 
 .task-form {
-    position: fixed;
+    position: absolute;
+    z-index: 999;
     width: 34rem;
     top: 1vh;
     right: 0;

@@ -7,6 +7,7 @@ const cUser = {
         try {
             let {name, email, password} = req.body
             await mUser.createUser({name, email, password})
+            res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
         } catch (err) {
             error.e500(err, req, res)
         }
@@ -15,44 +16,49 @@ const cUser = {
         try {
             let results = await mUser.oneUser()
             res.json(results)
-        } catch (error) {
+        } catch (err) {
             error.e500(err, req, res)
         }
     },
     loginUser: async (req, res)=>{
         try {
             let {email, password} = req.body
-            console.log(email);
-            console.log(password);
+            
             const results = await mUser.loginUser(email)
-            console.log(results);
+
+            // res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
+
             if(results.length === 0){
-                let err = {
-                    status: 401,
-                    message: `El usuario no fue encontrado en la BD`,
+                let err = {status: 401,  message: `El usuario no fue encontrado en la BD`,
                 };
                return error.e401(err, req, res);
             }
 
             let user = results[0]
             let isMatch = await bcrypt.compare(password, user.password)
-            console.log("la contrasena es", isMatch);
+
             if(!isMatch){
-                console.log("se activa el error");
-                let err = {
-                    status: 403,
-                    message: "Contraseña incorrecta",
-                };
+                let err = {status: 403, message: "Contraseña incorrecta"};
                 return error.e403(err, req, res);
             }
             
             req.session.user = user;
             
             res.json({ success: true, message: "Usuario autenticado" });
+            
 
         } catch (err) {
-            return error.e500(err, req, res);
+            error.e500(err, req, res);
         }
+    },
+    logout: (req, res)=>{
+        req.session.destroy((err)=>{
+            if(err){
+                return res.status(500).json({ success: false, message: "Error al cerrar sesión" });
+            }
+            res.json({ success: true, message: "Sesión cerrada exitosamente" });
+        })
+
     }
 }
 

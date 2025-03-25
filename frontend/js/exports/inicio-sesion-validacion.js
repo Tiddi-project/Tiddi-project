@@ -1,21 +1,17 @@
 const d = document
 export default function validacionInicioSesion (form){
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+]{6,20}$/;
-    // let password = e.target.value
-    // let passwordTest = passwordRegex.test(password)
+       
     
-    
-    d.addEventListener("submit", (e)=>{
-        // let email = form.querySelector("#password").value
-        let confirmEmail = validEmail()
-        let confirmPassword = validPassword()
-        if(confirmEmail && confirmPassword){
-            form.submit()
-        }else{
-            e.preventDefault()
-        }
-    })
+    // d.addEventListener("submit", (e)=>{
+    //     let confirmEmail = validEmail()
+    //     let confirmPassword = validPassword()
+    //     if(confirmEmail && confirmPassword){
+    //         form.submit()
+    //     }else{
+    //         e.preventDefault()
+    //     }
+    // })
     
     form.querySelector("#email").addEventListener("keyup", validEmail)
     

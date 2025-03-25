@@ -13,10 +13,14 @@ d.addEventListener("DOMContentLoaded", (e)=>{
     conexion()
     validacionInicioSesion($form)
     
-})
-// ajax
-
-d.addEventListener("submit", (e)=>{
-    e.preventDefault()
-    aUser.loginUser($form)
+    // ajax
+    d.addEventListener("submit", (e)=>{
+        e.preventDefault()
+        if (e.target.matches(".acceso-form")) {
+            // alert("el submit si esta funcionando")
+            console.log("Llamando a loginUser...");
+            aUser.loginUser($form)
+            // aUser.loginUser(e.target); // Pasar el formulario correcto
+        }
+    })
 })

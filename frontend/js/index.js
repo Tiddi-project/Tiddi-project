@@ -3,6 +3,8 @@ import allocation from "./exports/allocation.js"
 import checkbox from "./exports/checkbox.js"
 import panelActive from "./exports/panel.js"
 import conexion from "./exports/conexion.js"
+import aUser from "../ajax/aUser.js"
+import { checkAuth } from "../ajax/auth.js"
 
 
 const d = document
@@ -16,7 +18,13 @@ const $fragment = d.createDocumentFragment()
 
 
 
-d.addEventListener("DOMContentLoaded",(e)=>{
+d.addEventListener("DOMContentLoaded",async (e)=>{
+    const user = await checkAuth(); // Espera a que la autenticación termine antes de continuar
+    if (!user) {
+        window.location.href = "http://localhost:3000/inicio-sesion.html"; // Redirige si no está autenticado
+        return;
+    }
+
     panelActive(panelTask)
     checkbox()
     allocation($form)
@@ -67,6 +75,11 @@ d.addEventListener("DOMContentLoaded",(e)=>{
             }else{
                 e.preventDefault()
             }
+        }
+
+        if(e.target.matches(".logout")){
+            console.log(e.target.matches(".logout"));
+            aUser.logoutUser()
         }
     })
 

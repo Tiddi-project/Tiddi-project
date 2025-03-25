@@ -16,7 +16,7 @@ const cTask = {
             let {title, description} = req.body
             await mTask.addTask({title, description})
         } catch (err) {
-            error.e400({err, req, res})
+            error.e400(err, req, res)
         }
     },
     getOne: async (req, res)=>{
@@ -55,7 +55,7 @@ const cTask = {
             let {id} = req.params
             await mTask.completeTask({completed, id})
         } catch (error) {
-            
+            error.e400(err, req, res)
         }
     }
 }
