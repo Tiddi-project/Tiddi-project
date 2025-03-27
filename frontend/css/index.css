@@ -10,7 +10,7 @@ html {
     /* outline: thin solid; */
 }
 body{
-    width: 100%;   
+    /* width: 100%;    */
     height: 100vh;
     overflow-x: hidden;
 }
@@ -21,7 +21,7 @@ body{
     justify-content: center;
     align-items: center;
     background: transparent;
-    backdrop-filter: blur(15px);
+    /* backdrop-filter: blur(15px); */
 }
 .main {
     width: 60%;
@@ -43,7 +43,7 @@ body{
     cursor: pointer;
 }
 .logout:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
     color: #16C47F;
 }
 
@@ -79,7 +79,7 @@ body{
 /* ------------------------------------------------------ panel de agregar tarea */
 
 .task-form {
-    position: absolute;
+    position: fixed;
     z-index: 999;
     width: 34rem;
     top: 1vh;
@@ -185,11 +185,17 @@ hr {
 }
 .task-list {
     width: 80%;
-    height: 70vh;
+    height: 85vh;
     padding-top: 1rem;  
     padding-left: 4rem;
     border-top: thin solid #b0b0b0;
-    /* outline: thin solid; */
+    /* outline: thin solid red; */
+    overflow-y: scroll;
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+}
+.task-list::-webkit-scrollbar {
+    display: none;
 }
 /*--------------------------------------------------------- vista de tareas*/
 /* .task-container >*{
@@ -261,9 +267,9 @@ hr {
     display: inline-block;
 }
 
-svg {
+/* .svg {
     transform: rotate(-90deg);
-}
+} */
 
 /* Animación suave */
 #progress-circle {

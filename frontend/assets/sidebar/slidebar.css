@@ -1,0 +1,231 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #F0F0EC;
+    height: 100vh;
+}
+
+.slidebar {
+    position: fixed;
+    width: 250px;  /* 250px */
+    height: 100%;
+    /* overflow: hidden; */
+    padding: 1.2rem;  /* 20px */
+    background-color: white;
+    color: rgb(86, 86, 86);
+
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease;
+}
+
+.slidebar-mini {
+    width: 80px;  /* 80px */
+}
+
+.menu-btn{
+    position: absolute;
+    z-index: 998;
+    top: 4vh;
+    right: -1.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: right 0.3s ease;
+}
+
+.menu-btn ion-icon{
+    font-size: 1rem;
+}
+.btn-task-mini{
+    right: -5vw;  
+
+}
+.btn-task-mini ion-icon{
+    transform: rotate(180deg);
+}
+
+.span{
+    width: 100px;  /* 100px */
+    white-space: nowrap;
+    font-size: 1rem;  /* 16px */
+    text-align: left;
+    padding-top: 0.3rem;  /* 3px */
+    /* color: grey; */
+    opacity: 1;
+    transition: opacity 0.5s ease, width 0.5s ease;
+}
+.span ion-icon {
+    color: grey;
+
+}
+.ocult {
+    opacity: 0;
+    width: 0;
+}
+
+.namePage {
+    width: 100%;
+    height: 45px;  /* 45px */
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 40px;  /* 40px */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.title{
+    margin-left: 10px;  /* 10px */
+}
+
+/*------------------- Boton crear tarea--------------- */
+.btn-task {
+    width: 100%;
+    height: 45px;  /* 45px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;  /* 10px */
+    font-size: 1.6rem;
+    background-color: #218625;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-task ion-icon {
+    min-width: 50px;  /* 50px */
+    white-space: nowrap;
+    font-size: 2.5rem;  /* 25px */
+}
+
+/*------------------- Menu de navegacion--------------- */
+.nav {
+    margin-top: 2rem;
+    color: rgb(66, 65, 65);
+}
+
+.nav-item{
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    margin-bottom: 1rem;
+    list-style: none;
+}
+
+.nav a {
+    width: 100%;
+    height: 45px;  /* 45px */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;  /* 10px */
+    color: black;
+}
+
+.nav a:hover {
+    background-color: #218625;
+    color: white;
+}
+
+.nav ion-icon {
+    min-width: 40px;  /* 40px */
+    font-size: 1.5rem;  /* 20px */
+    margin-right: 0.5rem;
+}
+
+.ul-2 {
+    margin-top: 4rem;
+}
+/*------------------------ hover----------------------*/
+.slidebar.slidebar-mini .nav-item:hover {
+    overflow: visible;
+    
+}
+.slidebar.slidebar-mini .nav-item:hover .span-hover {
+    position: absolute;
+    width: auto;
+    opacity: 1; 
+    left: 9vw;
+    padding: 0.5rem;
+    white-space: nowrap;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background-color: black;
+    color:  white;
+    /* transform: translateY(-50%); */
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+
+}
+/* .slidebar.slidebar-mini .nav-item .span {
+    width: 0;
+} */
+/* .slidebar.slidebar-mini .nav-item:hover span {
+    opacity: 1;
+    color: white;
+    padding-left: 0.5rem;
+    top: 50%;
+    border-radius: 5px;
+} */
+
+/*------------------- Boton usuario--------------- */
+.user-btn {
+    width: 100%;
+    display: flex;
+    margin-top: 3rem;
+}
+
+.user__photo {
+    width: 50px;  /* 50px */
+    height: 50px;  /* 50px */
+    min-width: 50px;  /* 50px */
+    border-radius: 50%;  /* 10px */
+    object-fit: cover;
+    object-position: center;
+}
+
+.user_info{
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.7rem;  /* 7px */
+    font-weight: 600;
+}
+
+.nombre{
+    width: 100%;
+    font-size: 1rem;  /* 15px */
+}
+
+.email {
+    width: 100%; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; /* Agrega esto */
+    color: rgb(128, 128, 128);
+    font-size: 0.7rem;  /* 13px */
+}
+.user-icon {
+    display: flex;
+    align-items: center;
+}
+.slidebar.slidebar-mini .user-icon-img{
+    opacity: 0;
+}
