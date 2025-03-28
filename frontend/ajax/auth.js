@@ -6,12 +6,10 @@ export const checkAuth = async () =>{
             credentials: "include"
         })
         if(!res.ok) throw {status:res.status, message:res.statusText}
-        console.log(res);
         let data = await res.json()
-        console.log(data);
 
         if (data.authenticated) {
-            console.log("Usuario autenticado", data.user);
+            // console.log("Usuario autenticado", data.user);
             return data.user; 
         } else {
 

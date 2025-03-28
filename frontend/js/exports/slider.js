@@ -1,5 +1,5 @@
 const d = document
-export default function slider(logo, slidebar, slidebarBtn,spans){
+export function slider(logo, slidebar, slidebarBtn,spans){
     
     slidebarBtn.addEventListener("click", ()=>{
         slidebar.classList.toggle("slidebar-mini")

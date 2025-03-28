@@ -153,9 +153,9 @@ const aTask = {
             if(!res.ok) throw {status: res.status, message: res.statusText}
 
             let data = await res.json()
-            console.log(data[0]);
-            console.log(data[0].totalTask);
-            console.log(data[0].complete);
+            // console.log(data[0]);
+            // console.log(data[0].totalTask);
+            // console.log(data[0].complete);
             let infoTask = {
                 totalTask: data[0].totalTask,
                 totalComplete: data[0].complete
@@ -171,7 +171,7 @@ const aTask = {
             let res = await fetch("http://localhost:3000/user")
             if(!res.ok) throw {status: res.status, message:res.statusText}
             let data = await res.json()
-            console.log(data);
+            // console.log(data);
             // busqueda de informacion
             let usuario = data.user.name
             let nombreUsuario = usuario.split(" ")[0]
@@ -185,7 +185,7 @@ const aTask = {
             // nombre de usuario en slider
             options.emailUser.textContent = `${data.user.email}`
 
-            console.log(nombreUsuario);
+            // console.log(nombreUsuario);
             
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la captura del nombre de usuario"

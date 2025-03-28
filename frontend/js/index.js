@@ -45,8 +45,8 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
 
     // Grafica de progreso
     let progress = await aTask.progressTasks()
-    console.log(progress.complete);
-    console.log(progress.totalTask);
+    // console.log(progress.complete);
+    // console.log(progress.totalTask);
     circleProgress($circle, $tCompleted, $tTotal,progress)
     
     // metodo AJAX
@@ -106,26 +106,42 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
 
     // Bienvenida con nombre de usuario
     aTask.welcomeUser({welcomeUser, nameUser, emailUser})
+    
+    // funciones para el manejo de sidebar
+    function close(){
+        slidebar.classList.add("slidebar-mini")
+        slidebarBtn.classList.add("btn-task-mini")
+        spans.forEach((span)=>{
+            span.classList.add("ocult")
+            span.classList.add("span-hover")
+        })
+        localStorage.setItem("sidebar","close")
+    }
+    function open(){
+        slidebar.classList.remove("slidebar-mini")
+        slidebarBtn.classList.remove("btn-task-mini")
+        spans.forEach((span)=>{
+            span.classList.remove("ocult")
+            span.classList.remove("span-hover")
+        })
+        localStorage.setItem("sidebar","open")
+    }
+
+    // localstorage para el manejo del sidebar
+    if(localStorage.getItem("sidebar") === null) localStorage.setItem("sidebar","open")
+    if(localStorage.getItem("sidebar") === "open") open()
+    if(localStorage.getItem("sidebar") === "close") close()
 
     // Manejo de siderbar
     slidebarBtn.addEventListener("click", ()=>{
-        console.log("funciona");
-        slidebar.classList.toggle("slidebar-mini")
-        slidebarBtn.classList.toggle("btn-task-mini")
-        spans.forEach((span)=>{
-            span.classList.toggle("ocult")
-            span.classList.toggle("span-hover")
-        })
+        if (localStorage.getItem("sidebar") === "open") {
+            close();
+        } else {
+            open();
+        }
     })
 
-    // // manejo de scroll con mouse
-
-    // $taskList.addEventListener('wheel', (e) => {
-    //     e.preventDefault();
-    //     $taskContainer.scrollTop += e.deltaX; // Permite el desplazamiento horizontal
-    // });
-
-    // localstorage para el manejo del sidebar
+    
    
 
 })
