@@ -4,7 +4,8 @@ import cTask from "../controllers/cTask.js"
 const routes = Router()
 
 // Mostrara la pagina principal
-routes.get("/tasks", cTask.getAll)  // complete
+routes.get("/tasks", cTask.getAll)  // complete para tidas las tareas
+
 // Busqueda y creacion de tareas
 routes.post("/task", cTask.addTask) // complete
 routes.get("/task/:id", cTask.getOne)   // complete

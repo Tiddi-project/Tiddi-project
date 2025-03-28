@@ -21,3 +21,6 @@ create table users (
 	password varchar(255) not null,
 	created_u TIMESTAMP default CURRENT_TIMESTAMP
 );
+-- añadir clave foranea en db tiddi / tasks
+ALTER TABLE tasks ADD COLUMN user_id INT NOT NULL;
+ALTER TABLE tasks ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;

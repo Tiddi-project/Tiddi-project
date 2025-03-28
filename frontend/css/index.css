@@ -1,6 +1,5 @@
 html {
     font-size: 62.5%;
-    font-family: Arial, Helvetica, sans-serif;
 }
 * {
     padding: 0;
@@ -13,21 +12,263 @@ body{
     /* width: 100%;    */
     height: 100vh;
     overflow-x: hidden;
+    background-color: #f8f8f8;
 }
 .container-main {
+    /* border: thin solid red; */
     width: 100%;
+    min-width: 60%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     background: transparent;
-    /* backdrop-filter: blur(15px); */
 }
 .main {
-    width: 60%;
+    width: 79%;
     height: 100vh;
     padding-top: 2rem;
 }
+/*----------------------------sidebar----------------------------------------------------*/
+.slidebar {
+    position: fixed;
+    left: 0;
+    width: 250px;  /* 250px */
+    height: 100%;
+    /* overflow: hidden; */
+    padding: 2rem;  /* 20px */
+    background-color: white;
+    color: #263238;
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease;
+}
+
+.slidebar-mini {
+    width: 80px;  /* 80px */
+}
+
+.menu-btn{
+    position: absolute;
+    z-index: 998;
+    top: 4vh;
+    right: -1.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: right 0.3s ease;
+}
+
+/* .menu-btn ion-icon{
+    font-size: 1rem;
+} */
+.btn-task-mini{
+    right: -3vw;  
+}
+.btn-task-mini svg{
+    transform: rotate(180deg);
+}
+
+.span{
+    width: 100px;  /* 100px */
+    white-space: nowrap;
+    font-size: 1.6rem;  /* 16px */
+    text-align: left;
+    
+    padding-top: 0.3rem;  /* 3px */
+    /* color: grey; */
+    opacity: 1;
+    transition: opacity 0.5s ease, width 0.5s ease;
+}
+/* .span ion-icon {
+    color: grey;
+
+} */
+.ocult {
+    opacity: 0;
+    width: 0;
+}
+
+.namePage {
+    width: 100%;
+    height: 45px;  /* 45px */
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 45px;  /* 40px */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.titleSpan{
+    margin-left: 1.6rem;  /* 10px */
+    font-size: 2rem;
+}
+
+/*------------------- Boton crear tarea--------------- */
+.btn-task-sider {
+    width: 100%;
+    height: 45px;  /* 45px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;  /* 10px */
+    font-size: 2rem;
+    background-color: #218625;
+    color: white;
+    cursor: pointer;
+}
+
+/* .btn-task ion-icon {
+    min-width: 50px;
+    white-space: nowrap;
+    font-size: 2.5rem; 
+} */
+
+/*------------------- Menu de navegacion--------------- */
+.nav {
+    margin-top: 3rem;
+    /* color: rgb(66, 65, 65); */
+}
+
+.nav-item{
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    margin-bottom: 1rem;
+    list-style: none;
+}
+
+.nav a {
+    width: 100%;
+    height: 45px;  /* 45px */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;  /* 10px */
+    color: black;
+}
+
+.nav a:hover {
+    background-color: #218625;
+    color: white;
+}
+.nav svg:hover {
+    /* background-color: #218625; */
+    fill: white;
+}
+
+/* .nav ion-icon {
+    min-width: 40px; 
+    font-size: 1.5rem;  
+    margin-right: 0.5rem;
+} */
+
+.ul-2 {
+    margin-top: 7rem;
+}
+.nav svg{
+    min-width: 40px; 
+    color: rgb(62, 62, 62); /* Color normal */
+    transition: color 0.3s ease;
+}
+.nav span { 
+    margin-left: 1rem;
+}
+/*------------------------ hover----------------------*/
+.slidebar.slidebar-mini .nav-item:hover {
+    overflow: visible;
+    
+}
+.slidebar.slidebar-mini .nav-item:hover .span-hover {
+    position: absolute;
+    width: auto;
+    opacity: 1; 
+    left: 4vw;
+    padding: 0.5rem;
+    white-space: nowrap;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background-color: black;
+    color:  white;
+    /* transform: translateY(-50%); */
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+
+}
+/* .slidebar.slidebar-mini .nav-item .span {
+    width: 0;
+} */
+/* .slidebar.slidebar-mini .nav-item:hover span {
+    opacity: 1;
+    color: white;
+    padding-left: 0.5rem;
+    top: 50%;
+    border-radius: 5px;
+} */
+
+/*------------------- Boton usuario--------------- */
+.user-btn {
+    width: 100%;
+    display: flex;
+    margin-top: 7rem;
+}
+
+.user__photo {
+    width: 50px;  /* 50px */
+    height: 50px;  /* 50px */
+    min-width: 50px;  /* 50px */
+    border-radius: 50%;  /* 10px */
+    object-fit: cover;
+    object-position: center;
+}
+
+.user_info{
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.7rem;  /* 7px */
+    font-weight: 600;
+}
+
+.nombre{
+    width: 100%;
+    font-size: 1.5rem;  /* 15px */
+}
+
+.email {
+    width: 100%; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; /* Agrega esto */
+    color: rgb(128, 128, 128);
+    font-size: 1.2rem;  /* 13px */
+}
+.user-icon {
+    /* border: thin solid red; */
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    /* font-weight: bold; */
+    cursor: pointer;
+}
+.slidebar.slidebar-mini .user-icon-img{
+    opacity: 0;
+}
+/*----------------------------fin - sidebar----------------------------------------------------*/
 /* ------------------------------------------------------ boton de agregar tarea */
 .headers{
     width: 100%;
@@ -35,39 +276,25 @@ body{
     justify-content: space-between;
     align-items: center;
 }
-.logout {
-    width: 10rem;
-    border: none;
-    background-color: transparent;
-    font-weight: bold;
-    cursor: pointer;
-}
-.logout:hover {
-    /* transform: scale(1.1); */
-    color: #16C47F;
-}
-
 .title-main{
     margin: 2rem 0;
+    color: rgb(38, 50, 56);
 }
-.addTask {
+/* .addTask {
     width: 30%;
     height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: thin solid red; */
     padding: 2rem;
     margin-top: 3rem;
     margin-bottom: 2rem;
-    /* border-bottom: thin solid #b6b6b6; */
-
-}
-.addTask img {
+} */
+/* .addTask img {
     width: 2rem;
     height: 2rem;
-}
-.addTask button {
+} */
+/* .addTask button {
     border: none;
     width: 95%;
     text-align: start;
@@ -75,7 +302,7 @@ body{
     background-color: #ffffff;
     color: #B1B1B1;
     cursor: pointer;
-}
+} */
 /* ------------------------------------------------------ panel de agregar tarea */
 
 .task-form {
@@ -118,7 +345,6 @@ body{
     border: none;
     font-size: 1.3rem;
     background-color: #eeeeee;
-    border-top: #5c5c5c;
 }
 .title-task:focus {
     outline: none;
@@ -134,7 +360,6 @@ body{
     resize: none;
     outline: none;
 }
-
 .buttons {
     width: 90%;
     display: flex;
@@ -177,20 +402,18 @@ body{
 }
 
 /* ------------------------------------------------------ Listado de tareas */
-hr {
+/* hr {
     border: none;
     height: 1px;
     background-color: #b0b0b0;
     margin-bottom: 2rem;
-}
+} */
 .task-list {
-    width: 80%;
+    max-width:50%;
     height: 85vh;
     padding-top: 1rem;  
-    padding-left: 4rem;
     border-top: thin solid #b0b0b0;
-    /* outline: thin solid red; */
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: none;  /* Firefox */
     -ms-overflow-style: none;
 }
@@ -198,29 +421,27 @@ hr {
     display: none;
 }
 /*--------------------------------------------------------- vista de tareas*/
-/* .task-container >*{
-    outline: thin solid;
-    
-} */
 .task-container {
     width: 90%;
     display: flex;
     justify-content: space-between;
-    padding-left: 1rem;
-    padding-bottom: 1.5rem;
+    align-items: center;
+    padding: 1.5rem 0 1.5rem 1rem;
     margin-top: 2rem;
     font-size: 1.3rem;
     border-bottom: thin solid #d3d3d3;
-    /* border: thin solid; */
 }
 .task {
     width: 90%;
     padding-left: 1rem;
-    color: rgb(65, 65, 65);
-    /* border: thin solid; */
+    color: rgb(38, 50, 56);
 } 
 .task p {
-    color: #5c5c5c;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 0.5rem;
+    color: rgb(38, 50, 56);
 }
 .completed {
     /* background-color: #ccc; */
@@ -243,17 +464,21 @@ hr {
 /*--------------------------------------------------------- Barra de progreso*/
 .progress {
     position: absolute;
-    width: 25rem;
+    right: 3vw;
+    top: 30vh;
+    width: 46rem;
+    height: 55vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    right: 7vw;
-    top: 30vh;
     border-radius: 15px;
-    box-shadow: 6px 6px 10px -1px rgb(0, 0, 0, 0.15),
-                -6px -6px 10px -1px rgb(0, 0, 0, 0.15);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px -1px rgb(0, 0, 0, 0.15),
+                -3px -3px 5px -1px rgb(0, 0, 0, 0.15);
+    /* box-shadow: 6px 6px 10px -1px rgb(0, 0, 0, 0.15),
+-6px -6px 10px -1px rgb(0, 0, 0, 0.15); */
 }
 .progress h2{
     text-align: center;
@@ -266,16 +491,13 @@ hr {
     height: 200px;
     display: inline-block;
 }
-
 /* .svg {
     transform: rotate(-90deg);
 } */
-
 /* Animación suave */
 #progress-circle {
     transition: stroke-dashoffset 1s ease-in-out;
 }
-
 .progress-text {
     position: absolute;
     top: 50%;
@@ -296,13 +518,13 @@ input[type="checkbox"] + .newCheckbox::before {
     height: 16px;
     margin: 10px auto;
     border: thin solid #d3d3d3;
-    border-radius: 5px;
+    border-radius: 50%;
     text-align: center;
     line-height: 16px;
     color: transparent;
     cursor: pointer;
 }
 input[type="checkbox"]:checked +.newCheckbox::before {
-    border: thin solid #16C47F;;
-    color:  #16C47F;;
+    border: thin solid #218625;;
+    color:  #218625;;
 }

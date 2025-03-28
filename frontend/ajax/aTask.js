@@ -2,7 +2,10 @@
 const aTask = {
     getAll: async (option)=>{
         try {
-            let res = await fetch("http://localhost:3000/tasks")
+            let res = await fetch("http://localhost:3000/tasks",{
+                method: "GET",
+                credentials: "include"
+            })
             let data = await res.json()
             
             if(!res.ok){
@@ -160,6 +163,32 @@ const aTask = {
             return infoTask
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la eliminación"
+            console.log(`Error ${error.status}: ${message}`);
+        }
+    },
+    welcomeUser: async (options)=>{
+        try {
+            let res = await fetch("http://localhost:3000/user")
+            if(!res.ok) throw {status: res.status, message:res.statusText}
+            let data = await res.json()
+            console.log(data);
+            // busqueda de informacion
+            let usuario = data.user.name
+            let nombreUsuario = usuario.split(" ")[0]
+
+            // Mensaje de bienvenida
+            options.welcomeUser.textContent = `Bienvenido, ${nombreUsuario}.`
+
+            // nombre de usuario en slider
+            options.nameUser.textContent = `${usuario}`
+            
+            // nombre de usuario en slider
+            options.emailUser.textContent = `${data.user.email}`
+
+            console.log(nombreUsuario);
+            
+        } catch (error) {
+            let message = error.message || "Ha ocurrido un error en la captura del nombre de usuario"
             console.log(`Error ${error.status}: ${message}`);
         }
     }

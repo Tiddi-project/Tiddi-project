@@ -1,9 +1,10 @@
 import db from "../config/db.js"
 
 const mTask = {
-    getAll: async ()=>{
+    getAll: async (userId)=>{
         try {
-            const [results] = await db.query("SELECT * FROM tasks;")
+            // const [results] = await db.query("SELECT * FROM tasks ;")
+            const [results] = await db.query("SELECT * FROM tasks WHERE user_id = ?;", [userId])
             // console.log(results);
             return results
         } catch (error) {
@@ -11,25 +12,31 @@ const mTask = {
         }
     },
     addTask : async (task)=>{
-        await db.query("insert into tasks (title, description) values (?,?)", [task.title, task.description])
+        await db.query("insert into tasks (title, description, user_id) values (?,?,?)", [task.title, task.description, task.userId])
     },
-    getTask: async (id)=>{
-        let [results] = await db.query("SELECT * FROM tasks WHERE id = ?;", [id])
+    getTask: async (task)=>{
+        let [results] = await db.query("SELECT * FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
         return results
     },
     updateTask: async (task)=>{
-        await db.query("UPDATE tasks SET title= ? , description=? WHERE id = ?;", [task.title, task.description, task.id])
+        await db.query("UPDATE tasks SET title= ? , description= ? WHERE id = ? AND user_id = ?;", [task.title, task.description, task.id, task.userId])
     },
-    deleteTask: async (id)=>{
-        await db.query("DELETE FROM tasks WHERE id = ?;", [id])
+    deleteTask: async (task)=>{
+        await db.query("DELETE FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
     },
     completeTask: async (task)=>{
-        await db.query("UPDATE tasks SET complete= ? WHERE id = ?;", [task.completed, task.id])
+        await db.query("UPDATE tasks SET complete= ? WHERE id = ? AND user_id = ?;", [task.completed, task.id, task.userId])
 
     },
-    progressTasks: async ()=>{
+    progressTasks: async (userId)=>{
        
-            let [results] = await db.query("select count(*) as totalTask, count(case when complete = 1 then 1 end) as complete from tasks;")
+            let [results] = await db.query(`
+                select 
+                    count(*) as totalTask, 
+                    count(case when complete = 1 then 1 end) as complete
+                    from tasks
+                 WHERE user_id = ?;`
+            , [userId])
             
             return results
         

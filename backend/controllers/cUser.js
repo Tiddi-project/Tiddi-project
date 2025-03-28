@@ -59,6 +59,17 @@ const cUser = {
             res.json({ success: true, message: "Sesión cerrada exitosamente" });
         })
 
+    },
+    oneUser: async (req, res)=>{
+        try {
+            if(!req.session.user){
+                return res.status(401).json({ message: "No has iniciado sesión" });
+            }
+            const userId = req.session.user
+            res.json({user : userId})
+        } catch (error) {
+            error.e500(err, req, res)
+        }
     }
 }
 

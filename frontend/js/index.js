@@ -13,6 +13,9 @@ const panelTask = d.querySelector(".task-form")
 const $form = d.querySelector(".task-form")
 const $button = d.querySelector(".btn-task-sider")
 const $logout = d.getElementById("logout")
+const welcomeUser = d.querySelector(".title-main")
+const nameUser = d.querySelector(".nombre")
+const emailUser = d.querySelector(".email")
 // package task ↓
 const $taskList = d.querySelector(".task-list")
 const $taskContainer = d.querySelector(".task-container")
@@ -100,6 +103,9 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     $logout.addEventListener("click", ()=>{
         aUser.logoutUser()
     })
+
+    // Bienvenida con nombre de usuario
+    aTask.welcomeUser({welcomeUser, nameUser, emailUser})
 
     // Manejo de siderbar
     slidebarBtn.addEventListener("click", ()=>{

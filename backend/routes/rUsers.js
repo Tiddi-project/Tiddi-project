@@ -6,6 +6,7 @@ const routes = Router()
 
 routes.post("/signin", cUser.signUser)
 routes.get("/users", cUser.getUser)
+routes.get("/user", cUser.oneUser)
 routes.post("/login", cUser.loginUser)
 routes.post("/logout", cUser.logout)
 
