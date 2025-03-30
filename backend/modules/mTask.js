@@ -12,14 +12,14 @@ const mTask = {
         }
     },
     addTask : async (task)=>{
-        await db.query("insert into tasks (title, description, user_id) values (?,?,?)", [task.title, task.description, task.userId])
+        await db.query("insert into tasks (title, description, user_id, priority) values (?,?,?,?)", [task.title, task.description, task.userId, task.priority])
     },
     getTask: async (task)=>{
         let [results] = await db.query("SELECT * FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
         return results
     },
     updateTask: async (task)=>{
-        await db.query("UPDATE tasks SET title= ? , description= ? WHERE id = ? AND user_id = ?;", [task.title, task.description, task.id, task.userId])
+        await db.query("UPDATE tasks SET title= ? , description= ?, priority = ? WHERE id = ? AND user_id = ?;", [task.title, task.description, task.priority, task.id,  task.userId])
     },
     deleteTask: async (task)=>{
         await db.query("DELETE FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])

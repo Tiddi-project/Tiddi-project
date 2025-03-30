@@ -113,7 +113,7 @@ body{
     font-size: 2rem;
 }
 
-/*------------------- Boton crear tarea--------------- */
+/*------------------------------------------------- Boton crear tarea--------------- */
 .btn-task-sider {
     width: 100%;
     height: 45px;  /* 45px */
@@ -134,7 +134,7 @@ body{
     font-size: 2.5rem; 
 } */
 
-/*------------------- Menu de navegacion--------------- */
+/*------------------------------------------------------- Menu de navegacion--------------- */
 .nav {
     margin-top: 3rem;
     /* color: rgb(66, 65, 65); */
@@ -184,7 +184,7 @@ body{
 .nav span { 
     margin-left: 1rem;
 }
-/*------------------------ hover----------------------*/
+/*-------------------------------------------------------------- hover----------------------*/
 .slidebar.slidebar-mini .nav-item:hover {
     overflow: visible;
     
@@ -215,7 +215,7 @@ body{
     border-radius: 5px;
 } */
 
-/*------------------- Boton usuario--------------- */
+/*----------------------------------------------------------- Boton usuario--------------- */
 .user-btn {
     width: 100%;
     display: flex;
@@ -312,13 +312,14 @@ body{
     top: 1vh;
     right: 0;
     height: 90vh;
+    max-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    overflow-y: auto;
     padding: 1rem 2rem;
     margin-top: 2rem;
-    /* margin-bottom: 2rem; */
     border-bottom: thin solid #606060;
     border-radius: 15px;
     background-color: #ffffff;
@@ -340,7 +341,7 @@ body{
 .title-task {
     width: 90%;
     height: 5rem;
-    padding-left: 2rem;
+    padding-left: 1rem;
     margin-bottom: 2rem;
     border: none;
     font-size: 1.3rem;
@@ -352,14 +353,124 @@ body{
 .description-task{
     width: 90%;
     height: 15rem;
-    padding: 1rem 0 0 2rem;
+    padding: 1rem;
     border: none;
     font-size: 1.3rem;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "inder";
     background-color: #eeeeee;
     resize: none;
     outline: none;
 }
+/* ------------------------------------inicio-- opcion de prioridades---------------------- */
+.priority-otions {
+    width: 90%;
+}
+.priority-title {
+    font-size: 1.4rem;
+    margin-bottom: 1.7rem;
+}
+.options {
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.options label {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+.priority-otions input[type="radio"]{
+    display: none;
+}
+.circle {
+    border: thin solid;
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.low {border-color: rgb(110, 239, 227);}
+.medium {border-color: rgb(255, 195, 0);}
+.high {border-color: rgb(255, 55, 55);}
+
+.priority-otions input[type="radio"]:checked + .low { background-color: rgb(110, 239, 227);}
+.priority-otions input[type="radio"]:checked + .medium { background-color: rgb(255, 195, 0);}
+.priority-otions input[type="radio"]:checked + .high { background-color: rgb(255, 55, 55);}
+/* ------------------------------------fin---opcion de prioridades------------------------ */
+/* ------------------------------------inicio---subtareas------------------------- */
+.subtask__container {
+    /* border: thin solid red; */
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.subtask-button {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    background-color: white;
+    color: rgb(33, 134, 37);
+    cursor: pointer;
+}
+.subtask-title {
+    margin-left: 0.5rem;
+}
+.subtask-item{
+    /* border: thin solid blue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    padding: 0.5rem;
+}
+.subtask-input{
+    width: 85%;
+    height: 3rem;
+    padding: 1rem;
+    border: none;
+    outline: none;
+}
+/* Boton de eliminar subtarea */
+.remove-subtask {
+    width: 7.5%;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    color: grey;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+/*  estilos para el checkbox */
+.subtaskCheckbox{
+    appearance: none;
+}
+
+.subtaskCheckbox + label::before{
+    content: "\2713";
+    display: block;
+    width:2rem;
+    height: 2rem;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    line-height: 2.1rem;
+    font-size: 1.6rem;
+    color: transparent;
+    border: thin solid rgb(33, 134, 37);
+}
+.subtaskCheckbox:checked + label::before{
+    color: rgb(33, 134, 37);
+}
+/* ------------------------------------fin---subtareas--------------------------- */
+
 .buttons {
     width: 90%;
     display: flex;
@@ -426,10 +537,12 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 0 1.5rem 1rem;
+    padding: 1.5rem 0.5rem 1.5rem 1rem;
     margin-top: 2rem;
     font-size: 1.3rem;
-    border-bottom: thin solid #d3d3d3;
+    border: thin solid rgb(211, 211, 211);
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
 }
 .task {
     width: 90%;
@@ -452,6 +565,7 @@ body{
     background-color: transparent;
     border: none;
     cursor: pointer;
+
 }
 .task-container img {
     width: 2rem;

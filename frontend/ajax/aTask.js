@@ -7,7 +7,7 @@ const aTask = {
                 credentials: "include"
             })
             let data = await res.json()
-            
+            console.log(data);
             if(!res.ok){
                 throw {status: res.status, message: res.statusText, dir:res}
             }
@@ -42,14 +42,13 @@ const aTask = {
                 option.$template.querySelector(".edit").dataset.id = task.id
                 option.$template.querySelector(".edit").dataset.title = task.title
                 option.$template.querySelector(".edit").dataset.description = task.description
+                option.$template.querySelector(".edit").dataset.priority = task.priority
 
                 // uniendo el formato
                 let clone = document.importNode(option.$template, true)
                 option.$fragment.appendChild(clone)
             });
             option.$taskList.appendChild(option.$fragment)
-
-
 
         } catch (error) {
             let message = error.statusText || "Se ha producido un error"
@@ -69,13 +68,14 @@ const aTask = {
                 body: JSON.stringify({
                     title: form.titleTask.value,
                     description: form.descriptionTask.value,
+                    priority: form.priority.value,
                     completed: false
                 })
             })
-
+            
             let data = await res.json()
-
             if(!res.ok)  throw {status: res.status, message: res.statusText, dir:res}
+
             alert("Tarea creada con exito")
 
         } catch (error) {
@@ -103,6 +103,7 @@ const aTask = {
                     title: form.titleTask.value,
                     description: form.descriptionTask.value,
                     completed:isCompleted,
+                    priority:form.priority.value
                 })
             })
 

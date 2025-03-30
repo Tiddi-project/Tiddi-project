@@ -22,7 +22,7 @@
                 <img src="./assets/sidebar/logoT.JPG" alt="logo de tiddi" class="logo" id="logoT">
                 <span class="span titleSpan">Tiddi</span>
             </div>
-            <button class="btn-task-sider">
+            <button class="btn-task btn-task-sider">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path></svg>
                 <span class="span">Añadir tarea</span>
             </button>
@@ -117,8 +117,33 @@
         <!-- Formulario y panel modal -->
         <form class="task-form" autocomplete="off">
             <legend >Tarea:</legend>
-            <input type="text" id="title-task" name="titleTask" class="title-task" placeholder="Titulo de la tarea">
+            <input type="text" id="title-task" name="titleTask" class="title-task" placeholder="Titulo de la tarea" >
             <textarea name="descriptionTask" id="description-task" class="description-task" placeholder="Descripcion"></textarea>
+            <div class="priority-otions">
+                <h3 class="priority-title">Prioridades</h3>
+                <div class="options">
+
+                    <label>
+                        <input type="radio" name="priority" value="baja" class="priority-radio" checked />
+                        <span class="circle low"></span> Baja
+                    </label>
+                    <label>
+                        <input type="radio" name="priority" value="media" class="priority-radio" />
+                        <span class="circle medium"></span> Media
+                    </label>
+                    <label>
+                        <input type="radio" name="priority" value="alta" class="priority-radio" />
+                        <span class="circle high"></span> Alta
+                    </label>
+                </div>
+            </div>
+            <div class="subtask__container" data-count="0">
+                <button type="button" class="subtask-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(33, 134, 37);"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg>
+                    <span class="subtask-title">Agregar subtarea</span>
+                </button>
+                <!-- Ingreso de las subtareas -->
+            </div>
             <div class="buttons">
                 <button type="submit" class="add">Agregar</button>
                 <button type="button" class="delete" id="delete">Eliminar</button>

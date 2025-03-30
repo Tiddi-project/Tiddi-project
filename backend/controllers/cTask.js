@@ -21,8 +21,19 @@ const cTask = {
                 return res.status(401).json({ message: "No has iniciado sesión" });
             }
             const userId = req.session.user.id
-            let {title, description} = req.body
-            await mTask.addTask({title, description, userId})
+            let {title, description, priority} = req.body
+
+            // Convertir a minúsculas y validar prioridad
+            const validPriorities = ["baja", "media", "alta"];
+            priority = priority ? priority.toLowerCase() : "baja";
+
+            // Si la prioridad no es válida, asignar "media"
+            // if (!validPriorities.includes(priority)) {
+            //     priority = "media";
+            // }
+
+            priority = priority.toLowerCase()
+            await mTask.addTask({title, description, userId, priority})
         } catch (err) {
             error.e400(err, req, res)
         }
@@ -46,9 +57,14 @@ const cTask = {
                 return res.status(401).json({ message: "No has iniciado sesión" });
             }
             const userId = req.session.user.id
-            let {title, description} = req.body 
+            let {title, description, priority} = req.body 
+            console.log(title);
+            console.log(description);
+            console.log(priority);
+            // priority = prioritypriority.toLowerCase()
+
             let {id} = req.params
-            let result = await mTask.updateTask({id, title, description, userId})
+            let result = await mTask.updateTask({id, title, description, priority, userId})
 
             if (result.affectedRows === 0) {
                 return res.status(404).json({ message: "Tarea no encontrada" });

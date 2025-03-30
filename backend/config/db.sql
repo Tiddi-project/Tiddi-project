@@ -24,3 +24,7 @@ create table users (
 -- añadir clave foranea en db tiddi / tasks
 ALTER TABLE tasks ADD COLUMN user_id INT NOT NULL;
 ALTER TABLE tasks ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+-- prioridad en la tarea
+ALTER TABLE tasks ADD COLUMN priority ENUM('baja', 'media', 'alta') NOT NULL DEFAULT 'baja';

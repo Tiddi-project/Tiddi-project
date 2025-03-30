@@ -6,7 +6,7 @@ import conexion from "./exports/conexion.js"
 import aUser from "../ajax/aUser.js"
 import { checkAuth } from "../ajax/auth.js"
 import circleProgress from "./exports/circleProgress.js"
-
+import subtask from "./exports/subtarea.js"
 
 const d = document
 const panelTask = d.querySelector(".task-form")
@@ -29,6 +29,10 @@ const logo = d.getElementById("logoT")
 const slidebar = d.querySelector(".slidebar")
 const slidebarBtn = d.querySelector(".menu-btn")
 const spans = d.querySelectorAll(".span")
+/*------------subtareas------------------ */ 
+const $subtaskContainer = d.querySelector(".subtask__container")
+const $subtaskButton = d.querySelector(".subtask-button")
+const $removeSubtask = d.querySelector(".remove-subtask")
 
 d.addEventListener("DOMContentLoaded",async (e)=>{
     // Envia los datos de usuario para mantener la sesion iniciada
@@ -42,6 +46,11 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     checkbox()
     allocation($form)
     conexion()
+
+    // agregar subtareas 
+    $subtaskButton.addEventListener("click", (e)=>{
+        subtask($subtaskContainer)
+    });
 
     // Grafica de progreso
     let progress = await aTask.progressTasks()
@@ -74,7 +83,7 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     })
 
     // metodo PATCH para editar una sola propiedad en una tarea
-    d.addEventListener("change", (e)=>{
+    $taskList.addEventListener("change", (e)=>{
         let taskChecked = e.target.closest(".task-container").querySelector(".task")
         let idTask = e.target.dataset.id;
         let statusChecked = e.target.checked
@@ -98,6 +107,11 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
         //     console.log(e.target.matches(".logout"));
         //     aUser.logoutUser()
         // }
+
+        // Eliminacion de subtareas
+        if(e.target.classList.contains("remove-subtask")){
+            e.target.parentElement.remove()
+        }
     })
     // cierre de sesion
     $logout.addEventListener("click", ()=>{
@@ -140,8 +154,4 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
             open();
         }
     })
-
-    
-   
-
 })
