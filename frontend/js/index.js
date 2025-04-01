@@ -31,8 +31,10 @@ const slidebarBtn = d.querySelector(".menu-btn")
 const spans = d.querySelectorAll(".span")
 /*------------subtareas------------------ */ 
 const $subtaskContainer = d.querySelector(".subtask__container")
+const $subtaskElement = d.querySelector(".subtask-elements")
 const $subtaskButton = d.querySelector(".subtask-button")
 const $removeSubtask = d.querySelector(".remove-subtask")
+const $tasks = d.querySelectorAll(".task")
 
 d.addEventListener("DOMContentLoaded",async (e)=>{
     // Envia los datos de usuario para mantener la sesion iniciada
@@ -54,8 +56,6 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
 
     // Grafica de progreso
     let progress = await aTask.progressTasks()
-    // console.log(progress.complete);
-    // console.log(progress.totalTask);
     circleProgress($circle, $tCompleted, $tTotal,progress)
     
     // metodo AJAX
@@ -84,16 +84,18 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
 
     // metodo PATCH para editar una sola propiedad en una tarea
     $taskList.addEventListener("change", (e)=>{
-        let taskChecked = e.target.closest(".task-container").querySelector(".task")
-        let idTask = e.target.dataset.id;
-        let statusChecked = e.target.checked
-        
-        aTask.editChecked(taskChecked, idTask, statusChecked)
+        // console.log(e.target);
+        if (e.target.matches(".checkbox")) {
+            let taskChecked = e.target.closest(".task-container").querySelector(".task")
+            let idTask = e.target.dataset.id;
+            let statusChecked = e.target.checked
+            
+            aTask.editChecked(taskChecked, idTask, statusChecked)
+        }
     })
     
     // metodo DELETE para eliminar una tarea
     d.addEventListener("click", (e)=>{
-        // console.log(e.target.dataset.id);
         if(e.target.matches("#delete")){
             let isConfirmed = confirm("¿Estas seguro de que deseas eliminar la tarea?")
             if(isConfirmed){
@@ -103,14 +105,21 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
                 e.preventDefault()
             }
         }
-        // if(e.target.matches(".logout.user-icon")){
-        //     console.log(e.target.matches(".logout"));
-        //     aUser.logoutUser()
-        // }
-
+        
         // Eliminacion de subtareas
         if(e.target.classList.contains("remove-subtask")){
             e.target.parentElement.remove()
+        }
+
+        // subtareas
+        let taskElement = e.target.closest(".task"); // Asegura que el click venga de `.task`
+    
+        if (taskElement) {
+            let subtaskContainer = taskElement.closest(".task-container")?.querySelector(".subtask-elements");
+            
+            if (subtaskContainer) {
+                subtaskContainer.classList.toggle("subtask-active");
+            }
         }
     })
     // cierre de sesion
@@ -121,6 +130,13 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     // Bienvenida con nombre de usuario
     aTask.welcomeUser({welcomeUser, nameUser, emailUser})
     
+    // $tasks.forEach(task =>{
+    //     task.addEventListener("click", (e)=>{
+    //         let subElementTask = e.target.closest(".task-container").querySelector(".subtask-elements")
+    //         subElementTask.classList.toggle("subtask-active");
+    //     })
+
+    // })
     // funciones para el manejo de sidebar
     function close(){
         slidebar.classList.add("slidebar-mini")

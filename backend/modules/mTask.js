@@ -4,7 +4,22 @@ const mTask = {
     getAll: async (userId)=>{
         try {
             // const [results] = await db.query("SELECT * FROM tasks ;")
-            const [results] = await db.query("SELECT * FROM tasks WHERE user_id = ?;", [userId])
+            // const [results] = await db.query("SELECT * FROM tasks WHERE user_id = ?;", [userId])
+            const [results] = await db.query(`
+                SELECT 
+                    t.id AS task_id, t.title, t.description, t.complete, t.priority,
+                    JSON_ARRAYAGG(
+                        JSON_OBJECT('id', s.id, 'title', s.title, 'complete', s.complete)
+                    ) AS subtasks
+                FROM tasks t
+                LEFT JOIN subtasks s ON t.id = s.task_id
+                WHERE t.user_id = ?
+                GROUP BY t.id;
+
+                `, 
+                [userId]
+            )
+            
             // console.log(results);
             return results
         } catch (error) {

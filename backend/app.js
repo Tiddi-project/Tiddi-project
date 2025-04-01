@@ -9,7 +9,9 @@ import error from "./middlewares/error.js"
 import routesUser from "./routes/rUsers.js"
 import routesTask from "./routes/rTasks.js"
 import routesCheck from "./routes/rAuth.js"
+import routesSubtask from "./routes/rSubtask.js"
 import {isAuthenticated} from "./middlewares/auth.js"
+
 
 // crear el servidor
 const app = express()
@@ -47,9 +49,10 @@ app.use(
 );
 
 
-app.use(routesUser)
 app.use(routesCheck)
+app.use(routesUser)
 app.use(isAuthenticated, routesTask)
+app.use(isAuthenticated, routesSubtask)
 
 
 

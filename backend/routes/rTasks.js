@@ -2,7 +2,7 @@ import {Router} from "express"
 import cTask from "../controllers/cTask.js"
 
 const routes = Router()
-
+/*------------------------------------------------------------------------creacion de tareas */
 // Mostrara la pagina principal
 routes.get("/tasks", cTask.getAll)  // complete para todas las tareas
 
@@ -21,5 +21,6 @@ routes.delete("/delete/:id", cTask.deleteTask)  // complete
 
 // Muestra el progreso de total de tareas vs completadas
 routes.get("/progress", cTask.progressTasks)  // progess
+
 
 export default routes;

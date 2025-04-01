@@ -13,14 +13,13 @@ const aTask = {
             }
             
             if(data.length === 0){
-                option.$taskList.innerHTML = `
-                    <h2>No tienes tareas por realizar</h2>
-                `
-                
+                option.$taskList.innerHTML = `<h2>No tienes tareas por realizar</h2>`
             }
+                       
+
             data.forEach((task, index) => {
                 // checkbox
-                option.$template.querySelector(".checkbox").dataset.id = task.id
+                option.$template.querySelector(".checkbox").dataset.id = task.task_id
                 option.$template.querySelector(".checkbox").setAttribute("id", index)
                 option.$template.querySelector(".newCheckbox").setAttribute("for", index)
                 option.$template.querySelector(".task").setAttribute("for", index)
@@ -37,7 +36,31 @@ const aTask = {
                 // insertando valores de la API en contenedor de tarea
                 option.$template.querySelector(".title").textContent = task.title
                 option.$template.querySelector(".description").textContent = task.description
+                
+                // subtask
+                let subtaskList = option.$template.querySelector(".subtask-list");
+                subtaskList.innerHTML = ""; // 🔹 Evita la duplicación de subtareas
 
+                if(task.subtasks?.length === 1 && task.subtasks[0]?.id === null){
+                    subtaskList.innerHTML = `<p class="no-subtasks">No hay subtareas</p>`; // 🔹 Mensaje si no hay subtareas
+                }else if(task.subtasks.length > 0){
+                    task.subtasks.forEach((subtask)=>{
+                        let liElement = document.createElement("li")
+                        liElement.classList.add("subtask-item")
+                        liElement.innerHTML = `
+                        <input type="checkbox" id="s-${subtask.id}" name="subtaskCheckbox" class="subtask-checkbox">
+                        <label for="s-${subtask.id}" class="subtask-checkbox-label"></label>
+                        <span class="subtask-item-content">${subtask.title}</span>
+                        `;
+                        if(subtask.complete === 1){
+                            liElement.querySelector(".subtask-item-content").classList.add("completed");
+                            liElement.querySelector(".subtask-checkbox").checked = true;
+                        }
+                        subtaskList.appendChild(liElement)      
+                    })
+                }else {
+                    subtaskList.innerHTML = `<p class="no-subtasks">No hay subtareas</p>`; // 🔹 Mensaje si no hay subtareas
+                }
                 // insertando data-attribute
                 option.$template.querySelector(".edit").dataset.id = task.id
                 option.$template.querySelector(".edit").dataset.title = task.title
@@ -62,6 +85,13 @@ const aTask = {
     },
     addTask: async (form)=>{
         try {
+            let subtasks = [];
+            document.querySelectorAll(".subtask-input").forEach(input => {
+                if (input.value.trim() !== "") {
+                    subtasks.push({ title: input.value, complete: false });
+                }
+            });
+
             let res = await fetch("http://localhost:3000/task", {
                 method: "POST",
                 headers: {"content-type": "application/json; charset=utf-8"},
@@ -69,7 +99,8 @@ const aTask = {
                     title: form.titleTask.value,
                     description: form.descriptionTask.value,
                     priority: form.priority.value,
-                    completed: false
+                    completed: false,
+                    subtasks
                 })
             })
             

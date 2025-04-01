@@ -28,3 +28,14 @@ ALTER TABLE tasks ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCA
 
 -- prioridad en la tarea
 ALTER TABLE tasks ADD COLUMN priority ENUM('baja', 'media', 'alta') NOT NULL DEFAULT 'baja';
+
+-- creacion de tabla para subtareas
+CREATE TABLE subtasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    complete BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+);
+

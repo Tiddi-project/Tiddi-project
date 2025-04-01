@@ -116,7 +116,12 @@
         </main>
         <!-- Formulario y panel modal -->
         <form class="task-form" autocomplete="off">
-            <legend >Tarea:</legend>
+            <div class="buttons">
+                <button type="reset" class="button-cancel">Cancelar</button>
+                <button type="button" class="delete" id="delete">Eliminar</button>
+                <button type="submit" class="add">Agregar</button>
+            </div>
+            <!-- <legend >Tarea:</legend> -->
             <input type="text" id="title-task" name="titleTask" class="title-task" placeholder="Titulo de la tarea" >
             <textarea name="descriptionTask" id="description-task" class="description-task" placeholder="Descripcion"></textarea>
             <div class="priority-otions">
@@ -144,25 +149,34 @@
                 </button>
                 <!-- Ingreso de las subtareas -->
             </div>
-            <div class="buttons">
-                <button type="submit" class="add">Agregar</button>
-                <button type="button" class="delete" id="delete">Eliminar</button>
-            </div>
-            <button type="reset" class="button-cancel">Cancelar</button>
             <input type="hidden" name="id">
         </form>
 
         <template>
             <div class="task-container">
-                <input type="checkbox" name="checkbox" class="checkbox">
-                <label  class="newCheckbox"></label>
-                <label  class="task">
-                    <h3 class="title"></h3>
-                    <p class="description"></p>
-                </label>
-                <button type="button" class="btn-edit">
-                    <img src="./assets/right-btn.png" alt="mostrar tarea completa" class="edit">
-                </button>
+                <div class="task-elements">
+
+                    <input type="checkbox" name="checkbox" class="checkbox">
+                    <label  class="newCheckbox"></label>
+                    <div  class="task">
+                        <h3 class="title"></h3>
+                        <p class="description"></p>
+                        
+                    </div>
+                    <button type="button" class="btn-edit">
+                        <img src="./assets/right-btn.png" alt="mostrar tarea completa" class="edit">
+                    </button>
+                </div>
+                <div class="subtask-elements ">
+                    <ul class="subtask-list">
+                        <!-- <li class="subtask-item">
+                            <input type="checkbox" name="subtaskCheckbox" class="checkbox">
+                            <label  class="newCheckbox"></label>
+                            <span class="subtask-item-content"></span>
+                        </li> -->
+                    </ul>
+                </div>
+
             </div>
         </template>
     </div>
