@@ -42,11 +42,9 @@ body{
     box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
     transition: width 0.5s ease;
 }
-
 .slidebar-mini {
     width: 80px;  /* 80px */
 }
-
 .menu-btn{
     position: absolute;
     z-index: 998;
@@ -64,16 +62,12 @@ body{
     transition: right 0.3s ease;
 }
 
-/* .menu-btn ion-icon{
-    font-size: 1rem;
-} */
 .btn-task-mini{
     right: -3vw;  
 }
 .btn-task-mini svg{
     transform: rotate(180deg);
 }
-
 .span{
     width: 100px;  /* 100px */
     white-space: nowrap;
@@ -85,15 +79,10 @@ body{
     opacity: 1;
     transition: opacity 0.5s ease, width 0.5s ease;
 }
-/* .span ion-icon {
-    color: grey;
-
-} */
 .ocult {
     opacity: 0;
     width: 0;
 }
-
 .namePage {
     width: 100%;
     height: 45px;  /* 45px */
@@ -101,18 +90,15 @@ body{
     align-items: center;
     margin-bottom: 2rem;
 }
-
 .logo {
     width: 45px;  /* 40px */
     border-radius: 50%;
     cursor: pointer;
 }
-
 .titleSpan{
     margin-left: 1.6rem;  /* 10px */
     font-size: 2rem;
 }
-
 /*------------------------------------------------- Boton crear tarea--------------- */
 .btn-task-sider {
     width: 100%;
@@ -127,19 +113,11 @@ body{
     color: white;
     cursor: pointer;
 }
-
-/* .btn-task ion-icon {
-    min-width: 50px;
-    white-space: nowrap;
-    font-size: 2.5rem; 
-} */
-
 /*------------------------------------------------------- Menu de navegacion--------------- */
 .nav {
     margin-top: 3rem;
     /* color: rgb(66, 65, 65); */
 }
-
 .nav-item{
     overflow: hidden;
     position: relative;
@@ -147,7 +125,6 @@ body{
     margin-bottom: 1rem;
     list-style: none;
 }
-
 .nav a {
     width: 100%;
     height: 45px;  /* 45px */
@@ -157,7 +134,6 @@ body{
     border-radius: 10px;  /* 10px */
     color: black;
 }
-
 .nav a:hover {
     background-color: #218625;
     color: white;
@@ -166,13 +142,6 @@ body{
     /* background-color: #218625; */
     fill: white;
 }
-
-/* .nav ion-icon {
-    min-width: 40px; 
-    font-size: 1.5rem;  
-    margin-right: 0.5rem;
-} */
-
 .ul-2 {
     margin-top: 7rem;
 }
@@ -204,24 +173,12 @@ body{
     box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
 
 }
-/* .slidebar.slidebar-mini .nav-item .span {
-    width: 0;
-} */
-/* .slidebar.slidebar-mini .nav-item:hover span {
-    opacity: 1;
-    color: white;
-    padding-left: 0.5rem;
-    top: 50%;
-    border-radius: 5px;
-} */
-
 /*----------------------------------------------------------- Boton usuario--------------- */
 .user-btn {
     width: 100%;
     display: flex;
     margin-top: 7rem;
 }
-
 .user__photo {
     width: 50px;  /* 50px */
     height: 50px;  /* 50px */
@@ -230,7 +187,6 @@ body{
     object-fit: cover;
     object-position: center;
 }
-
 .user_info{
     overflow: hidden;
     width: 100%;
@@ -241,12 +197,10 @@ body{
     margin-left: 0.7rem;  /* 7px */
     font-weight: 600;
 }
-
 .nombre{
     width: 100%;
     font-size: 1.5rem;  /* 15px */
 }
-
 .email {
     width: 100%; 
     text-overflow: ellipsis;
@@ -280,31 +234,7 @@ body{
     margin: 2rem 0;
     color: rgb(38, 50, 56);
 }
-/* .addTask {
-    width: 30%;
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-} */
-/* .addTask img {
-    width: 2rem;
-    height: 2rem;
-} */
-/* .addTask button {
-    border: none;
-    width: 95%;
-    text-align: start;
-    padding-left: 2rem;
-    background-color: #ffffff;
-    color: #B1B1B1;
-    cursor: pointer;
-} */
 /* ------------------------------------------------------ panel de agregar tarea */
-
 .task-form {
     position: fixed;
     z-index: 999;
@@ -405,7 +335,6 @@ body{
     border-radius: 50%;
     cursor: pointer;
 }
-
 .low {border-color: rgb(110, 239, 227);}
 .medium {border-color: rgb(255, 195, 0);}
 .high {border-color: rgb(255, 55, 55);}
@@ -482,7 +411,6 @@ body{
     color: rgb(33, 134, 37);
 }
 /* ------------------------------------fin---subtareas--------------------------- */
-
 .buttons {
     width: 90%;
     display: flex;
@@ -511,16 +439,10 @@ body{
     background-color: transparent;
     cursor: pointer;
 }
-
 /* ------------------------------------------------------ Listado de tareas */
-/* hr {
-    border: none;
-    height: 1px;
-    background-color: #b0b0b0;
-    margin-bottom: 2rem;
-} */
 .task-list {
     max-width:50%;
+    min-width: 440px;
     height: 85vh;
     padding-top: 1rem;  
     border-top: thin solid #b0b0b0;
@@ -610,15 +532,18 @@ body{
 }
 .subtask-item{
     width: 100%;
+    height: 2.5rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    /* border: thin solid red;   */
 }
 .subtask-item-content {
     margin-left: 1rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: rgb(38, 50, 56);
 }
 /*--------------------------------------------------------- Barra de progreso*/
 .progress {
@@ -650,9 +575,6 @@ body{
     height: 200px;
     display: inline-block;
 }
-/* .svg {
-    transform: rotate(-90deg);
-} */
 /* Animación suave */
 #progress-circle {
     transition: stroke-dashoffset 1s ease-in-out;
@@ -666,7 +588,6 @@ body{
     font-weight: bold;
 }
 /*---------------------------------------------------- estilos en el checkbox task*/
-
 .checkbox {
     appearance: none;
 }

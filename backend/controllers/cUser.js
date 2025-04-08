@@ -43,7 +43,7 @@ const cUser = {
             }
             
             req.session.user = user;
-            
+            console.log("✅ Sesión después de login:", req.session); 
             res.json({ success: true, message: "Usuario autenticado" });
             
 

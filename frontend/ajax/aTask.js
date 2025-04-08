@@ -1,22 +1,24 @@
+import circleProgress from "../js/exports/circleProgress.js";
 
 const aTask = {
     getAll: async (option)=>{
         try {
+            // Peticion
             let res = await fetch("http://localhost:3000/tasks",{
                 method: "GET",
                 credentials: "include"
             })
+            // convertir datos del backend en formato que se usa en js
             let data = await res.json()
             console.log(data);
             if(!res.ok){
                 throw {status: res.status, message: res.statusText, dir:res}
             }
-            
+            // Restriccion en caso de no haber tareas relacionadas con el usuario
             if(data.length === 0){
                 option.$taskList.innerHTML = `<h2>No tienes tareas por realizar</h2>`
             }
-                       
-
+            // Recorrido de las tareas y asignacion en el template
             data.forEach((task, index) => {
                 // checkbox
                 option.$template.querySelector(".checkbox").dataset.id = task.task_id
@@ -47,6 +49,7 @@ const aTask = {
                     task.subtasks.forEach((subtask)=>{
                         let liElement = document.createElement("li")
                         liElement.classList.add("subtask-item")
+                        liElement.dataset.id = subtask.id
                         liElement.innerHTML = `
                         <input type="checkbox" id="s-${subtask.id}" name="subtaskCheckbox" class="subtask-checkbox">
                         <label for="s-${subtask.id}" class="subtask-checkbox-label"></label>
@@ -62,10 +65,11 @@ const aTask = {
                     subtaskList.innerHTML = `<p class="no-subtasks">No hay subtareas</p>`; // 🔹 Mensaje si no hay subtareas
                 }
                 // insertando data-attribute
-                option.$template.querySelector(".edit").dataset.id = task.id
+                option.$template.querySelector(".edit").dataset.id = task.task_id
                 option.$template.querySelector(".edit").dataset.title = task.title
                 option.$template.querySelector(".edit").dataset.description = task.description
                 option.$template.querySelector(".edit").dataset.priority = task.priority
+                option.$template.querySelector(".edit").dataset.subtask = JSON.stringify(task.subtasks)
 
                 // uniendo el formato
                 let clone = document.importNode(option.$template, true)
@@ -85,6 +89,7 @@ const aTask = {
     },
     addTask: async (form)=>{
         try {
+            // Se asignan las subtareas en un arreglo para enviar la totalidad de ellas
             let subtasks = [];
             document.querySelectorAll(".subtask-input").forEach(input => {
                 if (input.value.trim() !== "") {
@@ -94,6 +99,7 @@ const aTask = {
 
             let res = await fetch("http://localhost:3000/task", {
                 method: "POST",
+                credentials: "include",
                 headers: {"content-type": "application/json; charset=utf-8"},
                 body: JSON.stringify({
                     title: form.titleTask.value,
@@ -121,26 +127,54 @@ const aTask = {
             let idTask = form.id.value
             if (!idTask) throw { status: 400, message: "El ID de la tarea es obligatorio" }
 
-            let taskStatus = await fetch(`http://localhost:3000/task/${idTask}`)
-            if(!taskStatus.ok) throw {status: res.status, message: res.statusText}
+            // determinar el estado de la tarea (completed or uncompleted)
+            let taskStatus = await fetch(`http://localhost:3000/task/${idTask}`, {
+                method: "GET",
+                credentials: "include"
+              })
+            if(!taskStatus.ok) throw {status: taskStatus.status, message: taskStatus.statusText}
             let dataStatus = await taskStatus.json()
             let isCompleted  = dataStatus.completed
             
+            // ingreso de subtareas
+            let subtasks = []
+            let subtaskItem = form.querySelectorAll(".subtask-item")
+            subtaskItem.forEach(sub => {
+                // let subtaskId = sub.dataset.id || null;
+                let subtaskId = sub.getAttribute("data-id");
+                subtaskId = subtaskId ? parseInt(subtaskId) : null;
+                let title = sub.querySelector(".subtask-input").value.trim();
+                let complete = sub.querySelector(".subtaskCheckbox").checked;
+                if (title !== "") {
+                    subtasks.push({ id: subtaskId, title, complete });
+                }
+            });
+
+            console.log(subtasks);
            
             let res = await fetch(`http://localhost:3000/edit/${idTask}`, {
                 method: "PUT",
+                credentials: "include",
                 headers: {"content-type": "application/json; charset=utf-8"},
                 body: JSON.stringify({
                     title: form.titleTask.value,
                     description: form.descriptionTask.value,
                     completed:isCompleted,
-                    priority:form.priority.value
+                    priority:form.priority.value,
+                    subtasks
                 })
             })
-
+            
+            //  ver la respuesta del servidor
+            let responseText = await res.text();
+            console.log("Respuesta del servidor:", responseText);
+            
             if(!res.ok) throw {status: res.status, message: res.statusText, dir:res}
             alert("Tarea editada con exito")
         } catch (error) {
+            console.log(error);
+            alert("sicede en el catch")
+
             let message = error.statusText || "Se ha producido un error"
             let status = error.status
             console.log(`Error ${status}: ${message}`)
@@ -151,7 +185,8 @@ const aTask = {
             let idTask = form.id.value
 
             let res = await fetch(`http://localhost:3000/delete/${idTask}`, {
-                method:"DELETE"
+                method:"DELETE",
+                credentials: "include"
             })
 
             let data = res.json()
@@ -165,13 +200,17 @@ const aTask = {
         try {
             let res = await fetch(`http://localhost:3000/complete/${idTask}`, {
                 method: "PATCH",
-                headers: {"content-type": "application/json; charset= utf-8"},
+                credentials: "include",
+                headers: {"content-type": "application/json; charset=utf-8"},
                 body: JSON.stringify({
                     completed:statusChecked,
                 })
             })  
             if(!res.ok) throw {status: res.status, message: res.statusText}
 
+            // ✅ Actualizar la gráfica de progreso dinámicamente
+            let progress = await aTask.progressTasks();
+            circleProgress($circle, $tCompleted, $tTotal, progress);
             
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la eliminación"
@@ -180,14 +219,14 @@ const aTask = {
     },
     progressTasks: async ()=>{
         try {
-            let res = await fetch("http://localhost:3000/progress")
+            let res = await fetch("http://localhost:3000/progress", {
+                method: "GET",
+                credentials: "include"
+              })
 
             if(!res.ok) throw {status: res.status, message: res.statusText}
 
             let data = await res.json()
-            // console.log(data[0]);
-            // console.log(data[0].totalTask);
-            // console.log(data[0].complete);
             let infoTask = {
                 totalTask: data[0].totalTask,
                 totalComplete: data[0].complete
@@ -200,7 +239,10 @@ const aTask = {
     },
     welcomeUser: async (options)=>{
         try {
-            let res = await fetch("http://localhost:3000/user")
+            let res = await fetch("http://localhost:3000/user", {
+                method: "GET",
+                credentials: "include"
+              })
             if(!res.ok) throw {status: res.status, message:res.statusText}
             let data = await res.json()
             // console.log(data);

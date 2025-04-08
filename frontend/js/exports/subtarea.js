@@ -5,7 +5,7 @@ export default function subtask($subtaskContainer){
     let count = parseInt($subtaskContainer.dataset.count)+1
     $subtaskContainer.dataset.count = count; // Guardar el nuevo valor
         
-    const subtaskId = `subtask-${count}`;
+    const subtaskId = `subt-${count}`;
     const subtaskCreate = d.createElement("div")
     subtaskCreate.classList.add("subtask-item")
     subtaskCreate.innerHTML = `

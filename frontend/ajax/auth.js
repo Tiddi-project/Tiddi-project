@@ -12,15 +12,11 @@ export const checkAuth = async () =>{
             // console.log("Usuario autenticado", data.user);
             return data.user; 
         } else {
-
             return null;
         }
         return data
 
-        // if(data.authenticated){
-        //     window.location.href = "http://localhost:3000/inicio-sesion.html"
-        // }else{
-        // }
+        
     } catch (error) {
         let message = error.statusText || "Ha ocurrido un error"
         console.log(`Error: ${error.status}: ${message}`);

@@ -1,12 +1,12 @@
-import aTask from "../ajax/aTask.js"
-import allocation from "./exports/allocation.js"
-import checkbox from "./exports/checkbox.js"
-import panelActive from "./exports/panel.js"
-import conexion from "./exports/conexion.js"
-import aUser from "../ajax/aUser.js"
 import { checkAuth } from "../ajax/auth.js"
-import circleProgress from "./exports/circleProgress.js"
+import aTask from "../ajax/aTask.js"
+import aUser from "../ajax/aUser.js"
 import subtask from "./exports/subtarea.js"
+import checkbox from "./exports/checkbox.js"
+import allocation from "./exports/allocation.js"
+import panelActive from "./exports/panel.js"
+import circleProgress from "./exports/circleProgress.js"
+import conexion from "./exports/conexion.js"
 
 const d = document
 const panelTask = d.querySelector(".task-form")
@@ -40,7 +40,7 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     // Envia los datos de usuario para mantener la sesion iniciada
     const user = await checkAuth(); // Espera a que la autenticación termine antes de continuar
     if (!user) {
-        window.location.href = "http://localhost:3000/inicio-sesion.html"; // Redirige si no está autenticado
+        window.location.href = "http://localhost:3000/inicio-sesion.html"; 
         return;
     }
 
@@ -90,7 +90,7 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
             let idTask = e.target.dataset.id;
             let statusChecked = e.target.checked
             
-            aTask.editChecked(taskChecked, idTask, statusChecked)
+            aTask.editChecked(taskChecked, idTask, statusChecked, {$circle, $tCompleted, $tTotal,progress})
         }
     })
     
@@ -113,7 +113,6 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
 
         // subtareas
         let taskElement = e.target.closest(".task"); // Asegura que el click venga de `.task`
-    
         if (taskElement) {
             let subtaskContainer = taskElement.closest(".task-container")?.querySelector(".subtask-elements");
             
@@ -130,13 +129,6 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     // Bienvenida con nombre de usuario
     aTask.welcomeUser({welcomeUser, nameUser, emailUser})
     
-    // $tasks.forEach(task =>{
-    //     task.addEventListener("click", (e)=>{
-    //         let subElementTask = e.target.closest(".task-container").querySelector(".subtask-elements")
-    //         subElementTask.classList.toggle("subtask-active");
-    //     })
-
-    // })
     // funciones para el manejo de sidebar
     function close(){
         slidebar.classList.add("slidebar-mini")

@@ -9,6 +9,7 @@ const aUser = {
 
             let res = await fetch("http://localhost:3000/signin", {
                 method: "POST",
+                credentials: "include",
                 headers: {"content-type" : "application/json"},
                 body: JSON.stringify({
                     name,
@@ -30,6 +31,7 @@ const aUser = {
             
             let res = await fetch("http://localhost:3000/login",{
                 method: "POST",
+                credentials: "include",
                 headers: {"Content-Type":"application/json; charset=utf-8"},
                 body: JSON.stringify({
                     email, 

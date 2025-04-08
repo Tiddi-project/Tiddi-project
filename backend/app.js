@@ -23,11 +23,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // uso de los middleware
-// app.use(cors({
-//   origin: "http://localhost:3000",
-//   credentials: true
-// }))
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}))
+// app.use(cors())
 app.use(helmet())
 app.use(morgan("dev"))
 app.use(express.static(path.join(__dirname, "../frontend")))
@@ -38,13 +38,13 @@ app.use(
   session({
     secret: "mi_llave",
     resave: false,
-    saveUninitialized: false
-    // cookie: {
-    //   httpOnly: true,
-    //   secure: false,  // Cambia a 'true' en producción si usas HTTPS
-    //   sameSite: 'none',  // 'strict' o 'lax' dependiendo del comportamiento que quieras
-    //   maxAge: 1000 * 60 * 60 * 24,  // Expira después de 24 horas
-    // },
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,  // Cambia a 'true' en producción si usas HTTPS
+      sameSite: 'lax',  // 'strict' o 'lax' dependiendo del comportamiento que quieras
+      maxAge: 1000 * 60 * 60 * 24,  // Expira después de 24 horas
+    },
   })
 );
 

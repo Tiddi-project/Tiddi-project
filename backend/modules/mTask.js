@@ -26,15 +26,25 @@ const mTask = {
             throw {status:500, message: "Error al cargar las tareas"}
         }
     },
-    addTask : async (task)=>{
-        await db.query("insert into tasks (title, description, user_id, priority) values (?,?,?,?)", [task.title, task.description, task.userId, task.priority])
+    addTask : async (task, connection)=>{
+            let [taskResult] = await connection.execute(
+                "insert into tasks (title, description, user_id, priority) values (?,?,?,?)", [task.title, task.description, task.userId, task.priority]
+            );
+
+            // Obtener el ID de la nueva tarea
+            return taskResult.insertId;    // Retornar el ID de la tarea insertada
+           
     },
     getTask: async (task)=>{
         let [results] = await db.query("SELECT * FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
         return results
     },
-    updateTask: async (task)=>{
-        await db.query("UPDATE tasks SET title= ? , description= ?, priority = ? WHERE id = ? AND user_id = ?;", [task.title, task.description, task.priority, task.id,  task.userId])
+    updateTask: async (task, connection)=>{
+        let [results] = await connection.execute(
+            "UPDATE tasks SET title= ? , description= ?, priority = ? WHERE id = ? AND user_id = ?;", 
+            [task.title, task.description, task.priority, task.id,  task.userId]
+        )
+        return results
     },
     deleteTask: async (task)=>{
         await db.query("DELETE FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])

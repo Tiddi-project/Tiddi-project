@@ -3,14 +3,21 @@ const d = document
 export default function panelActive(panelTask, button){
     button.addEventListener("click",(e)=>{
         panelTask.classList.add("isActive")
+        panelTask.querySelector(".add").textContent = "Agregar"
     })
     
     d.addEventListener("click",(e)=>{
 
-              // permite esconder el panel
+        // permite esconder el panel
         if(e.target.matches(".button-cancel")){
             panelTask.classList.remove("isActive")
             panelTask.reset()
+            // ✅ Limpiar subtareas al cancelar
+            const subtasksContainer = panelTask.querySelector(".subtask__container").querySelectorAll(".subtask-item"); 
+            subtasksContainer.forEach(subtask => {
+                subtask.remove()
+            });
+            
         }
 
         // asigna los valores de la tarea en el panel para su edicion
