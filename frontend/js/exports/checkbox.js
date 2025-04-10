@@ -10,7 +10,7 @@ export default function checkbox(){
             let unitTask = taskContainer.querySelector(".task");
             let checkbox = taskContainer.querySelector(".checkbox").checked
             unitTask.classList.toggle("completed", checkbox)
-            window.location.reload()
+            // window.location.reload()
         }
         if(e.target.matches(".subtask-checkbox")){
             let taskContainer =  e.target.closest(".subtask-item") 

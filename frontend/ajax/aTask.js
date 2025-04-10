@@ -207,10 +207,6 @@ const aTask = {
                 })
             })  
             if(!res.ok) throw {status: res.status, message: res.statusText}
-
-            // ✅ Actualizar la gráfica de progreso dinámicamente
-            let progress = await aTask.progressTasks();
-            circleProgress($circle, $tCompleted, $tTotal, progress);
             
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la eliminación"
@@ -264,6 +260,21 @@ const aTask = {
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la captura del nombre de usuario"
             console.log(`Error ${error.status}: ${message}`);
+        }
+    },
+    completeSubtaskChecked: async(container, idSubtask, checked)=>{
+        try {
+            let res = await fetch(`http://localhost:3000/subtask/${idSubtask}`, {
+                method: "PATCH",
+                credentials: "include",
+                headers: {"content-type": "application/json; charset=utf-8"},
+                body: JSON.stringify({
+                    complete:checked,
+                })
+            })
+            if(!res.ok) throw {status: res.status, message: res.statusText}
+        } catch (error) {
+            
         }
     }
 

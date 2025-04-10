@@ -84,13 +84,23 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
 
     // metodo PATCH para editar una sola propiedad en una tarea
     $taskList.addEventListener("change", (e)=>{
-        // console.log(e.target);
+        //console.log(e.target); //subtask-checkbox
         if (e.target.matches(".checkbox")) {
             let taskChecked = e.target.closest(".task-container").querySelector(".task")
             let idTask = e.target.dataset.id;
             let statusChecked = e.target.checked
             
-            aTask.editChecked(taskChecked, idTask, statusChecked, {$circle, $tCompleted, $tTotal,progress})
+            aTask.editChecked(taskChecked, idTask, statusChecked)
+            return
+        }
+        if (e.target.matches(".subtask-checkbox")) {
+            let subtaskChecked = e.target.closest(".subtask-elements").querySelector(".subtask-item")
+            let idSubtask = e.target.id.replace("s-", "");
+            let statusChecked = e.target.checked
+            // console.log(statusChecked);
+            
+             aTask.completeSubtaskChecked(subtaskChecked, idSubtask, statusChecked)
+             return
         }
     })
     

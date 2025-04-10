@@ -143,6 +143,25 @@ const cTask = {
         } catch (error) {
             error.e500(err, req, res)
         }
+    },
+    completeSubtask: async (req, res)=>{
+        try {
+            if(!req.session.user){
+                return res.status(401).json({ message: "No has iniciado sesión" });
+            }
+            let userId = req.session.user.id
+            let {id} = req.params
+            let {complete} = req.body
+            if(complete){
+                complete = 1
+            }else{
+                complete = 0
+            }
+            console.log(userId, id, complete);
+            await mSubtask.completeSubtask(userId, id, complete)
+        } catch (error) {
+            
+        }
     }
 }
 

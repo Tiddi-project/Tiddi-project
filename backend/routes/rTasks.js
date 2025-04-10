@@ -15,6 +15,7 @@ routes.put("/edit/:id", cTask.updateTask)   // complete
 
 // Tareas completadas 
 routes.patch("/complete/:id", cTask.completeTask)
+routes.patch("/subtask/:id",  cTask.completeSubtask)
 
 // Eliminacion de tareas
 routes.delete("/delete/:id", cTask.deleteTask)  // complete

@@ -57,6 +57,17 @@ const mSubtask = {
         } catch (error) {
             throw { status: 500, message: "Error al actualizar las subtareas" };
         }
+    },
+    completeSubtask: async(userId, subtaskId, complete)=>{
+        try {
+            await db.execute(
+                "UPDATE subtasks SET complete = ? WHERE id = ?;", 
+                [complete, subtaskId]
+            )
+        } catch (error) {
+            throw { status: 500, message: "Error al actualizar las subtareas" };
+            
+        }
     }
 }
 

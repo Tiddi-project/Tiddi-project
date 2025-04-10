@@ -5,7 +5,7 @@ const mTask = {
         try {
             // const [results] = await db.query("SELECT * FROM tasks ;")
             // const [results] = await db.query("SELECT * FROM tasks WHERE user_id = ?;", [userId])
-            const [results] = await db.query(`
+            const [results] = await db.execute(`
                 SELECT 
                     t.id AS task_id, t.title, t.description, t.complete, t.priority,
                     JSON_ARRAYAGG(
@@ -36,7 +36,7 @@ const mTask = {
            
     },
     getTask: async (task)=>{
-        let [results] = await db.query("SELECT * FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
+        let [results] = await db.execute("SELECT * FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
         return results
     },
     updateTask: async (task, connection)=>{
@@ -47,15 +47,15 @@ const mTask = {
         return results
     },
     deleteTask: async (task)=>{
-        await db.query("DELETE FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
+        await db.execute("DELETE FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
     },
     completeTask: async (task)=>{
-        await db.query("UPDATE tasks SET complete= ? WHERE id = ? AND user_id = ?;", [task.completed, task.id, task.userId])
+        await db.execute("UPDATE tasks SET complete= ? WHERE id = ? AND user_id = ?;", [task.completed, task.id, task.userId])
 
     },
     progressTasks: async (userId)=>{
        
-            let [results] = await db.query(`
+            let [results] = await db.execute(`
                 select 
                     count(*) as totalTask, 
                     count(case when complete = 1 then 1 end) as complete
