@@ -173,7 +173,7 @@ const aTask = {
             alert("Tarea editada con exito")
         } catch (error) {
             console.log(error);
-            alert("sicede en el catch")
+            alert("sucede en el catch")
 
             let message = error.statusText || "Se ha producido un error"
             let status = error.status
