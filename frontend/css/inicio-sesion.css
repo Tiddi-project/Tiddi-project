@@ -58,7 +58,6 @@ a{
     display: flex;
     list-style-type: none;
 }
-
 .item-link{
     margin-right: 4rem;
     color: var(--color-tittle);
@@ -124,9 +123,7 @@ a{
     color: var(--color-tittle);
     align-items: center;
 }
-
 /* -------------------------------- Estilos de formulario------------------------------ */
-
 .sesion-acceso {
     width: 50%;
 }
@@ -140,7 +137,8 @@ a{
 .acceso-form h2{
     font-size: 3rem;
 }
-.acceso-form input{
+.email {
+    /* .acceso-form input{ */
     width: 70%;
     height: 35px;
     padding-left: 2rem;
@@ -149,10 +147,12 @@ a{
     background-color: var(--color-sesion);
     font-family: var(--font-size);
 }
-.acceso-form input[type="submit"] {
+.envio {
     width: 40%;
     height: 30px;
     padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     border-radius: 10px;
     border: none;
     background-color: var(--color-color-buttom);
@@ -160,6 +160,51 @@ a{
     color: white;
     cursor: pointer;
 } 
+.password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 37px;
+    margin-top: 1rem;
+    background-color: var(--color-sesion);
+}
+.password{
+    width: 80%;
+    height: 100%;
+    padding-left: 1rem;
+    border: none;   
+    background-color: transparent;
+    /* border: thin solid red ; */
+    font-family: var(--font-size);
+}
+.password-container img {
+    width: 10%;
+    cursor: pointer;
+    object-fit: cover; /* recorta si es necesario */
+}
+/* eyes */
+.eye-close, .eye-open {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 10%;           /* Puedes ajustar este tamaño según tu diseño */
+    height: 35px;         /* Debe tener altura para verse */
+    display: inline-block;
+    cursor: pointer;
+}
+.eye-close {
+    background-image: url("../assets/eye-closed-svgrepo-com.svg");
+}
+.eye-open {
+    background-image: url("../assets/eye-svgrepo-com.svg");
+
+}
+
+.email:focus,
+.password:focus {
+    outline: none;
+}
 .bton-registro {
     width: 40%;
     height: 30px;
@@ -177,7 +222,7 @@ a{
     color: #ff0000  ;
     margin-top: 0.5rem;
 }
-.acceso-form input[type="submit"]:hover {
+.envio:hover {
     background-color: var(--color-form);
     color: var(--color-tittle);
     /* transform: scale(1.1); */
@@ -188,16 +233,13 @@ a{
 
 } 
 .enlace{
-    /* color: var(--color-tittle);
-    font-size: 1.4rem;
-    margin: 1rem 0; */
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 2rem 0;
     gap: 1rem; /* Espacio entre el texto y las líneas */
     font-size: 1.4rem;
     color: var(--color-tittle);
-    margin: 1rem 0;
     text-decoration: none; /* Quita el subrayado del enlace */
 }
 .enlace-linea1::after,
@@ -208,16 +250,14 @@ a{
     background-color: var(--color-tittle);
     color: white;
 }
-.enlace-linea2::after,
+/* .enlace-linea2::after,
 .enlace-linea2::before{
     content: "....................";
     flex-grow: 1;
     height: 1px;
     background-color: var(--color-tittle);
     color: white;
-}
-
-
+} 
 
 .redes{
     display: flex;
@@ -230,21 +270,19 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 15rem;
-    height: 50px; */
     padding: 0.5rem 1rem;
     border: thin solid;
     border-radius: 25px;
-    color: black;
+    color: black
 }
 .redes-icon:hover{
     transform: scale(1.1);
 
 }
 .redes-icon img{
-    /* width: 3.7rem; */
     margin-right: 2rem;
 }
+*/
 
 /* validaciones */
 .formulario-error {
@@ -275,3 +313,41 @@ a{
       opacity: 1;
     }
   }
+/* -----------------------------------------------------------------------------------------------Toast */
+.toastBox {
+    position: absolute;
+    z-index: 999;
+    right: 30px;
+    top: 30px;
+    
+}
+.toast {
+    position: relative;
+    width: 400px;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 500;
+    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    background-color: rgb(255, 255, 255);
+}
+.svgToast {
+    margin: 0 2rem 0 2rem;
+}
+.toast::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background-color: var(--color-color-buttom);
+    animation: anim 5s linear forwards;
+}
+@keyframes anim {
+    100% {
+        width: 0;
+    }
+}
