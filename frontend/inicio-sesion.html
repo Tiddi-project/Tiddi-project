@@ -35,16 +35,20 @@
             <article class="sesion-acceso">
                 <form class="acceso-form" >
                     <h2>Iniciar sesión</h2>
-                    <input type="email" name="email" id="email" placeholder="Correo electronico"  autofocus required >
+                    <input type="email" name="email" class="email" id="email" placeholder="Correo electronico"  autofocus required >
                     <span class="testFail"></span>
 
-                    <input type="password" name="password" id="password"  placeholder="Contraseña"  required >
+                    <div class="password-container">
+                        <input type="password" name="password" class="password" id="password"  placeholder="Contraseña"  required >
+                        <span class="eye-close"></span>
+                        <!-- <img src="./assets/eye-closed-svgrepo-com.svg" class="eye" alt="No mostrar contraseña"> -->
+                    </div>
                     
                     <input type="submit" class="envio" value="Ingresar">
                     <a href="#" class="enlace">¿Olvidaste tu contraseña?</a>
                     <p class="enlace enlace-linea1">¿No tienes una cuenta?</p>
                     <a href="./registro.html" class="bton-registro">Registrate</a>  
-                    <p class="enlace enlace-linea2">o accede con</p>
+                    <!-- <p class="enlace enlace-linea2">o accede con</p>
                     <div class="redes">
                         <a href="#" class="redes-icon">
                             <img src="./assets/facebook-color.png" alt="icono de Facebook">
@@ -54,12 +58,15 @@
                             <img src="./assets/google.png" alt="icono de Google">
                             <span>Google</span>
                         </a>
-                    </div>
+                    </div> -->
                 </form>
-
             </article>
         </section>
+        <div class="toastBox">
+            <!-- Aqui se mostrara el anuncio en caso de usuario o contraseña errada -->
+        </div>
     </main>
-    <script src="./js/inicio.sesion.js" type="module"></script>
+    <button class="toastButton">Active</button>
+    <script src="./js/inicio-sesion.js" type="module"></script>
 </body>
 </html>

@@ -23,7 +23,7 @@ const cUser = {
     loginUser: async (req, res)=>{
         try {
             let {email, password} = req.body
-            
+            console.log("👉 Email y password recibidos:", email, password)
             const results = await mUser.loginUser(email)
 
             // res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });

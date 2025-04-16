@@ -1,3 +1,4 @@
+import toast from "../js/exports/toast.js"
 
 
 const aUser = {
@@ -24,7 +25,7 @@ const aUser = {
             console.log(`Error ${error.status}: ${message}`);
         }
     },
-    loginUser: async (form) =>{
+    loginUser: async (form, toastContainer) =>{
         try {
             let email = form.email.value
             let password = form.password.value
@@ -40,6 +41,8 @@ const aUser = {
             })
 
             let data = await res.json()
+            console.log(data);
+            console.log(res);
             if (!res.ok) throw { status: res.status, message: res.statusText };
             
 
@@ -52,6 +55,12 @@ const aUser = {
            
         } catch (error) {
             let message = error.statusText || "Ha ocurrido un error"
+            if(error.status === 401){
+                toast("Usuario no registrado", toastContainer)
+            }
+            if(error.status === 403){
+                toast("Contraseña incorrecta", toastContainer)
+            }
             console.log(`Error ${error.status}: ${message}`);
         }
     },
@@ -68,6 +77,13 @@ const aUser = {
         } catch (error) {
             let message = error.message || "ha ocurrido un error al cerrar sesion"
             console.log(`Error ${error.status}: ${message}`);
+        }
+    },
+    verificationUser: async ()=>{
+        try {
+            
+        } catch (error) {
+            
         }
     }
 }
