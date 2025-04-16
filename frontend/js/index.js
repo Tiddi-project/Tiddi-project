@@ -26,6 +26,8 @@ const $tCompleted = d.querySelector(".task-completed")
 const $tTotal = d.querySelector(".task-total")
 /* --------sliderbar------------ */
 const logo = d.getElementById("logoT")
+const logoLetras = d.querySelector(".logo-letras")
+const botonNuevaTarea = d.querySelector(".btn-task-sider")
 const slidebar = d.querySelector(".slidebar")
 const slidebarBtn = d.querySelector(".menu-btn")
 const spans = d.querySelectorAll(".span")
@@ -130,6 +132,17 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
                 subtaskContainer.classList.toggle("subtask-active");
             }
         }
+        console.log(e.target.matches(".fotoDePerfil"))
+        console.log(e.target.matches("#perfil"))
+
+        if (e.target.matches(".fotoDePerfil")) {
+            const menu = document.getElementById("perfilMenu");
+            const perfil = document.getElementById("perfil")
+            menu.classList.toggle("active");
+            perfil.classList.toggle("active");
+        }
+
+
     })
     // cierre de sesion
     $logout.addEventListener("click", ()=>{
@@ -143,6 +156,8 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     function close(){
         slidebar.classList.add("slidebar-mini")
         slidebarBtn.classList.add("btn-task-mini")
+        logoLetras.classList.add("ocultar")
+        botonNuevaTarea.classList.add("ocultar")
         spans.forEach((span)=>{
             span.classList.add("ocult")
             span.classList.add("span-hover")
@@ -152,6 +167,8 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     function open(){
         slidebar.classList.remove("slidebar-mini")
         slidebarBtn.classList.remove("btn-task-mini")
+        logoLetras.classList.remove("ocultar")
+        botonNuevaTarea.classList.remove("ocultar")
         spans.forEach((span)=>{
             span.classList.remove("ocult")
             span.classList.remove("span-hover")
@@ -165,11 +182,11 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     if(localStorage.getItem("sidebar") === "close") close()
 
     // Manejo de siderbar
-    slidebarBtn.addEventListener("click", ()=>{
+    slidebarBtn.addEventListener("click", (e)=>{
         if (localStorage.getItem("sidebar") === "open") {
             close();
         } else {
             open();
-        }
+        } 
     })
 })

@@ -14,6 +14,12 @@ body{
     overflow-x: hidden;
     background-color: #f8f8f8;
 }
+body button {
+    cursor: pointer;
+}
+body button:active {
+    transform: scale(0.95);
+}
 .container-main {
     /* border: thin solid red; */
     width: 100%;
@@ -33,10 +39,11 @@ body{
 .slidebar {
     position: fixed;
     left: 0;
-    width: 250px;  /* 250px */
+    width: 210px;  /* 250px */
     height: 100%;
     /* overflow: hidden; */
-    padding: 2rem;  /* 20px */
+    /* padding: 2rem; */
+    padding-top: 2rem;
     background-color: white;
     color: #263238;
     box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
@@ -63,10 +70,11 @@ body{
 }
 
 .btn-task-mini{
-    right: -3vw;  
+    right: -3vw;
 }
 .btn-task-mini svg{
     transform: rotate(180deg);
+    transition: 0.7s;
 }
 .span{
     width: 100px;  /* 100px */
@@ -88,30 +96,46 @@ body{
     height: 45px;  /* 45px */
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-bottom: 2rem;
+    gap: 5px;
 }
 .logo {
     width: 45px;  /* 40px */
     border-radius: 50%;
     cursor: pointer;
 }
+.logo-letras {
+    height: 35px;
+    transition: 0.5s;
+}
+.logo-letras.ocultar {
+    opacity: 0;
+    height: 0;
+}
 .titleSpan{
     margin-left: 1.6rem;  /* 10px */
     font-size: 2rem;
 }
+
 /*------------------------------------------------- Boton crear tarea--------------- */
 .btn-task-sider {
-    width: 100%;
+    width: 80%;
     height: 45px;  /* 45px */
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
-    border-radius: 10px;  /* 10px */
+    border-radius: 50px;  /* 10px */
     font-size: 2rem;
     background-color: #218625;
     color: white;
     cursor: pointer;
+    margin: 3rem auto;
+}
+.btn-task-sider.ocultar {
+    width: 45px;
+    transition: 0.3s;
 }
 /*------------------------------------------------------- Menu de navegacion--------------- */
 .nav {
@@ -125,25 +149,30 @@ body{
     margin-bottom: 1rem;
     list-style: none;
 }
+.nav-item a:hover svg {
+    fill: white !important;
+  }
+  
+.nav-item a:hover .span {
+    color: white;
+}
 .nav a {
-    width: 100%;
-    height: 45px;  /* 45px */
+    width: 90%;
+    height: 40px;
     display: flex;
     align-items: center;
     text-decoration: none;
-    border-radius: 10px;  /* 10px */
-    color: black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #073509;
+    padding-left: 2rem;
 }
 .nav a:hover {
     background-color: #218625;
     color: white;
 }
-.nav svg:hover {
-    /* background-color: #218625; */
-    fill: white;
-}
 .ul-2 {
-    margin-top: 7rem;
+    margin-top: 5rem;
 }
 .nav svg{
     min-width: 40px; 
@@ -153,12 +182,12 @@ body{
 .nav span { 
     margin-left: 1rem;
 }
+
 /*-------------------------------------------------------------- hover----------------------*/
-.slidebar.slidebar-mini .nav-item:hover {
-    overflow: visible;
-    
-}
-.slidebar.slidebar-mini .nav-item:hover .span-hover {
+/* .slidebar.slidebar-mini .nav-item:hover {
+    overflow: visible;   
+} */
+/* .slidebar.slidebar-mini .nav-item:hover .span-hover {
     position: absolute;
     width: auto;
     opacity: 1; 
@@ -169,11 +198,94 @@ body{
     transition: all 0.3s ease;
     background-color: black;
     color:  white;
-    /* transform: translateY(-50%); */
+   
     box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
 
+} */
+/* ----------------------------------Apartado de perfil-------------------------- */
+.contenedorPerfil{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
 }
-/*----------------------------------------------------------- Boton usuario--------------- */
+.contenedorPerfil span{
+    font-size: 1.6rem;
+}
+.contenedorPerfil nav ul li a img{
+   height: 16px;
+   width: 20px;  
+}
+.fotoDePerfil{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.perfil{
+    display: block;
+    margin: 0 auto;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+}
+.perfil:hover{
+    outline: 3px solid #218625;
+}
+.perfil:active {
+    transform: scale(0.95);
+}
+.perfil.active{
+    outline: 3px solid #218625;
+}
+
+/* ----------------------------------------------Mini menu perfil------------------- */
+.menu-perfil {
+    display: none;
+    position: absolute;
+    left: 70%;
+    background: #218625;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 150px;
+    transition: 0.3s;
+}
+.menu-perfil a {
+    all: unset;
+    color: white;
+    padding: 2px;
+    display: block;
+    cursor: pointer;   
+}
+.menu-perfil.active {
+    display: block;
+}
+.slidebar-mini .menu-perfil {
+    left: 105%;
+    transition: 0.3s;
+}
+.menu-perfil::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -15px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #218625 transparent transparent;
+}
+.icono{
+    width: 15px;
+    padding-right: 5px;
+}
+/*----------------------------------------------------------- Boton usuario--------------- Esta sección ya no se usará */ 
 .user-btn {
     width: 100%;
     display: flex;
@@ -197,10 +309,10 @@ body{
     margin-left: 0.7rem;  /* 7px */
     font-weight: 600;
 }
-.nombre{
+/* .nombre{
     width: 100%;
-    font-size: 1.5rem;  /* 15px */
-}
+    font-size: 1.5rem;
+} */
 .email {
     width: 100%; 
     text-overflow: ellipsis;
