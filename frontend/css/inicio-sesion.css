@@ -208,12 +208,12 @@ a{
     height: 30px;
     padding-top: 0.5rem;
     border-radius: 10px;
-    border: none;
-    background-color: var(--color-color-buttom);
     font-family: var(--font-size);
     font-size: 1.3rem;
     text-align: center;
-    color: white;
+    color: #073509;
+    border: #073509 solid 1px;
+    background-color: none;
 }
 .testFail {
     font-size: 1.2rem;

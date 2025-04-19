@@ -66,11 +66,8 @@ a{
     font-size: 2rem;
     text-align: center;
 }
-.nav-items li:hover , .nav-logo:hover{
-    transform: scale(1.1);
-}
 .item-link:hover{
-    color:  var(--color-color-buttom);
+    text-shadow: 0 0 1px #073509;
 }
 /* ---------------------------------------Estilos de inicio de sesion-------------------------------- */
 .registro-contenedor{
@@ -89,6 +86,7 @@ a{
     height: 80vh;
     border-radius: 35px;
     background-color: white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 
 }
 .registro-mensaje {
@@ -166,12 +164,12 @@ a{
     height: 30px;
     padding-top: 0.5rem;
     border-radius: 10px;
-    border: none;
-    background-color: var(--color-color-buttom);
     font-family: var(--font-size);
     font-size: 1.3rem;
     text-align: center;
-    color: white;
+    color: #073509;
+    border: #073509 solid 1px;
+    background-color: none;
 }
 .testFail {
     width: 70%;
@@ -180,14 +178,10 @@ a{
     margin-top: 0.5rem;
 }
 .registro-form input[type="submit"]:hover {
-    background-color: var(--color-form);
-    color: var(--color-tittle);
-    /* transform: scale(1.1); */
+    font-weight: bold;
 } 
 .bton-registro:hover {
-    background-color: var(--color-form);
-    color: var(--color-tittle);
-
+    font-weight: bold;
 } 
 .enlace{
     /* color: var(--color-tittle);
