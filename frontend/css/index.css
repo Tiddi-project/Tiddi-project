@@ -209,6 +209,7 @@ body button:active {
     flex-direction: column;
     align-items: center;
     margin-top: 3rem;
+    text-align: center;
 }
 .contenedorPerfil span{
     font-size: 1.6rem;
@@ -226,8 +227,8 @@ body button:active {
 .perfil{
     display: block;
     margin: 0 auto;
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     border: none;
     background-color: transparent;
@@ -284,55 +285,6 @@ body button:active {
 .icono{
     width: 15px;
     padding-right: 5px;
-}
-/*----------------------------------------------------------- Boton usuario--------------- Esta sección ya no se usará */ 
-.user-btn {
-    width: 100%;
-    display: flex;
-    margin-top: 7rem;
-}
-.user__photo {
-    width: 50px;  /* 50px */
-    height: 50px;  /* 50px */
-    min-width: 50px;  /* 50px */
-    border-radius: 50%;  /* 10px */
-    object-fit: cover;
-    object-position: center;
-}
-.user_info{
-    overflow: hidden;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0.7rem;  /* 7px */
-    font-weight: 600;
-}
-/* .nombre{
-    width: 100%;
-    font-size: 1.5rem;
-} */
-.email {
-    width: 100%; 
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap; /* Agrega esto */
-    color: rgb(128, 128, 128);
-    font-size: 1.2rem;  /* 13px */
-}
-.user-icon {
-    /* border: thin solid red; */
-    width: 3rem;
-    display: flex;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-    /* font-weight: bold; */
-    cursor: pointer;
-}
-.slidebar.slidebar-mini .user-icon-img{
-    opacity: 0;
 }
 /*----------------------------fin - sidebar----------------------------------------------------*/
 /* ------------------------------------------------------ boton de agregar tarea */
