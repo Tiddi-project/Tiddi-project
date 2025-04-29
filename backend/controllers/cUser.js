@@ -6,10 +6,26 @@ const cUser = {
     signUser: async (req, res)=>{
         try {
             let {name, email, password} = req.body
-            await mUser.createUser({name, email, password})
+            console.log("aqui esta bien antes del db");
+
+            // creacion del usuario
+            let result = await mUser.createUser({name, email, password})
+            console.log(result);
+            console.log("aqui esta bien despues del db", result);
+
+            // respuesta en caso de que todo salga bien
             res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
         } catch (err) {
-            error.e500(err, req, res)
+            console.error("Error al registrar usuario:", err.message);
+
+            if(err.message === "El correo ya está en uso"){
+                console.log("Se enviara el estatus 409 al frontend");
+                return res.status(409).json({ success: false, message: err.message });
+            }
+
+            // Si el error no es por correo duplicado, se maneja como un error general
+            console.error("Error inesperado:", err);
+            return error.e500(err, req, res)
         }
     },
     getUser: async (req, res)=>{
@@ -31,7 +47,7 @@ const cUser = {
             if(results.length === 0){
                 let err = {status: 401,  message: `El usuario no fue encontrado en la BD`,
                 };
-               return error.e401(err, req, res);
+                return error.e401(err, req, res);
             }
 
             let user = results[0]

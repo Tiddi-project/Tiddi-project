@@ -7,6 +7,7 @@ const d = document,
 w = window,
 n = navigator
 const $form = d.querySelector(".registro-form")
+const $toastContainer = d.querySelector(".toastBox")
 
 d.addEventListener("DOMContentLoaded", (e)=>{
     conexion()  //complete
@@ -15,7 +16,7 @@ d.addEventListener("DOMContentLoaded", (e)=>{
     d.addEventListener("submit", (e)=>{
         e.preventDefault()
         // Metodo AJAX
-        aUser.signinUser($form) 
+        aUser.signinUser($form, $toastContainer) 
         window.location.reload()
     })
     

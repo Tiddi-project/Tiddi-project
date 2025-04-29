@@ -101,8 +101,8 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
             let statusChecked = e.target.checked
             // console.log(statusChecked);
             
-             aTask.completeSubtaskChecked(subtaskChecked, idSubtask, statusChecked)
-             return
+            aTask.completeSubtaskChecked(subtaskChecked, idSubtask, statusChecked)
+            return
         }
     })
     
@@ -132,8 +132,8 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
                 subtaskContainer.classList.toggle("subtask-active");
             }
         }
-        console.log(e.target.matches(".fotoDePerfil"))
-        console.log(e.target.matches("#perfil"))
+        // console.log(e.target.matches(".fotoDePerfil"))
+        // console.log(e.target.matches("#perfil"))
 
         if (e.target.matches(".fotoDePerfil")) {
             const menu = document.getElementById("perfilMenu");

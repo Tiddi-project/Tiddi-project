@@ -7,7 +7,10 @@ const aUser = {
             let name = form.nameRegistro.value
             let email = form.emailRegistro.value
             let password = form.passwordRegistro.value
+            console.log({name, email, password});
+            alert("funciona antes de la peticion")
 
+            // peticion
             let res = await fetch("http://localhost:3000/signin", {
                 method: "POST",
                 credentials: "include",
@@ -17,11 +20,29 @@ const aUser = {
                     email,
                     password
                 })
+            
             })
+
+
+
+            console.log(res)
+            // alert("funciona despues de la peticion")
             let data = await res.json()
+
             if (!res.ok) throw {status: res.status, message: res.statusText}
+            alert(data)
+            console.log("Usuario registrado exitosamente");
+
+
         } catch (error) {
+            alert(error)
+            alert("se activo la alarma en el ajax catch")
+            
             let message = error.message || "Ha ocurrido un error"
+
+            if(error.status === 409){
+                toast("Correo ya registrado", toastContainer)
+            }
             console.log(`Error ${error.status}: ${message}`);
         }
     },
@@ -52,7 +73,7 @@ const aUser = {
                 alert("Usuario autenticado correctamente");
                 window.location.href = "http://localhost:3000/";
             }
-           
+        
         } catch (error) {
             let message = error.statusText || "Ha ocurrido un error"
             if(error.status === 401){

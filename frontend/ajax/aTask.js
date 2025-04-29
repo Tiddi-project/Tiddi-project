@@ -238,7 +238,7 @@ const aTask = {
             let res = await fetch("http://localhost:3000/user", {
                 method: "GET",
                 credentials: "include"
-              })
+            })
             if(!res.ok) throw {status: res.status, message:res.statusText}
             let data = await res.json()
             // console.log(data);
@@ -253,7 +253,7 @@ const aTask = {
             options.nameUser.textContent = `${usuario}`
             
             // nombre de usuario en slider
-            options.emailUser.textContent = `${data.user.email}`
+            //options.emailUser.textContent = `${data.user.email}`
 
             // console.log(nombreUsuario);
             
