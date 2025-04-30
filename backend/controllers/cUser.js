@@ -9,6 +9,9 @@ const cUser = {
             await mUser.createUser({name, email, password})
             res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
         } catch (err) {
+            if (err.code === 409) {
+                return res.status(409).json({ success: false, message: err.message });
+            }
             error.e500(err, req, res)
         }
     },
