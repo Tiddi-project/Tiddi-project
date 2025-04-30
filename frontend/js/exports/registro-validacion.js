@@ -10,19 +10,21 @@ export default function validacionRegistro(form){
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+]{6,20}$/;
 
-    d.addEventListener("submit", (e)=>{
-        let confNombre = validName()
-        let confEmail = validEmail()
-        let confPass = validPassword()
-        let confConf = validConfirm()
-        if(confNombre && confEmail && confPass && confConf){
-            form.submit()
-        }else{
-            e.preventDefault()
-        }
-    })
+    // d.addEventListener("submit", (e)=>{
+    //     let confNombre = validName()
+    //     let confEmail = validEmail()
+    //     let confPass = validPassword()
+    //     let confConf = validConfirm()
+    //     if(confNombre && confEmail && confPass && confConf){
+    //         form.submit()
+    //     }else{
+    //         e.preventDefault()
+    //     }
+
+    // })
 
     // validacion nombre
+    
     nombre.addEventListener("input", validName)
 
     function validName(){
@@ -92,5 +94,13 @@ export default function validacionRegistro(form){
         }
     }
 
+     // Devuelve una función que chequea TODO y retorna true/false
+    return function validateAll() {
+        const ok  = validName()
+                & validEmail()
+                & validPassword()
+                & validConfirm();
+        return Boolean(ok);
+    };
 
 }

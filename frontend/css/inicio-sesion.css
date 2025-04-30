@@ -312,8 +312,8 @@ a{
 .toastBox {
     position: absolute;
     z-index: 999;
-    right: 30px;
-    top: 30px;
+    left: 30%;
+    top: 15px;
     
 }
 .toast {

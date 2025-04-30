@@ -2,7 +2,7 @@ import toast from "../js/exports/toast.js"
 
 
 const aUser = {
-    signinUser: async (form)=>{
+    signinUser: async (form, toastContainer)=>{
         try {
             let name = form.nameRegistro.value
             let email = form.emailRegistro.value
@@ -19,10 +19,17 @@ const aUser = {
                 })
             })
             let data = await res.json()
-            if (!res.ok) throw {status: res.status, message: res.statusText}
+            if (!res.ok) throw {status: res.status, message: data.message}
+            toast("Registro exitoso", toastContainer, res.status)
+            form.reset()
+
         } catch (error) {
             let message = error.message || "Ha ocurrido un error"
             console.log(`Error ${error.status}: ${message}`);
+            if(error.status === 409){
+                // alert("error en el registro")
+                toast("El correo ya está registrado", toastContainer, error.status)
+            }
         }
     },
     loginUser: async (form, toastContainer) =>{
@@ -49,17 +56,17 @@ const aUser = {
             if(!data.success) { 
                 alert("Credenciales incorrectas");
             }else{
-                alert("Usuario autenticado correctamente");
+                // alert("Usuario autenticado correctamente");
                 window.location.href = "http://localhost:3000/";
             }
            
         } catch (error) {
             let message = error.statusText || "Ha ocurrido un error"
             if(error.status === 401){
-                toast("Usuario no registrado", toastContainer)
+                toast("Usuario no registrado", toastContainer, error.status)
             }
             if(error.status === 403){
-                toast("Contraseña incorrecta", toastContainer)
+                toast("Contraseña incorrecta", toastContainer, error.status)
             }
             console.log(`Error ${error.status}: ${message}`);
         }

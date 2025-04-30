@@ -1,7 +1,7 @@
 import aUser from "../ajax/aUser.js"
 import conexion from "./exports/conexion.js"
 import validacionInicioSesion from "./exports/inicio-sesion-validacion.js"
-import toast from "./exports/toast.js"
+// import toast from "./exports/toast.js"
 // import toast from 'toast.js';
 
 const d = document
@@ -37,8 +37,8 @@ d.addEventListener("DOMContentLoaded", async (e)=>{
                 d.getElementById("password").setAttribute("type", "password")
             }
         }
-        if(e.target.matches(".toastButton")){
-            toast("Toast active", $toastContainer)
-        }
+        // if(e.target.matches(".toastButton")){
+        //     toast("Toast active", $toastContainer)
+        // }
     })
 })

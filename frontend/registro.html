@@ -45,26 +45,17 @@
                     <input type="password" name="passwordConfirm"  placeholder="Confirmar contraseña" required >
                     <span class="testFail confirmSpan"></span>
 
-                    <input type="submit" value="Registrarse">
-                        <p class="enlace enlace-linea1">¿Ya tienes una cuenta?</p>
-                    <a href="./inicio-sesion.html" class="bton-registro">Ingresar</a>
-                    <!-- <p class="enlace enlace-linea2">o accede con</p>
-                    <div class="redes">
-                        <a href="#" class="redes-icon">
-                            <img src="./assets/facebook-color.png" alt="icono de Facebook">
-                            <span>Facebook</span>
-                        </a>
-                        <a href="#" class="redes-icon">
-                            <img src="./assets/google.png" alt="icono de Google">
-                            <span>Google</span>
-                        </a>
-                    </div> -->
+                    <input id="registro" type="submit" value="Registrarse">
                     
-
+                    <p class="enlace enlace-linea1">¿Ya tienes una cuenta?</p>
+                    <a href="./inicio-sesion.html" class="bton-registro">Ingresar</a>
                 </form>
 
             </article>
         </section>
+        <div class="toastBox">
+            <!-- Aqui se mostrara el anuncio en caso de registro errado -->
+        </div>
     </main>
     <script src="./js/registro.js" type="module"></script>
 </body>
