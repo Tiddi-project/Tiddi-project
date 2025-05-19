@@ -1,0 +1,83 @@
+
+<div class="headers">
+    <h1 class="title-main"></h1>
+    <!-- <button type="button" class="logout">Cerrar sesión</button> -->
+</div>
+
+<!-- seccion de las tareas por dia -->
+<section class="desplazarFecha">
+    <button class="diaAnterior">
+        <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <span class="diaActual"></span>
+    <button class="diaSiguiente">
+        <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+</section>
+
+<section class="contenedorDeTarea">
+    <section class="task-list">
+        <!-- inicio -->
+        
+        <!-- fin -->
+    </section>
+    <!-- --------------------------Barra de progreso-------------------- -->
+    <section class="barraDeProgresoContenedor">
+        <div class="barraDeProgreso">
+            <h2>Mi progreso</h2>
+            <div class="progress-container">
+                <svg class="svg" width="200" height="200" viewBox="0 0 120 120">
+                    <!-- Círculo de fondo -->
+                    <circle cx="60" cy="60" r="50" stroke="#ddd" stroke-width="10" fill="none"/>
+                    
+                    <!-- Círculo de progreso con animación -->
+                    <circle id="progress-circle" cx="60" cy="60" r="50"
+                    stroke="#4caf50" stroke-width="10" fill="none"
+                    stroke-linecap="round"
+                    stroke-dasharray="314"
+                    stroke-dashoffset="314" />
+                </svg>
+                <div class="progress-text" id="progress-text">
+                    <span class="task-completed"></span>
+                    <span>/</span>
+                    <span class="task-total"></span>
+                </div>
+                <!-- <p>Completa todas tus tareas y logra tu meta del día.</p> -->
+            </div>
+        </div>
+    </section>
+</section>
+
+<!-- ---------Prototipo para la visualizacion de las tareas--------- -->
+
+<template>
+    <div class="task-container">
+        <div class="task-elements">
+
+            <input type="checkbox" name="checkbox" class="checkbox">
+            <label  class="newCheckbox"></label>
+            <div  class="task">
+                <h3 class="title"></h3>
+                <p class="description"></p>
+                
+            </div>
+            <button type="button" class="btn-edit">
+                <img src="./assets/right-btn.png" alt="mostrar tarea completa" class="edit">
+            </button>
+        </div>
+        <div class="subtask-elements ">
+            <ul class="subtask-list">
+                <!-- <li class="subtask-item">
+                    <input type="checkbox" name="subtaskCheckbox" class="checkbox">
+                    <label  class="newCheckbox"></label>
+                    <span class="subtask-item-content"></span>
+                </li> -->
+            </ul>
+        </div>
+
+    </div>
+</template>

@@ -1,46 +1,80 @@
+import { calendario, calendarioPorSemana, tareasPorDiaSemana } from "../js/exports/calendario.js";
 import circleProgress from "../js/exports/circleProgress.js";
 
 const aTask = {
-    getAll: async (option)=>{
+    getAll: async (fecha, option)=>{
         try {
             // Peticion
             let res = await fetch("http://localhost:3000/tasks",{
                 method: "GET",
                 credentials: "include"
             })
+
             // convertir datos del backend en formato que se usa en js
             let data = await res.json()
-            console.log(data);
             if(!res.ok){
                 throw {status: res.status, message: res.statusText, dir:res}
             }
+
+            // Filtramos solo las tareas que coincidan con la fecha
+            const fechaCorta  = fecha.toLocaleDateString("sv-SE");
+            let tareasDelDia = data.filter(task => {
+                if (!task.deadline) return false;
+                let fechaTarea = new Date(task.deadline).toLocaleDateString("sv-SE");
+                return fechaTarea === fechaCorta;
+            });
+            // console.log(fechaCorta);
+
+            // 🧼 Limpiar el contenedor antes de renderizar
+            option.$taskList.innerHTML = "";
+
+            let tareasCompletadas = tareasDelDia.filter(tarea => {
+                return tarea.complete === 1 
+            }).length
+            circleProgress(tareasCompletadas, tareasDelDia.length)
+
+            // console.log(`La fecha es: ${fechaCorta}
+            //             tareas completadas: ${tareasCompletadas}
+            //             total tareas en el dia: ${tareasDelDia.length}    
+            // `);
+
             // Restriccion en caso de no haber tareas relacionadas con el usuario
-            if(data.length === 0){
-                option.$taskList.innerHTML = `<h2>No tienes tareas por realizar</h2>`
+            if (tareasDelDia.length === 0) {
+                option.$taskList.innerHTML = `<h2>No tienes tareas para este día</h2>`;
+                return;
             }
-            // Recorrido de las tareas y asignacion en el template
-            data.forEach((task, index) => {
+            
+            tareasDelDia.forEach((task, index) => {
+                // creamos un clone de template
+                let clone = document.importNode(option.$template, true)
+                // se le asigna el color al contenedorcolor del contenedor
+                const taskContainer = clone.querySelector(".task-container");
+                if (task.color) {
+                    // Asegura que el color tenga el formato correcto (con #)
+                    const colorHex = task.color.startsWith("#") ? task.color : `#${task.color}`;
+                    taskContainer.style.backgroundColor = colorHex;
+                }
                 // checkbox
-                option.$template.querySelector(".checkbox").dataset.id = task.task_id
-                option.$template.querySelector(".checkbox").setAttribute("id", index)
-                option.$template.querySelector(".newCheckbox").setAttribute("for", index)
-                option.$template.querySelector(".task").setAttribute("for", index)
+                clone.querySelector(".checkbox").dataset.id = task.task_id
+                clone.querySelector(".checkbox").setAttribute("id", index)
+                clone.querySelector(".newCheckbox").setAttribute("for", index)
+                clone.querySelector(".task").setAttribute("for", index)
                 
                 if(task.complete === 1){
-                    option.$template.querySelector(".task").classList.add("completed")
-                    option.$template.querySelector(".checkbox").checked = true
+                    clone.querySelector(".task").classList.add("completed")
+                    clone.querySelector(".checkbox").checked = true
                 }else{
-                    option.$template.querySelector(".task").classList.remove("completed")
-                    option.$template.querySelector(".checkbox").checked = false
-
+                    clone.querySelector(".task").classList.remove("completed")
+                    clone.querySelector(".checkbox").checked = false
                 }
 
                 // insertando valores de la API en contenedor de tarea
-                option.$template.querySelector(".title").textContent = task.title
-                option.$template.querySelector(".description").textContent = task.description
+                clone.querySelector(".title").textContent = task.title
+                clone.querySelector(".description").textContent = task.description
+
                 
                 // subtask
-                let subtaskList = option.$template.querySelector(".subtask-list");
+                let subtaskList = clone.querySelector(".subtask-list");
                 subtaskList.innerHTML = ""; // 🔹 Evita la duplicación de subtareas
 
                 if(task.subtasks?.length === 1 && task.subtasks[0]?.id === null){
@@ -64,18 +98,30 @@ const aTask = {
                 }else {
                     subtaskList.innerHTML = `<p class="no-subtasks">No hay subtareas</p>`; // 🔹 Mensaje si no hay subtareas
                 }
+                // formateando la hora de la base de datos a la aceptada por el input
+                function toLocalDatetimeInputValue(utcString) {
+                    const utcDate = new Date(utcString);
+                    const tzOffset = utcDate.getTimezoneOffset() * 60000;
+                    const localDate = new Date(utcDate.getTime() - tzOffset);
+                    return localDate.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:mm'
+                  }
                 // insertando data-attribute
-                option.$template.querySelector(".edit").dataset.id = task.task_id
-                option.$template.querySelector(".edit").dataset.title = task.title
-                option.$template.querySelector(".edit").dataset.description = task.description
-                option.$template.querySelector(".edit").dataset.priority = task.priority
-                option.$template.querySelector(".edit").dataset.subtask = JSON.stringify(task.subtasks)
+                clone.querySelector(".edit").dataset.id = task.task_id
+                clone.querySelector(".edit").dataset.title = task.title
+                clone.querySelector(".edit").dataset.description = task.description
+                clone.querySelector(".edit").dataset.priority = task.priority
+                clone.querySelector(".edit").dataset.deadline = toLocalDatetimeInputValue(task.deadline)
+                clone.querySelector(".edit").dataset.colorTarea = task.color
+                clone.querySelector(".edit").dataset.imagen = task.imagen_url
+                clone.querySelector(".edit").dataset.subtask = JSON.stringify(task.subtasks)
 
                 // uniendo el formato
-                let clone = document.importNode(option.$template, true)
+                
                 option.$fragment.appendChild(clone)
             });
+
             option.$taskList.appendChild(option.$fragment)
+
 
         } catch (error) {
             let message = error.statusText || "Se ha producido un error"
@@ -97,6 +143,7 @@ const aTask = {
                 }
             });
 
+            /* // Peticion al servidor sin incluir imagenes 
             let res = await fetch("http://localhost:3000/task", {
                 method: "POST",
                 credentials: "include",
@@ -104,16 +151,41 @@ const aTask = {
                 body: JSON.stringify({
                     title: form.titleTask.value,
                     description: form.descriptionTask.value,
+                    deadline: form.fechaHora.value,
                     priority: form.priority.value,
                     completed: false,
+                    color: form.colorTarea.value,
                     subtasks
                 })
             })
+            */
+
+            let formData = new FormData();
+            formData.append("title", form.titleTask.value);
+            formData.append("description", form.descriptionTask.value);
+            formData.append("deadline", form.fechaHora.value);
+            formData.append("priority", form.priority.value);
+            formData.append("completed", false);
+            formData.append("color", form.colorTarea.value);
+
+            // Manejo de imagenes
+            if (form.imagen && form.imagen.files.length > 0) {
+                formData.append("imagen", form.imagen.files[0]);
+            } 
+            
+            formData.append("subtasks", JSON.stringify(subtasks));
+            
+            let res = await fetch("http://localhost:3000/task", {
+                method: "POST",
+                credentials: "include",
+                body: formData
+            });
             
             let data = await res.json()
             if(!res.ok)  throw {status: res.status, message: res.statusText, dir:res}
 
-            alert("Tarea creada con exito")
+            // alert("Tarea creada con exito")
+            
 
         } catch (error) {
             let message = error.statusText || "Se ha producido un error"
@@ -136,6 +208,31 @@ const aTask = {
             let dataStatus = await taskStatus.json()
             let isCompleted  = dataStatus.completed
             
+            // Peticion para la edicion de la tarea
+            /*
+            let res = await fetch(`http://localhost:3000/edit/${idTask}`, {
+                method: "PUT",
+                credentials: "include",
+                headers: {"content-type": "application/json; charset=utf-8"},
+                body: JSON.stringify({
+                    title: form.titleTask.value,
+                    description: form.descriptionTask.value,
+                    completed:isCompleted,
+                    priority:form.priority.value,
+                    deadline: form.fechaHora.value,
+                    color: form.colorTarea.value,
+                    subtasks
+                })
+            })
+            */
+            let formData = new FormData(); // tu formulario con inputs
+            formData.append("title", form.titleTask.value)
+            formData.append("description", form.descriptionTask.value)
+            formData.append("deadline", form.fechaHora.value)
+            formData.append("priority", form.priority.value)
+            formData.append("completed",isCompleted)
+            formData.append("color",form.colorTarea.value)
+
             // ingreso de subtareas
             let subtasks = []
             let subtaskItem = form.querySelectorAll(".subtask-item")
@@ -150,31 +247,23 @@ const aTask = {
                 }
             });
 
-            console.log(subtasks);
-           
+            formData.append("subtasks", JSON.stringify(subtasks));
+
+            if (form.imagen && form.imagen.files.length > 0) {
+                formData.append("imagen", form.imagen.files[0]);
+            } 
             let res = await fetch(`http://localhost:3000/edit/${idTask}`, {
                 method: "PUT",
                 credentials: "include",
-                headers: {"content-type": "application/json; charset=utf-8"},
-                body: JSON.stringify({
-                    title: form.titleTask.value,
-                    description: form.descriptionTask.value,
-                    completed:isCompleted,
-                    priority:form.priority.value,
-                    subtasks
-                })
+                body: formData 
             })
-            
-            //  ver la respuesta del servidor
-            let responseText = await res.text();
-            console.log("Respuesta del servidor:", responseText);
-            
+
             if(!res.ok) throw {status: res.status, message: res.statusText, dir:res}
-            alert("Tarea editada con exito")
         } catch (error) {
             console.log(error);
+            console.log(error.dir);
             alert("sucede en el catch")
-
+            
             let message = error.statusText || "Se ha producido un error"
             let status = error.status
             console.log(`Error ${status}: ${message}`)
@@ -196,7 +285,7 @@ const aTask = {
             console.log(`Error ${error.status}: ${message}`);
         }
     },
-    editChecked: async (taskContainer, idTask, statusChecked)=>{
+    editChecked: async (idTask, statusChecked)=>{
         try {
             let res = await fetch(`http://localhost:3000/complete/${idTask}`, {
                 method: "PATCH",
@@ -207,6 +296,7 @@ const aTask = {
                 })
             })  
             if(!res.ok) throw {status: res.status, message: res.statusText}
+            
             
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la eliminación"
@@ -241,21 +331,41 @@ const aTask = {
               })
             if(!res.ok) throw {status: res.status, message:res.statusText}
             let data = await res.json()
-            // console.log(data);
+
             // busqueda de informacion
             let usuario = data.user.name
             let nombreUsuario = usuario.split(" ")[0]
-
             // Mensaje de bienvenida
-            options.welcomeUser.textContent = `Bienvenido, ${nombreUsuario}.`
+            // options.welcomeUser.textContent = `Bienvenido, ${nombreUsuario}.`
 
             // nombre de usuario en slider
-            options.nameUser.textContent = `${usuario}`
+            options.nombreDeUsuarioSidebar.textContent = `${usuario}`
             
-            // nombre de usuario en slider
-            options.emailUser.textContent = `${data.user.email}`
+            // correo de usuario en slider
+            // options.emailUser.textContent = `${data.user.email}`
 
-            // console.log(nombreUsuario);
+            
+        } catch (error) {
+            let message = error.message || "Ha ocurrido un error en la captura del nombre de usuario"
+            console.log(`Error ${error.status}: ${message}`);
+        }
+    },
+    usernameTitle: async (tituloDelContenedor)=>{
+        try {
+            let res = await fetch("http://localhost:3000/user", {
+                method: "GET",
+                credentials: "include"
+              })
+            if(!res.ok) throw {status: res.status, message:res.statusText}
+            let data = await res.json()
+            
+            // busqueda de informacion
+            let usuario = data.user.name
+            let nombreUsuario = usuario.split(" ")[0]
+            // Mensaje de bienvenida
+            tituloDelContenedor.textContent = `Bienvenido, ${nombreUsuario}.`
+            
+
             
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la captura del nombre de usuario"
@@ -275,6 +385,92 @@ const aTask = {
             if(!res.ok) throw {status: res.status, message: res.statusText}
         } catch (error) {
             
+        }
+    },
+    viewCalendarMonth:async (fecha, contenedorCalendario)=>{
+        try {
+            // Peticion
+            let res = await fetch("http://localhost:3000/tasks",{
+                method: "GET",
+                credentials: "include"
+            })
+            // convertir datos del backend en formato que se usa en js
+            let data = await res.json()
+            
+            if(!res.ok){
+                throw {status: res.status, message: res.statusText, dir:res}
+            }
+            // console.log(data);
+
+
+            // vista de calendario mes
+            calendario(contenedorCalendario, fecha, data);
+
+            
+
+        } catch (error) {
+            let message = error.statusText || "Se ha producido un error"
+            let status = error.status || "404"
+            contenedorCalendario.innerHTML = 
+            `<h3>Error ${status}: ${message} </h3>
+            <br>
+            <p> No se encontro el contenido solicitado  </p>
+            `
+        }
+    },
+    viewCalendarWeek:async (fecha, contenedorCalendario)=>{
+        try {
+            // Peticion
+            let res = await fetch("http://localhost:3000/tasks",{
+                method: "GET",
+                credentials: "include"
+            })
+            // convertir datos del backend en formato que se usa en js
+            let data = await res.json()
+            
+            if(!res.ok){
+                throw {status: res.status, message: res.statusText, dir:res}
+            }
+            // console.log(data);
+
+            // vista de calendario semana
+            calendarioPorSemana(contenedorCalendario, fecha, data)
+
+        } catch (error) {
+            let message = error.statusText || "Se ha producido un error"
+            let status = error.status || "404"
+            contenedorCalendario.innerHTML = 
+            `<h3>Error ${status}: ${message} </h3>
+            <br>
+            <p> No se encontro el contenido solicitado  </p>
+            `
+        }
+    },
+    taskForWeek:async (fecha, contenedorCalendario, svg)=>{
+        try {
+            // Peticion
+            let res = await fetch("http://localhost:3000/tasks",{
+                method: "GET",
+                credentials: "include"
+            })
+            // convertir datos del backend en formato que se usa en js
+            let data = await res.json()
+            
+            if(!res.ok){
+                throw {status: res.status, message: res.statusText, dir:res}
+            }
+            // console.log(data);
+            // vista de calendario semana
+            tareasPorDiaSemana(contenedorCalendario, fecha, data, svg)
+
+        } catch (error) {
+            let message = error.statusText || "Se ha producido un error"
+            let status = error.status || "404"
+            contenedorCalendario.innerHTML = 
+            `<h3>Error ${status}: ${message} </h3>
+            <br>
+            <p> No se encontro el contenido solicitado  </p>
+            `
         }
     }
 

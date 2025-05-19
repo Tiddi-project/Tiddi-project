@@ -1,0 +1,296 @@
+
+.desempTitulo {
+    width: 100%;
+    height: 5%;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #218625;
+}
+.desempEstadistica{
+    /* border: thin solid red; */
+    width: 96%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: #f8f8f8;
+}
+/* -------------------------------------------------------------Tareas completadas por semana */
+.desempEstadistica__uno{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 10px;
+    background-color: white;
+}
+.desempEstadistica__uno-titulo{
+    width: 90%;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+}
+.desempEstadistica__uno-grafica {
+    width: 90%;
+    height: 70%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    font-size: 1.3rem;
+    /* border: thin solid ; */
+}
+.tareasPorDiaContenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    /* border: thin solid; */
+}
+.contenedor-barra {
+    width: 50%;
+    height: 70px;          /* altura máxima de la barra */
+    background: #eee;
+    display: flex;
+    align-items: flex-end;  /* barras crecen desde abajo */
+    margin-bottom: 0.6rem;
+    /* padding: 4px; */
+    border-radius: 6px;
+    /* border: thin solid red; */
+}
+.barra-tarea {
+    width: 100%;           /* ocupa todo el ancho disponible */
+    background-color: #AAF334;
+    border-radius: 4px;
+    transition: height 0.3s;
+}
+.diaSemanaEstadisticaContenedor{
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-row: auto;
+    /* background-color: #218625; */
+}
+.diaSemanaEstadistica{
+    text-align: center;
+}
+.promedioSemanaActual {
+    font-size: 1.3rem;
+}
+.desplazarFecha-promedio{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+}
+/* --------------------------------------------------------------------productividad total */
+.desempEstadistica__dos {
+    position: relative;
+    grid-column:  2; /*ocupa de la columna 1 a la 3 */
+    grid-row: 1/span 2;     /* ocupa la primera fila */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    
+}
+/* Promedio de tareas completadas por dia */
+.desempEstadistica__dos-porcentaje {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: thin solid ; */
+    grid-column:  1; /*ocupa de la columna 1 a la 3 */
+    grid-row: 1/span 2;     /* ocupa la primera fila */
+    background-color: white;
+    /* border-radius: 10px 0 0 10px; */
+    border-radius: 10px;
+}
+.porcentaje__titulo{
+    width: 90%;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+
+}
+.porcentaje__grafica{
+    width: 90%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #218625;
+}
+.porcentaje__grafica-span{
+    position:absolute;
+    right: 1;
+    font-size: 4rem;
+}
+/* total de tareas completadas por dia */
+.desempEstadistica__dos-completadas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    /* border-radius: 0 10px 0 0; */
+    border-radius: 10px;
+    grid-column:  2; /*ocupa de la columna 1 a la 3 */
+    grid-row: 1;     /* ocupa la primera fila */
+}
+.completadas__titulo{
+    width: 90%;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+}
+.completadas__grafica{
+    width: 90%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7rem;
+    color: #218625;
+
+    /* border: thin solid ; */
+
+}
+/* total de tareas sin completadar por dia */
+.desempEstadistica__dos-sinCompletar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-column:  2; /*ocupa de la columna 1 a la 3 */
+    grid-row: 2;     /* ocupa la primera fila */
+    /* border-radius: 0 0 10px 0; */
+    border-radius: 10px;
+    background-color: white;
+
+}
+.sinCompletar__titulo{
+    width: 90%;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+
+}
+.sinCompletar__grafica{
+    width: 90%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7rem;
+    color: #218625;
+    /* border: thin solid ; */
+
+}
+/* ------------------------------------------------ Promedio de tareas completadas por dia */
+.desempEstadistica__tres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+
+}
+.desempEstadistica__tres-titulo{
+    width: 90%;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+
+}
+.desempEstadistica__tres-grafica {
+    width: 90%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7rem;
+    color: #218625;
+
+}
+
+
+/* Tablet: cambia a una sola columna pero mantiene proporciones */
+@media screen and (max-width: 1024px) {
+    .desempEstadistica {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+  
+    .desempEstadistica__uno,
+    .desempEstadistica__tres {
+      height: auto;
+    }
+  
+    .desempEstadistica__dos {
+      grid-column: auto;
+      grid-row: auto;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+    
+    .desempEstadistica__dos-porcentaje {
+        grid-row: 1 / span 2;
+    }
+    .porcentaje__grafica{
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        /* border: thin solid; */
+    }
+    .svg {
+        width: 120px;
+        height: 120px;
+    }
+    .porcentaje__grafica-span{
+        font-size: 2rem;
+    }
+}
+  
+/* Móvil: todo en una sola columna, elementos apilados */
+@media screen and (max-width: 600px) {
+.desempEstadistica__dos {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.desempEstadistica__dos-porcentaje,
+.desempEstadistica__dos-completadas,
+.desempEstadistica__dos-sinCompletar {
+    width: 100%;
+    grid-column: auto;
+    grid-row: auto;
+}
+.porcentaje__grafica{
+    height: 100px;
+}
+.porcentaje__grafica-span {
+    font-size: 2.5rem;
+}
+
+.completadas__grafica,
+.sinCompletar__grafica {
+    font-size: 4rem;
+}
+.svg {
+    width: auto;
+    height: 100%;
+}
+.porcentaje__grafica-span{
+    font-size: 2rem;
+}
+}
+  

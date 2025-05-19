@@ -12,6 +12,8 @@ create table tasks (
 	updated_t TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 	-- foreign key (user_id) references users(id) on delete cascade
 )
+-- Esta columna guardará solo la ruta o nombre del archivo - no la imagen como tal
+ALTER TABLE users ADD COLUMN profile_picture VARCHAR(255);
 
 -- TABLA DE USUARIOS
 create table users (
@@ -38,4 +40,10 @@ CREATE TABLE subtasks (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
+-- almacena la fecha y hora límite de la tarea
+ALTER TABLE tasks ADD COLUMN deadline DATETIME DEFAULT NULL;
+-- almacena el color que desea que tenga la tarea
+ALTER TABLE tasks ADD COLUMN color VARCHAR(6);
 
+-- Esta columna guardará solo la ruta o nombre del archivo - no la imagen como tal
+ALTER TABLE tasks ADD COLUMN imagen_url VARCHAR(255) DEFAULT NULL;

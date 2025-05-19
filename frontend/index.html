@@ -6,15 +6,18 @@
     <title>Tiddi</title>
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/vistaMes.css">
+    <link rel="stylesheet" href="./css/vistaPerfil.css">
+    <link rel="stylesheet" href="./css/vistaEstadisticas.css">
     <!-- <link rel="stylesheet" href="./css/slidebar.css"> -->
     <!-- Fuentes de google -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inder&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body> 
-    <!-- MAIN -->
+    <!-- Distribución de la vista -->
     <div class="container-main">
-        <!-- SIDEBAR----------------------------------------------------------------------------->
+        <!-- --------------------------------------------------------------------SIDEBAR-->
         <aside class="slidebar ">
             <div class="menu-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1)"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>
@@ -30,19 +33,19 @@
             <nav class="nav">
                 <ul>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="#"  data-vista="vistas/vistaDia.html">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #073509"><path d="M11 12h6v6h-6z"></path><path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm.001 16H5V8h14l.001 12z"></path></svg>
                             <span class="span">Día</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="#"  data-vista="vistas/vistaSemana.html">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #073509"><path d="M19 4h-3V2h-2v2h-4V2H8v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zM5 20V7h14V6l.002 14H5z"></path><path d="M7 10v2h10V9H7z"></path></svg>
                             <span class="span">Semana</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="#"  data-vista="vistas/vistaMes.html">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #073509;"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg>
                             <span class="span">Mes</span>
                         </a>
@@ -50,7 +53,7 @@
                 </ul>
                 <ul class="ul-2">
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="#" data-vista="vistas/vistaEstadisticas.html">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #073509;"><path d="M6 21H3a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1zm7 0h-3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v17a1 1 0 0 1-1 1zm7 0h-3a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1z"></path></svg>
                             <span class="span">Mi desempeño</span>
                         </a>
@@ -66,103 +69,85 @@
             <!-- Sección de perfil -->
             <div class="contenedorPerfil">
                 <button class="perfil" id="perfil">
-                    <img src="./assets/sidebar/foto usuario.png" alt="Foto de perfil" class="fotoDePerfil">
+                    <img src="./assets/sidebar/foto-usuario.png" alt="Foto de perfil" class="fotoDePerfil">
                 </button>
-                <span class="nombre"></span>
+                <span class="nombre nombreUsuarioSidebar"></span>
 
                 <!-- Mini menu de perfil -->
 
-                <div id="perfilMenu" class="menu-perfil">
-                    <nav>
-                        <ul>
-                            <li class="nav-item">
-                                <a href="#">
-                                    <img src="./assets/sidebar/usuario.png" alt="Icono" class="icono">
-                                    <span>Mi perfil</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <nav>
-                        <ul>
-                            <li class="nav-item">
-                                <a href="#">
-                                    <img src="./assets/sidebar/cerrar-sesion.png" alt="Icono" class="icono">
-                                    <span id="logout">Cerrar sesión</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+            </div>
+
+            <!-- TODO: Proximo a revision para mejorarlo semánticamente -->
+            <div id="perfilMenu" class="menu-perfil">
+                <nav>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="#" data-vista="vistas/vistaPerfil.html">
+                                <img src="./assets/sidebar/usuario.png" alt="Icono" class="icono">
+                                <span>Mi perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="#">
+                                <img src="./assets/sidebar/cerrar-sesion.png" alt="Icono" class="icono">
+                                <span id="logout">Cerrar sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div> 
 
-            <!-- Antiguo apartado de perfil     -->
-
-            <!-- <div class="user-btn">
-                <img src="./assets/sidebar/bender.jpg" alt="foto de perfil" class="user__photo">
-                <div class="user_info">
-                    <span class="span nombre"></span>
-                    <span class="span email"></span>
-                </div>
-                <button id="logout" type="button" class="logout user-icon">
-
-                    <img src="logout.svg" alt="imagen de salida">
-
-                    <svg class="user-icon-img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(61, 61, 61);" ><path d="m13 16 5-4-5-4v3H4v2h9z"></path><path d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z"></path>
-                    </svg>
-                </a>
-            </div> -->
-            
         </aside>
-        <main class="main">
-            <div class="headers">
-                <h1 class="title-main"></h1>
-                <!-- <button type="button" class="logout">Cerrar sesión</button> -->
-            </div>
-            <!-- <div class="addTask">
-                <img src="./assets/icon.png" alt="icono de agregar">
-                <button type="button" class="btn-task">Nueva tarea</button>
-            </div> -->
-            <!-- <hr> -->
-            <section class="task-list">
-                <!-- inicio -->
-                
-                <!-- fin -->
-            </section>
-            <!-- --------------------------Barra de progreso-------------------- -->
-            <div class="progress">
-                <h2>Mi progreso</h2>
-                <div class="progress-container">
-                    <svg class="svg" width="200" height="200" viewBox="0 0 120 120">
-                        <!-- Círculo de fondo -->
-                        <circle cx="60" cy="60" r="50" stroke="#ddd" stroke-width="10" fill="none"/>
-                        
-                        <!-- Círculo de progreso con animación -->
-                        <circle id="progress-circle" cx="60" cy="60" r="50"
-                        stroke="#4caf50" stroke-width="10" fill="none"
-                        stroke-linecap="round"
-                        stroke-dasharray="314"
-                        stroke-dashoffset="314" />
-                    </svg>
-                    <div class="progress-text" id="progress-text">
-                        <span class="task-completed"></span>
-                        <span>/</span>
-                        <span class="task-total"></span>
-                    </div>
-                    <!-- <p>Completa todas tus tareas y logra tu meta del día.</p> -->
-                </div>
-            </div>
+        <!-- ---------------------------------------------------------------------VISTAS-->
+        <main class="main-content" id="main-content">
+            <!-- Aqui se cargaran dinamicamente las vistas -->
+            
         </main>
-        <!-- Formulario y panel modal -->
-        <form class="task-form" autocomplete="off">
+        <!-- -------------------------------------------------Formulario y panel modal -->
+        <form class="task-form" autocomplete="off" enctype="multipart/form-data">
+            <!-- Cabecera del panel -->
             <div class="buttons">
                 <button type="reset" class="button-cancel">Cancelar</button>
                 <button type="button" class="delete" id="delete">Eliminar</button>
                 <button type="submit" class="add">Agregar</button>
             </div>
-            <!-- <legend >Tarea:</legend> -->
+            <!-- Input para colocarle un titulo a la tarea -->
             <input type="text" id="title-task" name="titleTask" class="title-task" placeholder="Titulo de la tarea" >
+            <!-- Ingresar la descripcion de la tarea -->
             <textarea name="descriptionTask" id="description-task" class="description-task" placeholder="Descripcion"></textarea>
+
+            <!-- Permite el envio de UNA imagen -->
+            <input type="file" class="imagen" name="imagen" id="imagen" accept="image/*" />
+
+            <div class="img-btn">
+                <svg width="20" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"        stroke="black" stroke-width="3">
+                    <path d="M20 20 L20 44 C20 48 24 52 28 52 C32 52 36 48 36 44 L36 16 C36 12 32 8 28 8 C24 8 20 12 20 16 L20 40 C20 42 22 44 24 44 C26 44 28 42 28 40 L28 20" />
+                </svg>
+                <span>Insertar imagen</span>
+            </div>
+            <div class="imagenContainer">
+                <img  alt="imagen insertada" class="imagen-insertada">
+                <button class="btn-eliminar-imagen" type="button">
+                    <svg class="svg-eliminar-imagen" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Círculo de fondo -->
+                        <circle cx="16" cy="16" r="15" fill="grey" />
+                        <!-- Líneas de la X -->
+                        <line x1="10" y1="10" x2="22" y2="22" stroke="white" stroke-width="2" stroke-linecap="round" />
+                        <line x1="22" y1="10" x2="10" y2="22" stroke="white" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                </button>
+            </div>
+              
+            <!-- Insertar la fecha de la tarea -->
+            <div class="fecha">
+                <label for="fechaHora">Fecha</label>
+                <input type="datetime-local" id="fechaHora" class="fechaHora" name="fechaHora">
+            </div>
+            <!-- Permite seleccionar la prioridad de la tarea -->
             <div class="priority-otions">
                 <h3 class="priority-title">Prioridades</h3>
                 <div class="options">
@@ -181,6 +166,24 @@
                     </label>
                 </div>
             </div>
+            <!-- Permite escoger el color que quiera tener en la tarea -->
+            <div class="color-options">
+                <h3 class="color-title">Color</h3>
+                <div class="colorSeleccionado">
+                    <label for="color0"><input type="radio" value="FFFFFF" name="colorTarea" id="color0" checked></label>
+                    <label for="color1"><input type="radio" value="FFDFBA" name="colorTarea" id="color1"></label>
+                    <label for="color2"><input type="radio" value="FFC0CB" name="colorTarea" id="color2"></label>
+                    <label for="color3"><input type="radio" value="E6C8FF" name="colorTarea" id="color3"></label>
+                    <label for="color4"><input type="radio" value="FFFF99" name="colorTarea" id="color4"></label>
+                    <label for="color5"><input type="radio" value="ADD8E6" name="colorTarea" id="color5"></label>
+                    <label for="color6"><input type="radio" value="C1FFC1" name="colorTarea" id="color6"></label>
+                    <label for="color7"><input type="radio" value="E5B49D" name="colorTarea" id="color7"></label>
+                    <label for="color8"><input type="radio" value="FF94C5" name="colorTarea" id="color8"></label>
+                    <label for="color9"><input type="radio" value="84DBFF" name="colorTarea" id="color9"></label>
+                    <label for="color10"><input type="radio" value="75FFD6" name="colorTarea" id="color10"></label>
+                </div>
+            </div>
+            <!-- permite asignar subtareas que hagan parte de la tarea -->
             <div class="subtask__container" data-count="0">
                 <button type="button" class="subtask-button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(33, 134, 37);"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg>
@@ -190,34 +193,6 @@
             </div>
             <input type="hidden" name="id">
         </form>
-
-        <template>
-            <div class="task-container">
-                <div class="task-elements">
-
-                    <input type="checkbox" name="checkbox" class="checkbox">
-                    <label  class="newCheckbox"></label>
-                    <div  class="task">
-                        <h3 class="title"></h3>
-                        <p class="description"></p>
-                        
-                    </div>
-                    <button type="button" class="btn-edit">
-                        <img src="./assets/right-btn.png" alt="mostrar tarea completa" class="edit">
-                    </button>
-                </div>
-                <div class="subtask-elements ">
-                    <ul class="subtask-list">
-                        <!-- <li class="subtask-item">
-                            <input type="checkbox" name="subtaskCheckbox" class="checkbox">
-                            <label  class="newCheckbox"></label>
-                            <span class="subtask-item-content"></span>
-                        </li> -->
-                    </ul>
-                </div>
-
-            </div>
-        </template>
     </div>
     <script src="./js/index.js" type="module"></script>
 </body>

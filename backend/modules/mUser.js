@@ -26,11 +26,22 @@ const mUser = {
     },
     oneUser: async ()=>{
         const add = "select * from users;"
-        let [results] = await db.query(add)
+        let [results] = await db.execute(add)
         return results
     },
     loginUser: async (email)=>{
         let [results] = await db.query("SELECT * FROM users WHERE email = ?;",[email])
+        return results
+    },
+    updateUser: async (userId, imagen)=>{
+        console.log("--------Este es el modelo-------");
+        console.log(imagen);
+        // console.log(datos);
+        await db.execute("UPDATE users SET profile_picture= ? WHERE id = ?;", [imagen, userId ])
+    },
+    perfilUser: async (userId)=>{
+        const add = "select * from users where id =?;"
+        let [results] = await db.execute(add, [userId])
         return results
     }
 }

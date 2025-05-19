@@ -7,7 +7,7 @@ const mTask = {
             // const [results] = await db.query("SELECT * FROM tasks WHERE user_id = ?;", [userId])
             const [results] = await db.execute(`
                 SELECT 
-                    t.id AS task_id, t.title, t.description, t.complete, t.priority,
+                    t.id AS task_id, t.title, t.description, t.complete, t.priority,t.deadline,t.color, t.imagen_url,
                     JSON_ARRAYAGG(
                         JSON_OBJECT('id', s.id, 'title', s.title, 'complete', s.complete)
                     ) AS subtasks
@@ -28,7 +28,7 @@ const mTask = {
     },
     addTask : async (task, connection)=>{
             let [taskResult] = await connection.execute(
-                "insert into tasks (title, description, user_id, priority) values (?,?,?,?)", [task.title, task.description, task.userId, task.priority]
+                "insert into tasks (title, description, user_id, priority, deadline, color, imagen_url) values (?,?,?,?,?,?,?)", [task.title, task.description, task.userId, task.priority, task.deadline, task.color, task.imagen_url ]
             );
 
             // Obtener el ID de la nueva tarea
@@ -40,9 +40,20 @@ const mTask = {
         return results
     },
     updateTask: async (task, connection)=>{
+        console.log({
+            title: task.title,
+            description: task.description,
+            priority: task.priority,
+            deadline: task.deadline,
+            color: task.color,
+            imagen_url: task.imagen_url,
+            id: task.id,
+            userId: task.userId
+          });
+          
         let [results] = await connection.execute(
-            "UPDATE tasks SET title= ? , description= ?, priority = ? WHERE id = ? AND user_id = ?;", 
-            [task.title, task.description, task.priority, task.id,  task.userId]
+            "UPDATE tasks SET title= ? , description= ?, priority = ?, deadline = ?, color = ?, imagen_url = ? WHERE id = ? AND user_id = ?;", 
+            [task.title, task.description, task.priority, task.deadline, task.color, task.imagen_url, task.id,  task.userId]
         )
         return results
     },

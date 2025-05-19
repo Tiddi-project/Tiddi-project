@@ -1,3 +1,4 @@
+// Funcion creada para la asignacion del los valores del formulario para su edicion
 const d = document
 
 export default function allocation(form){
@@ -11,7 +12,23 @@ export default function allocation(form){
             form.titleTask.value = valor.title
             form.descriptionTask.value = valor.description
             form.priority.value = valor.priority
+            form.colorTarea.value = valor.colorTarea
             form.id.value = valor.id
+
+            form.querySelector(".imagen-insertada").src = `/uploads/${valor.imagen}`
+            if (valor.imagen) {
+                form.querySelector(".imagen-insertada").style.display = "block";
+                form.querySelector(".btn-eliminar-imagen").style.display = "block";
+            }else{
+                form.querySelector(".imagen-insertada").style.display = "none";
+                form.querySelector(".btn-eliminar-imagen").style.display = "none";
+            }
+
+            // convierte la fecha a formato aceptado
+            const fecha = new Date(valor.deadline);
+            const fechaLocal = fecha.toISOString().slice(0, 16);
+            form.fechaHora.value = fechaLocal;
+            // form.fechaHora.value = valor.deadline
             form.classList.add("isActive")
 
 

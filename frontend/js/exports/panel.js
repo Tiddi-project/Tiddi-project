@@ -11,6 +11,11 @@ export default function panelActive(panelTask, button){
         // permite esconder el panel
         if(e.target.matches(".button-cancel")){
             panelTask.classList.remove("isActive")
+            // permite que al hacer click en cancelar se elimine la imagen
+            panelTask.querySelector(".imagen-insertada").src = ""
+            panelTask.querySelector(".imagen-insertada").style.display = "none"
+            panelTask.querySelector(".btn-eliminar-imagen").style.display = "none"
+            // se resetea el formulario
             panelTask.reset()
             // ✅ Limpiar subtareas al cancelar
             const subtasksContainer = panelTask.querySelector(".subtask__container").querySelectorAll(".subtask-item"); 

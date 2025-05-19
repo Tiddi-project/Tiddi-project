@@ -1,0 +1,268 @@
+.perfilForm{
+    width: 80%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* padding-top: 1rem; */
+    background-color: white;
+    border: thin solid rgb(208, 208, 208);
+    border-radius: 10px;
+}
+.perfilForm__titulo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    height: 7%;
+    border-radius: 10px;
+    color: #218625;
+    /* border: thin solid red; */
+}
+.perfilForm__titulo .guardarCambios{
+    width: 150px;
+}
+/* ------------------------------------------------------- seccion foto de perfil */
+
+.fotoPerfil__Container{
+    display: flex;
+    width: 85%;
+    height: 25%;
+    /* border: thin solid grey; */
+    border-radius: 10px;
+    /* margin-bottom: 1rem; */
+}
+.fotoPerfil__imagen {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fotoPerfil__imagen-foto{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    /* border: thin solid; */
+
+}
+.fotoPerfil__seccion {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    /* border: thin solid red; */
+}
+.fotoPerfil__upload {
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: rgb(52, 52, 52);
+    cursor: pointer;
+}
+.fotoDePerfilUsuario{
+    display: none;
+}
+/* ------------------------------------------------------- seccion informacion de contacto */
+.informacionPersonal{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    /* height: 35%; */
+    padding: 1rem 0.5rem 2rem 2rem;
+    border: thin solid rgb(208, 208, 208);
+    border-radius: 10px;
+}
+.informacionPersonal__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+    /* border: thin solid; */
+}
+.informacionPersonal__span{
+    /* height: 30%; */
+    padding-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.informacionPersonal__btn{
+    width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    border: thin solid rgb(208, 208, 208);
+    border-radius: 5px;
+    font-size: 1.3rem;
+    background-color: transparent;
+    cursor: pointer;
+}
+.informacionPersonal__btn span{
+    margin-left: 0.4rem;
+    pointer-events: auto;
+}
+.informacionPerfil {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* margin-top: 1rem; */
+    /* border: thin solid red; */
+}
+.informacionPerfil input{
+    border: thin solid rgb(227, 227, 227);
+    /* background-color: rgb(225, 225, 225); */
+    height: 30px;
+}
+/* ------------------------------------------------- seccion uno de form para nombre y correo */
+
+.informacionPerfil-uno{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    /* border: thin solid; */
+}
+.perfil__nombre{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+    padding-right: 1.5rem;
+    margin-right: 1.5rem;
+}
+.perfil__nombre span{
+    color: grey;
+    margin-bottom: 1rem;
+}
+.perfil__email{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+
+}
+.perfil__email span{
+    color: grey;
+    margin-bottom: 1rem;
+}
+/* ------------------------------------------------- seccion dos de form para nombre y correo */
+
+.informacionPerfil-dos{
+    display: none;
+    /* display: flex; */
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    /* border: thin solid; */
+}
+.informacionPersonal__footer{
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    /* border: thin solid; */
+}
+.footerBtn {
+    width: 160px;
+}
+/* --------------------- Tablets (≤768px) --------------------- */
+@media (max-width: 768px) {
+    .perfilForm {
+      width: 90%;
+      height: auto;
+      padding: 2rem 1rem;
+    }
+  
+    .perfilForm__titulo {
+      /* flex-direction: column; */
+      align-items: flex-start;
+      height: auto;
+      gap: 1rem;
+    }
+  
+    .fotoPerfil__Container {
+      flex-direction: column;
+      height: auto;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .fotoPerfil__imagen,
+    .fotoPerfil__seccion {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .informacionPerfil-uno,
+    .informacionPerfil-dos {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .perfil__nombre,
+    .perfil__email {
+      width: 100%;
+      margin-right: 0;
+      padding-right: 0;
+    }
+  
+    .informacionPersonal__footer {
+      /* flex-direction: column; */
+      gap: 1rem;
+      align-items: flex-start;
+    }
+}
+  
+/* --------------------- Móviles (≤480px) --------------------- */
+@media (max-width: 480px) {
+    .perfilForm {
+      width: 95%;
+    }
+    .perfilForm__titulo {
+        width: 85%;
+        /* border: thin solid; */
+        /* display: flex; */
+        /* flex-direction: row; */
+        margin-bottom: 1rem;
+    }
+    .fotoPerfil__Container {
+        margin-bottom: 1rem;
+    }
+  
+    .informacionPersonal__btn,
+    .footerBtn,
+    .fotoPerfil__upload {
+      width: 100%;
+      font-size: 1.2rem;
+    }
+  
+    .informacionPersonal__span {
+      font-size: 1.4rem;
+    }
+  
+    .perfil__nombre span,
+    .perfil__email span {
+      font-size: 1.2rem;
+    }
+  
+    .perfil__nombre,
+    .perfil__email {
+      font-size: 1.2rem;
+    }
+}
+  

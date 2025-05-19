@@ -1,0 +1,143 @@
+/* html {
+    font-size: 62.5%;
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+    */
+/* body {
+    background-color: #3F7D58;
+
+}  */
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 2rem;
+    /* border: thin solid red; */
+}
+
+/* Estilos para el desplazamiento de fechas */
+.desplazarFecha{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    /* align-self: flex-start; */
+}
+button {
+    border: none;
+    margin: 0 1rem;
+    background-color: transparent;
+    cursor: pointer;
+}
+.flecha {
+    color: white;
+    background-color: grey;
+}
+.flecha:hover {
+    color: black;
+}
+.mesActual{
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+}
+.SemanaActual{
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+}
+/* Estilos para los encabezados de los dias de la semana */
+.calendario__diasSemana{
+    width: 96%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* border: thin solid red; */
+    margin-bottom: 1rem;
+    /* margin: 0 0.2rem 1rem 0.2rem; */
+}
+.calendario__diaSemana{
+    text-align: center;
+}
+.calendario__diaSemana h4{
+    font-size: 1.5rem;
+    color: rgb(0, 0, 0);
+}
+.semana__dia {
+    padding: 0 0.5rem 0 0.5rem;
+}
+/* Estilos para los dias del mes */
+
+.calendario {
+    width: 96%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* grid-template-rows: repeat(5, 1fr); */
+    gap: 0.5rem;
+    padding: 0.3rem;
+    background-color: white;
+
+}
+.calendario__dia {
+    text-align: center;
+    list-style: none;
+    border: thin solid grey; 
+    padding: 0.5rem;
+}
+.calendario__dia h5{
+    padding-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+} 
+
+.evento {
+    width: 100%; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; 
+    background-color: #ADD8E6;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* --------------------------------------- Estilos para la vista de semana */
+.semana {
+    width: 96%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    padding: 0.3rem;
+    background-color: white;
+    
+}
+.semana__dia{
+    text-align: center;
+    border: thin solid grey; 
+}
+.semana__dia h5 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+.semana {
+    width: 96%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* grid-template-rows: repeat(5, 1fr); */
+    gap: 0.5rem;
+    padding: 0.3rem;
+    background-color: white;
+}
+/* --------------------------------------- Estilos para la vista de semana */
+.diaActual {
+    font-size: 1.6rem;
+    font-weight: bold;
+}

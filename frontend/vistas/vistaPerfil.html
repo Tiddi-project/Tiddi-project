@@ -1,0 +1,95 @@
+<form action="#" class="perfilForm" enctype="multipart/form-data">
+    <section class="perfilForm__titulo">
+        <span class="informacionPersonal__span">Perfil</span>
+        <button type="submit" class="informacionPersonal__btn guardarCambios">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                width="16" height="16" 
+                fill="none" stroke="currentColor" 
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/>
+            <polyline points="7 3 7 8 15 8"/>
+            </svg>
+            <span>Guardar Cambios</span>
+        </button>
+    </section>
+    <section class="fotoPerfil__Container">
+        <div class="fotoPerfil__imagen">
+            <img src="../assets/foto-de-perfil.png" alt="foto de perfil" class="fotoPerfil__imagen-foto">
+        </div>
+        <div class="fotoPerfil__seccion">
+            <button type="button" class="fotoPerfil__upload">Cargar una nueva imagen</button>
+            <div class="fotoPerfil__input">
+                <input type="file" name="fotoDePerfilUsuario" class="fotoDePerfilUsuario" id="fotoDePerfilUsuario" accept="image/*">
+            </div>
+        </div>
+    </section>
+    <section class="informacionPersonal">
+        <div class="informacionPersonal__header">
+            <span class="informacionPersonal__span">Informacion personal</span>
+            <button type="button" class="informacionPersonal__btn editarInformacion">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    width="16" height="16" 
+                    fill="none" stroke="currentColor" 
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                    class="feather feather-edit">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                <span>Editar</span>
+            </button>
+        </div>
+        <div class="informacionPerfil">
+            <section class="informacionPerfil-uno">
+                <!-- Nombre -->
+                <div class="perfil__nombre">
+                    <span>Nombre completo</span>
+                    <input type="text" name="nombrePerfil" id="nombrePerfil" class="nombrePerfil" required disabled>
+                </div>
+                <!-- correo -->
+                <div class="perfil__email">
+                    <span>Correo electronico</span>
+                    <input type="email" name="emailPerfil" id="emailPerfil" class="emailPerfil" disabled>
+                </div>
+            </section>
+            <section class="informacionPerfil-dos">
+                <!-- contraseña anterior -->
+                <div class="perfil__nombre">
+                    <span>Contraseña anterior</span>
+                    <input type="password" name="passwordAfter" id="passwordAfter" class="passwordAfter" disabled >
+                </div>
+                <!-- contraseña nueva -->
+                <div class="perfil__email">
+                    <span>Contraseña nueva</span>
+                    <input type="password" name="passwordNew" id="passwordNew" class="passwordNew" disabled>
+                </div>
+            </section>
+        </div>
+    </section>
+    <!-- Botones para mas opciones -->
+    <div class="informacionPersonal__footer">
+        <button type="button" class="informacionPersonal__btn footerBtn cambiarContrasenia">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" 
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <circle cx="12" cy="16" r="1"/>
+            </svg>
+
+            <span>Cambiar contraseña</span>
+        </button>
+
+        <button type="button" class="informacionPersonal__btn footerBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" 
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+            <path d="M10 11v6M14 11v6"/>
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+            </svg>
+            <span>Eliminar Cuenta</span>
+        </button>
+    </div>
+</form>

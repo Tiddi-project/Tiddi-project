@@ -9,10 +9,11 @@ html {
     /* outline: thin solid; */
 }
 body{
-    /* width: 100%;    */
+    width: 100%;   
     height: 100vh;
     overflow-x: hidden;
     background-color: #f8f8f8;
+    /* border: thin solid red; */
 }
 body button {
     cursor: pointer;
@@ -30,10 +31,19 @@ body button:active {
     align-items: center;
     background: transparent;
 }
-.main {
-    width: 79%;
+.main-content {
+    width: 100%;
     height: 100vh;
     padding-top: 2rem;
+    margin-left: 230px;
+    transition: margin-left 0.3s ease;
+    /* padding-left: 15rem; */
+    /* border: thin solid red; */
+
+}
+.main-content-reduce {
+    margin-left: 120px;
+
 }
 /*----------------------------sidebar----------------------------------------------------*/
 .slidebar {
@@ -68,7 +78,6 @@ body button:active {
     cursor: pointer;
     transition: right 0.3s ease;
 }
-
 .btn-task-mini{
     right: -3vw;
 }
@@ -184,9 +193,9 @@ body button:active {
 }
 
 /*-------------------------------------------------------------- hover----------------------*/
-/* .slidebar.slidebar-mini .nav-item:hover {
-    overflow: visible;   
-} */
+.slidebar.slidebar-mini .nombreUsuarioSidebar {
+    display: none;  
+}
 /* .slidebar.slidebar-mini .nav-item:hover .span-hover {
     position: absolute;
     width: auto;
@@ -208,10 +217,11 @@ body button:active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 5rem;
     text-align: center;
 }
 .contenedorPerfil span{
+    margin-top: 1rem;
     font-size: 1.6rem;
 }
 .contenedorPerfil nav ul li a img{
@@ -245,18 +255,18 @@ body button:active {
 .perfil.active{
     outline: 3px solid #218625;
 }
-
 /* ----------------------------------------------Mini menu perfil------------------- */
 .menu-perfil {
-    display: none;
     position: absolute;
+    z-index: 999;
     left: 70%;
+    bottom: 13%;
+    width: 150px;
+    display: none;
+    padding: 10px 10px 0 10px;
+    font-size: 1.4rem;
     background: #218625;
     border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    width: 150px;
     transition: 0.3s;
 }
 .menu-perfil a {
@@ -295,7 +305,7 @@ body button:active {
     align-items: center;
 }
 .title-main{
-    margin: 2rem 0;
+    margin: 2rem 0 3rem 0;
     color: rgb(38, 50, 56);
 }
 /* ------------------------------------------------------ panel de agregar tarea */
@@ -367,6 +377,66 @@ body button:active {
     resize: none;
     outline: none;
 }
+/* --------------------------Panel de tareas-- opcion de imagenes---------------------- */
+.img-btn{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    cursor: pointer;
+}
+.img-btn span{
+    font-size: 1.3rem;
+
+}
+.imagen {
+    display: none;
+}
+.imagenContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    /* border: thin solid red; */
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.imagen-insertada{
+    display: none;
+    /* border: thin solid black; */
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+}
+.btn-eliminar-imagen{
+    display: none;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    cursor: pointer;
+    display: none;
+}
+/* --------------------------Panel de tareas-- opcion de fechas---------------------- */
+.fecha{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+
+}
+.fecha label{
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+.fechaHora{
+    margin-bottom: 1rem;
+    border: none;
+    cursor: pointer;
+}
 /* ------------------------------------inicio-- opcion de prioridades---------------------- */
 .priority-otions {
     width: 90%;
@@ -406,7 +476,41 @@ body button:active {
 .priority-otions input[type="radio"]:checked + .low { background-color: rgb(110, 239, 227);}
 .priority-otions input[type="radio"]:checked + .medium { background-color: rgb(255, 195, 0);}
 .priority-otions input[type="radio"]:checked + .high { background-color: rgb(255, 55, 55);}
-/* ------------------------------------fin---opcion de prioridades------------------------ */
+/* -----------------------------------fin---opcion de prioridades------------------------ */
+/* ------------------------------------inicio---color de tarea------------------------- */
+.color-options{
+    width: 90%;
+    margin-bottom: 2rem;
+}
+.color-title {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+
+}
+.colorSeleccionado input[type = "radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 5px 0 5px 1px;
+    border: 2px solid #ccc;
+}
+.colorSeleccionado input[type="radio"]:checked {
+    border: 2px solid #000;
+}
+.colorSeleccionado input[type="radio"][value="FFFFFF"] { background-color: #FFFFFF; }
+.colorSeleccionado input[type="radio"][value="FFDFBA"] { background-color: #FFDFBA; }
+.colorSeleccionado input[type="radio"][value="FFC0CB"] { background-color: #FFC0CB; }
+.colorSeleccionado input[type="radio"][value="E6C8FF"] { background-color: #E6C8FF; }
+.colorSeleccionado input[type="radio"][value="FFFF99"] { background-color: #FFFF99; }
+.colorSeleccionado input[type="radio"][value="ADD8E6"] { background-color: #ADD8E6; }
+.colorSeleccionado input[type="radio"][value="C1FFC1"] { background-color: #C1FFC1; }
+.colorSeleccionado input[type="radio"][value="E5B49D"] { background-color: #E5B49D; }
+.colorSeleccionado input[type="radio"][value="FF94C5"] { background-color: #FF94C5; }
+.colorSeleccionado input[type="radio"][value="84DBFF"] { background-color: #84DBFF; }
+.colorSeleccionado input[type="radio"][value="75FFD6"] { background-color: #75FFD6; }
+
 /* ------------------------------------inicio---subtareas------------------------- */
 .subtask__container {
     /* border: thin solid red; */
@@ -504,15 +608,27 @@ body button:active {
     cursor: pointer;
 }
 /* ------------------------------------------------------ Listado de tareas */
+.contenedorDeTarea{
+    /* border: thin solid blue; */
+    width:100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 1fr;
+
+}
 .task-list {
-    max-width:50%;
-    min-width: 440px;
-    height: 85vh;
+    grid-column: 1;
+    min-width: 375.594px;
+    /* min-width: 440px; */
+    height: 100%;
     padding-top: 1rem;  
     border-top: thin solid #b0b0b0;
     overflow-y: auto;
     scrollbar-width: none;  /* Firefox */
     -ms-overflow-style: none;
+    /* border: thin solid red; */
+
 }
 .task-list::-webkit-scrollbar {
     display: none;
@@ -524,12 +640,14 @@ body button:active {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 0.5rem 1.5rem 1rem;
-    margin-top: 2rem;
+    padding: 1rem 0.5rem 1rem 1rem;
+    margin-top: 1rem;
     font-size: 1.3rem;
     border: thin solid rgb(211, 211, 211);
     border-radius: 15px;
     background-color: rgb(255, 255, 255);
+    /* border: thin solid blue; */
+
 }
 .task-elements{
     width: 100%;
@@ -610,47 +728,78 @@ body button:active {
     color: rgb(38, 50, 56);
 }
 /*--------------------------------------------------------- Barra de progreso*/
-.progress {
-    position: absolute;
-    right: 3vw;
-    top: 30vh;
-    width: 46rem;
-    height: 55vh;
-    display: none;
-    /* display: flex; */
+.barraDeProgresoContenedor{
+    /* width: 100%; */
+    min-width: 460px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: #16C47F; */
+    /* border: thin solid red; */
+}
+.barraDeProgreso {
+    grid-column: 2;
+    min-width: 322.547px;
+    width: 70%;
+    height: 60%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
     border-radius: 15px;
     background-color: rgb(255, 255, 255);
+    /* border: thin solid red; */
+
+    /* padding: 2rem; */
+    /* position: absolute;
+    right: 3vw;
+    top: 30vh; */
+    /* display: none; */
     box-shadow: 3px 3px 5px -1px rgb(0, 0, 0, 0.15),
                 -3px -3px 5px -1px rgb(0, 0, 0, 0.15);
     /* box-shadow: 6px 6px 10px -1px rgb(0, 0, 0, 0.15),
 -6px -6px 10px -1px rgb(0, 0, 0, 0.15); */
 }
-.progress h2{
+.barraDeProgreso h2{
     text-align: center;
     /* margin-top: 2rem; */
     margin-bottom: 3rem;
 }
+/* .progress-container > * {
+    border: thin solid;
+} */
 .progress-container {
     position: relative;
-    width: 200px;
-    height: 200px;
-    display: inline-block;
+    /* width: 200px;
+    height: 200px; */
+    width: 100%;
+    /* height: 200px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: thin solid red; */
+
 }
 /* Animación suave */
 #progress-circle {
     transition: stroke-dashoffset 1s ease-in-out;
 }
+/* .svg {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+} */
 .progress-text {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 1;
+    left: 5;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
     font-size: 20px;
     font-weight: bold;
+    /* border: thin solid red; */
+
 }
 /*---------------------------------------------------- estilos en el checkbox task*/
 .checkbox {
@@ -662,7 +811,8 @@ body button:active {
     width: 16px;
     height: 16px;
     margin: 10px auto;
-    border: thin solid #d3d3d3;
+    border: thin solid #878787;
+    /* border: thin solid #d3d3d3; */
     border-radius: 50%;
     text-align: center;
     line-height: 16px;
@@ -684,7 +834,8 @@ body button:active {
     width: 16px;
     height: 16px;
     margin: 10px auto;
-    border: thin solid #d3d3d3;
+    border: thin solid #878787;
+    /* border: thin solid #d3d3d3; */
     border-radius: 50%;
     text-align: center;
     line-height: 16px;
@@ -696,3 +847,17 @@ body button:active {
     /* border: thin solid red; */
     color:  #218625;
 }
+@media (max-width: 768px) {
+    .contenedorDeTarea {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+  
+    .task-list, .barraDeProgresoContenedor {
+      grid-column: auto;
+      width: 100%;
+      min-width: unset;
+      border: none;
+    }
+  }
+  

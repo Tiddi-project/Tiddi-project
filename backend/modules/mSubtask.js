@@ -16,7 +16,7 @@ const mSubtask = {
     },
     updateSubtask: async (taskId, subtasks, connection)=>{
         try {
-            console.log("👉 Subtareas recibidas para actualizar:", subtasks);
+            // console.log("👉 Subtareas recibidas para actualizar:", subtasks);
             // Obtener las subtareas actuales de la tarea
             let [existingSubtasks] = await connection.execute(
                 "SELECT id FROM subtasks WHERE task_id = ?",[taskId]
@@ -27,14 +27,14 @@ const mSubtask = {
             const receivedIds = subtasks.map(sub => sub.id).filter(id => id) //muestra solo los id de las sub sin null
             // Eliminar subtareas que ya no existen en la actualización
             const subtasksToDelete = existingIds.filter(id => !receivedIds.includes(id));
-            console.log("🗑️ Subtareas a eliminar:", subtasksToDelete);
+            // console.log("🗑️ Subtareas a eliminar:", subtasksToDelete);
             if (subtasksToDelete.length > 0) {
                 await connection.execute(`DELETE FROM subtasks WHERE id IN (${subtasksToDelete.map(() => '?').join(', ')})`, subtasksToDelete);
             }
 
             // Actualizar subtareas existentes
             const subtasksToUpdate = subtasks.filter(sub => sub.id)
-            console.log("✏️ Subtareas a actualizar:", subtasksToUpdate);
+            // console.log("✏️ Subtareas a actualizar:", subtasksToUpdate);
             for (let sub of subtasksToUpdate) {
                 await connection.execute(
                     "UPDATE subtasks SET title = ?, complete = ? WHERE id = ? AND task_id = ?",
@@ -44,7 +44,7 @@ const mSubtask = {
 
             // Insertar nuevas subtareas
             const subtasksToInsert = subtasks.filter(sub => !sub.id);
-            console.log("➕ Subtareas a insertar:", subtasksToInsert);
+            // console.log("➕ Subtareas a insertar:", subtasksToInsert);
             if (subtasksToInsert.length > 0) {
                 const placeholders = subtasksToInsert.map(() => "(?, ?, ?)").join(", ");
                 const values = subtasksToInsert.flatMap(sub => [taskId, sub.title, sub.complete]);

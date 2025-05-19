@@ -26,7 +26,7 @@ const cUser = {
     loginUser: async (req, res)=>{
         try {
             let {email, password} = req.body
-            console.log("👉 Email y password recibidos:", email, password)
+            // console.log("👉 Email y password recibidos:", email, password)
             const results = await mUser.loginUser(email)
 
             // res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
@@ -73,7 +73,45 @@ const cUser = {
         } catch (error) {
             error.e500(err, req, res)
         }
-    }
+    },
+    perfilUser: async (req, res)=>{
+        try {
+            if(!req.session.user){
+                return res.status(401).json({ message: "No has iniciado sesión" });
+            }
+            const userId = req.session.user.id
+            await cUser.perfilUser(userId)
+            res.json({user : userId})
+        } catch (err) {
+            error.e500(err, req, res)
+        }
+    },
+    updatePerfilUser: async (req, res)=>{
+        try {
+            if(!req.session.user){
+                return res.status(401).json({ message: "No has iniciado sesión" });
+            }
+            // console.log(req.body);
+            const userId = req.session.user.id
+            let imagen
+            if (req.file) imagen = `/uploads/${req.file.filename}`;
+
+            /*
+            const cambios = {};
+            if (req.body.name) cambios.name = req.body.name;
+            if (req.body.email) cambios.email = req.body.email;
+            if (req.file) cambios.imagen = `/uploads/${req.file.filename}`;
+            */
+            console.log("--------Este es el controlador-------");
+            console.log(req.body);
+            console.log(userId);
+            console.log(imagen);
+            await mUser.updateUser(userId, imagen)
+            res.status(200).json({status : true})
+        } catch (err) {
+            error.e500(err, req, res)
+        }
+    },
 }
 
 export default cUser;
