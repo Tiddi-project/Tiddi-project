@@ -22,7 +22,11 @@ const storage = multer.diskStorage({    //guardar los archivos en el disco duro 
   }
 });
 
-const upload = multer({ storage }); // Creamos una instancia de multer usando la configuración anterior (storage).
+const upload = multer({ storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5 MB
+  } 
+}); // Creamos una instancia de multer usando la configuración anterior (storage).
 // Ahora upload es una herramienta lista para usarse en nuestras rutas para aceptar imágenes.
 
 

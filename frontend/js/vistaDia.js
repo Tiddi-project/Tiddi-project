@@ -122,8 +122,6 @@ export async function initVistaDia() {
 
     // Bienvenida con nombre de usuario
     aTask.usernameTitle(welcomeUser)
-
-
     
     // funcion para renderizar la vista desde index
     //evento "tareasActualizadas"

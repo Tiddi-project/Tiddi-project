@@ -11,6 +11,7 @@ import routesTask from "./routes/rTasks.js"
 import routesCheck from "./routes/rAuth.js"
 import routesSubtask from "./routes/rSubtask.js"
 import {isAuthenticated} from "./middlewares/auth.js"
+import FileStore from "session-file-store"
 
 
 // crear el servidor
@@ -36,8 +37,14 @@ app.use('/uploads', express.static(path.join(__dirname, "public/uploads")))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+// Manejo de sesiones
+const fileStore = FileStore(session);
 app.use(
   session({
+    store: new fileStore({
+    path: './sessions',   // Carpeta donde se guardan los archivos
+    retries: 1
+    }),
     secret: "mi_llave",
     resave: false,
     saveUninitialized: false,

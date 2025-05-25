@@ -25,7 +25,7 @@ routes.patch("/subtask/:id",  cTask.completeSubtask)
 routes.delete("/delete/:id", cTask.deleteTask)  // complete
 
 // Muestra el progreso de total de tareas vs completadas
-routes.get("/progress", cTask.progressTasks)  // progess
+routes.get("/progress", cTask.progressTasks)  // progress
 
 
 export default routes;
