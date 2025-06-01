@@ -48,6 +48,7 @@ body button:active {
 /*----------------------------sidebar----------------------------------------------------*/
 .slidebar {
     position: fixed;
+    z-index: 999;
     left: 0;
     width: 210px;  /* 250px */
     height: 100%;
@@ -158,9 +159,16 @@ body button:active {
     margin-bottom: 1rem;
     list-style: none;
 }
+.nav-item a.active {
+   background-color: #218625;
+    color: white;
+}
+.nav-item a.active svg{
+    fill: white
+}
 .nav-item a:hover svg {
-    fill: white !important;
-  }
+    fill: white ;
+}
   
 .nav-item a:hover .span {
     color: white;

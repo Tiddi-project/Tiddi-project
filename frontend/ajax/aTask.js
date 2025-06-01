@@ -396,17 +396,11 @@ const aTask = {
             })
             // convertir datos del backend en formato que se usa en js
             let data = await res.json()
-            
             if(!res.ok){
                 throw {status: res.status, message: res.statusText, dir:res}
             }
-            // console.log(data);
-
-
             // vista de calendario mes
             calendario(contenedorCalendario, fecha, data);
-
-            
 
         } catch (error) {
             let message = error.statusText || "Se ha producido un error"

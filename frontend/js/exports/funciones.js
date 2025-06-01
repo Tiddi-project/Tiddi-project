@@ -121,7 +121,7 @@ export function obtenerRangoSemanal(fecha) {
     const inicio = primerDia.toLocaleDateString("es-CO", opciones);       // ej: "29 de diciembre"
     const fin = ultimoDia.toLocaleDateString("es-CO", opcionesFinal);     // ej: "4 de enero de 2025"
 
-    return `Del ${inicio} al ${fin}`;
+    return `Semana del ${inicio} al ${fin}`;
 }
 export function graficaProductividad (svgCirculo, datos){
     let totalTasks = datos.totalTareasEnLaSemana;

@@ -22,7 +22,6 @@ main {
     padding-left: 2rem;
     /* border: thin solid red; */
 }
-
 /* Estilos para el desplazamiento de fechas */
 .desplazarFecha{
     display: flex;
@@ -69,6 +68,8 @@ button {
     color: rgb(0, 0, 0);
 }
 .semana__dia {
+    min-width: 100px;
+    max-width: 170px;
     padding: 0 0.5rem 0 0.5rem;
 }
 /* Estilos para los dias del mes */
@@ -85,27 +86,87 @@ button {
 
 }
 .calendario__dia {
+    position: relative;
+    min-width: 148px;
+    min-height: 76.5625px;
+    max-height: 99.8438px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+
     text-align: center;
     list-style: none;
     border: thin solid grey; 
     padding: 0.5rem;
 }
 .calendario__dia h5{
-    padding-top: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #218625; */
+    /* padding-top: 0.5rem; */
     margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    /* border: thin solid red; */
+    border-radius: 50%;
 } 
-
 .evento {
-    width: 100%; 
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap; 
+    display: flex;
     background-color: #ADD8E6;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     border-radius: 5px;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    overflow: hidden;
     cursor: pointer;
+}
+.evento__content{
+    width: 100%; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: start;
+}
+.check__tareaSemana{
+    appearance: none;
+}
+.check__tareaSemana + label::before{
+    border: thin solid #218625;
+    content: "\2713";
+    border-radius: 50%;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 1rem;
+    text-align: center;
+    line-height: 1rem;
+    color: transparent;
+}
+.check__tareaSemana:checked + label::before{
+    color: #218625;
+}
+.eventos_semana{
+    width: 100%;
+
+}
+/*  */
+.evento__extra {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    background-color: #e0e0e0;
+    color: #333;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: default;
+    margin-top: 2px;
 }
 /* --------------------------------------- Estilos para la vista de semana */
 .semana {
@@ -119,12 +180,23 @@ button {
     
 }
 .semana__dia{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    border: thin solid grey; 
+    justify-content: flex-start;
+    /* border: thin solid rgb(204, 204, 204);  */
 }
 .semana__dia h5 {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
+    /* border: thin solid red; */
+    border-radius: 50%;
 }
 .semana {
     width: 96%;
@@ -136,8 +208,24 @@ button {
     padding: 0.3rem;
     background-color: white;
 }
+.eventos{
+    width: 100%;
+    max-height: 58px;
+    /* border: thin solid red; */
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    overflow: hidden;
+}
 /* --------------------------------------- Estilos para la vista de semana */
 .diaActual {
     font-size: 1.6rem;
     font-weight: bold;
+}
+.hoy {
+    /* width: 3rem;
+    height: 3rem;*/
+    background-color: #218625; 
+    color: #ffff;
+    font-weight: bold;
+    /* border-radius: 50%; */
 }

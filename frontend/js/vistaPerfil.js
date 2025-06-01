@@ -56,14 +56,15 @@ export async function initVistaPerfil() {
         }
     })
     $cambiarContrasenia.addEventListener("click", (e)=>{
-        console.log("funciona el boton de cambiar contraseña");
+        console.log(e.target.matches(".informacionPersonal__btn.footerBtn.cambiarContrasenia"));
         
         const contraseniaAnterior = d.getElementById("passwordAfter")
         const contraseniaNueva = d.getElementById("passwordNew")
         const contenedorContrasenia = d.querySelector(".informacionPerfil-dos")
 
         // Habilita la vista de la contraseña
-        contenedorContrasenia.style.display = "flex"
+        // contenedorContrasenia.style.display = "flex"
+        contenedorContrasenia.classList.toggle("passActive")
 
         // permite escribir y que se vuelva requerido
         contraseniaAnterior.setAttribute("required","")
@@ -79,6 +80,5 @@ export async function initVistaPerfil() {
         let datosDeUsuario = await aUser.perfilUser($formularioPerfil)
         console.log(datosDeUsuario);
         await aUser.updateUser(datosDeUsuario, $formularioPerfil)
-        // alert("enviado")
     })
 }

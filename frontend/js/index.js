@@ -72,6 +72,10 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
 
     // 🚨 Agrega esta línea para cargar la vista del día automáticamente:
     await aView($contenedorDinamico, "vistas/vistaDia.html");
+    const enlaceInicial = d.querySelector('.nav-item a[data-vista="vistas/vistaDia.html"]');
+    if (enlaceInicial) {
+        enlaceInicial.classList.add("active");
+    }
     
     // Bienvenida con nombre de usuario
     aTask.welcomeUser({ nombreDeUsuarioSidebar})
@@ -190,7 +194,10 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
         enlace.addEventListener("click",async (e)=>{
             const enlaceReal = e.target.closest("a"); // <-- siempre busca el <a>
             const vista = enlaceReal?.dataset.vista;
-            // const vista = enlace.dataset.vista
+            
+            
+            $enlacesVistas.forEach(el => el.classList.remove("active"));
+            enlaceReal.classList.add("active");
             await aView( $contenedorDinamico, vista)
         })
     })

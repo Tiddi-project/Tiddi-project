@@ -27,13 +27,6 @@ export default async function aView(contenedor, vista) {
             console.warn(`No se encontró la función ${nombreFuncion}`);
         }
 
-        /*
-        const script = document.createElement("script");
-        script.src = `./js/${nombreVista}.js`; // asumiendo que están en /js/
-        script.type = "module"; // si usas módulos ES6
-        script.defer = true;
-        document.body.appendChild(script);
-        */
 
     } catch (error) {
         contenedor.innerHTML = `<p>Error al cargar la vista: ${error.message}</p>`;

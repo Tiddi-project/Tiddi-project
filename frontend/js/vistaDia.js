@@ -1,9 +1,8 @@
 import checkbox from "./exports/checkbox.js"
 import allocation from "./exports/allocation.js"
-import circleProgress from "./exports/circleProgress.js"
 // import aUser from "../ajax/aUser.js"
 import aTask from "../ajax/aTask.js"
-import {formateoDeTitulo, diaAnterior, diaSiguiente} from './exports/funciones.js';
+import {diaAnterior, diaSiguiente} from './exports/funciones.js';
 
 
 export async function initVistaDia() {

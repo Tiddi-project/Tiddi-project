@@ -4,7 +4,6 @@ import { graficaProductividad } from "./funciones.js";
 export  function calendario(contenedor, fecha, eventos){
     // Limpiar los dias enteriores
     contenedor.innerHTML = "";
-    // console.log(eventos);
     // determinacion de año y mes
     let anio = fecha.getFullYear()
     let mes = fecha.getMonth()
@@ -19,7 +18,7 @@ export  function calendario(contenedor, fecha, eventos){
     for (let i = 0; i < inicioSemana; i++) {
         contenedor.innerHTML += `
         <div class="calendario__dia">
-        <h5></h5>
+            <h5></h5>
         </div>`;
     }
 
@@ -40,16 +39,37 @@ export  function calendario(contenedor, fecha, eventos){
 
         // Si hay eventos para ese día, los mostramos
         let eventosHTML = '';
+        const maxVisible = 2;
+        /*
         if (eventosDelDia.length > 0) {
             eventosHTML = eventosDelDia
             .map(evento => `<div class="evento" style="background-color: #${evento.color};">${evento.title}</div>`).
             join("");
+        }*/
+       if (eventosDelDia.length > 0) {
+            eventosDelDia.forEach((evento, index) => {
+                if (index < maxVisible) {
+                    eventosHTML += `
+                        <div class="evento" style="background-color: #${evento.color};">
+                            <input type="checkbox" class="check__tareaSemana" id="${evento.task_id}" ${evento.complete===1 ? "checked" : ""}>
+                            <label for="${evento.task_id}"></label>
+                            <div class="evento__content">${evento.title}</div>
+                        </div>`;
+                }
+            });
+            const eventosOcultos = eventosDelDia.length - maxVisible;
+            if (eventosOcultos > 0) {
+                eventosHTML += `
+                    <div class="evento evento__extra">
+                        +${eventosOcultos}
+                    </div>`;
+            }
         }
 
         contenedor.innerHTML += `
         <div class="calendario__dia">
+            <div class="eventos">${eventosHTML}</div>
             <h5>${i}</h5>
-            <div class="eventos"};">${eventosHTML}</div>
         </div>`;
     }
 
@@ -78,11 +98,13 @@ export function calendarioPorSemana(contenedor, fecha, eventos){
         diasSemana.push(fechaPorDia)
     }
 
+    const hoy = new Date().toISOString().split("T")[0];
+    console.log(hoy);
     diasSemana.forEach(dia=>{
         // const fechaCorta = dia.split("T")[0]; // "2025-04-28"
         const fechaCorta = new Date(dia).toISOString().split("T")[0];
         // const fechaCorta = new Date(dia).toLocaleDateString("sv-SE", { timeZone: "UTC" });
-
+        const esHoy = fechaCorta === hoy;
         const eventosDelDia = eventos.filter((evento) => {
             // evento.deadline.startsWith(fechaCorta)
             if(!evento.deadline) return false;
@@ -91,16 +113,21 @@ export function calendarioPorSemana(contenedor, fecha, eventos){
             return eventoFecha === fechaCorta;
         }
         );
-        
+        // console.log(eventosDelDia);
         let eventosHTML = eventosDelDia
         .map(evento => 
-            `<div class="evento" style="background-color: #${evento.color};">${evento.title}</div>`
+            `<div class="evento" style="background-color: #${evento.color};">
+                <input type="checkbox" class="check__tareaSemana" id="${evento.task_id}" ${evento.complete===1 ? "checked" : ""}>
+                <label for="${evento.task_id}"></label>
+                <div class="evento__content">${evento.title}</div>
+                
+            </div>`
         ).join("");
         
         contenedor.innerHTML += `
         <div class="semana__dia">
-            <h5>${fechaCorta.slice(-2)}</h5>
-            <div class="eventos">${eventosHTML}</div>
+            <h5 class="${esHoy ? "hoy" : ""}">${fechaCorta.slice(-2)}</h5>
+        <div class="eventos_semana">${eventosHTML}</div>
         </div>`;
         
         
