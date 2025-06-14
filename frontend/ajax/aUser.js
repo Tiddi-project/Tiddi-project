@@ -79,7 +79,7 @@ const aUser = {
             })
             let data = await res.json()
             if(!res.ok) throw {status: res.status, message: res.statusText}
-            alert(data.message)
+            // alert(data.message)
             window.location.href = "http://localhost:3000/inicio-sesion.html"
         } catch (error) {
             let message = error.message || "ha ocurrido un error al cerrar sesion"
@@ -108,21 +108,15 @@ const aUser = {
     //         console.log(`Error: ${error.status}: ${message}`);
     //     }
     // },
-    perfilUser: async (form)=>{
+    perfilUser: async ()=>{
         try {
             let res = await fetch("http://localhost:3000/check", {
                 method: "GET",
                 credentials: "include"
             })
-            if(!res.ok) throw {status:res.status, message:res.statusText}
-            let data = await res.json()
-            // console.log(data.user);
-            if (!data.authenticated) return 
-            
-            // form.nombrePerfil.value = data.user.name
-            // form.emailPerfil.value = data.user.email
-            // console.log(data);
-            // form.querySelector(".fotoPerfil__imagen-foto").src = data.user.
+            if(!res.ok) throw {status:res.status, message:res.statusText};
+            let data = await res.json();
+            if (!data.authenticated) return null;
             return data.user
             
         } catch (error) {
@@ -132,47 +126,41 @@ const aUser = {
     },
     updateUser: async (dataUser, formulario)=>{
         try {
-            /*
-            // Informacion en base de datos del usuario
-            let nombreOriginal = dataUser.name
-            let correoOriginal = dataUser.email
+            // ID del usuario
             let userId = dataUser.id
-            
-            // Informacion del formulario en perfil
-            let nombreNuevo = formulario.nombrePerfil.value
-            let correoNuevo = formulario.emailPerfil.value
-            let claveAnterior = formulario.passwordAfter.value
-            let claveNueva = formulario.passwordNew.value
-            let formData = new FormData();
-            if(nombreOriginal !== nombreNuevo) formData.append("name", nombreNuevo);
-            if(correoOriginal !== correoNuevo) formData.append("email", correoNuevo);
-            if(claveAnterior) formData.append("passwordAfter", claveAnterior);
-            if(claveNueva) formData.append("passwordNew", claveNueva);
-            */
-            // Manejo de imagenes
-            let formData = new FormData();
-            let userId = dataUser.id
-            if (formulario.fotoDePerfilUsuario.files.length > 0) {
-                formData.append("imagen", formulario.fotoDePerfilUsuario.files[0]);
-            } 
-            /*
-            // peticion
-            // Solo enviás si hay cambios
-            if ([...formData.entries()].length === 0){
-                alert('No hiciste ningún cambio.') 
-                return
+            const formData = new FormData();
+
+            // Campos para el cambio de nombre de usuario
+            let nombreDeUsuario = formulario.nombrePerfil.value
+
+            // Campos para el cambio de nombre de usuario
+            let contraseniaAnterior = formulario.passwordAfter?.value.trim()
+            let contraseniaNueva = formulario.passwordNew?.value.trim()
+
+            let imagen = formulario.fotoDePerfilUsuario.files?.[0]
+
+            formData.append("name", nombreDeUsuario);
+            // Añadir imagen si existe
+            if (imagen) {
+                formData.append("imagen", imagen);
             }
-            alert(formData);
-            */
+            // Añadir cambio de contraseña solo si hay datos
+            if (contraseniaAnterior && contraseniaNueva) {
+                formData.append("contraseniaAnterior", contraseniaAnterior);
+                formData.append("contraseniaNueva", contraseniaNueva);
+            }
+            
             let res = await fetch(`http://localhost:3000/user/${userId}`, {
                 method: "PATCH",
                 credentials: "include",
                 body: formData
             });
             
-            let data = await res.json()
             if(!res.ok)  throw {status: res.status, message: res.statusText, dir:res}
+            let data = await res.json()
 
+            alert("Perfil actualizado correctamente ✅");
+            
         } catch (error) {
             let message = error.statusText || "Se ha producido un error"
             let status = error.status || "404"

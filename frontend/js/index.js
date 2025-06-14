@@ -8,6 +8,8 @@ import panelActive from "./exports/panel.js"
 // import circleProgress from "./exports/circleProgress.js"
 import conexion from "./exports/conexion.js"
 import aView from "../ajax/aViews.js"
+import { aReminder } from "../ajax/aReminder.js"
+import validarTareas from "./exports/validacionTareas.js"
 
 const d = document
 const $logout = d.getElementById("logout")
@@ -20,6 +22,8 @@ const $imagenInput = d.getElementById("imagen")
 const $imagenbtn = d.querySelector(".img-btn")
 const $imagenInsertada = d.querySelector(".imagen-insertada")
 const $btnEliminarImagen = d.querySelector(".btn-eliminar-imagen")
+const $mensajeAdvertencia = d.querySelector(".testTaskImageFail")
+
 // const welcomeUser = d.querySelector(".title-main")
 
 /* --------sliderbar------------ */
@@ -66,9 +70,12 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
         window.location.href = "http://localhost:3000/inicio-sesion.html"; 
         return;
     }
-    $fotoDePerfil.src = user.profile_picture
-    console.log(user);
+
+    // Funcion para identificar si el usuario se queda sin conexion internet
     conexion()
+    
+    //  Asignacion de la foto de perfil
+    $fotoDePerfil.src = user.profile_picture || '../assets/foto-de-perfil.png';
 
     // 🚨 Agrega esta línea para cargar la vista del día automáticamente:
     await aView($contenedorDinamico, "vistas/vistaDia.html");
@@ -77,9 +84,11 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
         enlaceInicial.classList.add("active");
     }
     
-    // Bienvenida con nombre de usuario
-    aTask.welcomeUser({ nombreDeUsuarioSidebar})
+    // recordatorios
+    await aReminder()
 
+    // Bienvenida con nombre de usuario
+    await aTask.welcomeUser({ nombreDeUsuarioSidebar})
 
     /*   ------------------------------------------------------------- Funciones para el manejo de sidebar*/
     function close(){
@@ -106,7 +115,6 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
         $mainContent.classList.remove("main-content-reduce")
         localStorage.setItem("sidebar","open")
     }
-
     if(localStorage.getItem("sidebar") === null) localStorage.setItem("sidebar","open")
     if(localStorage.getItem("sidebar") === "open") open()
     if(localStorage.getItem("sidebar") === "close") close()
@@ -129,8 +137,8 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     )
 
     /*----------------------------------------------------------------------------------Cierre de sesion */
-    $logout.addEventListener("click", ()=>{
-        aUser.logoutUser()
+    $logout.addEventListener("click", async()=>{
+        await aUser.logoutUser()
     })
 
     /*--------------------------------------------------------------------------Manejo de panel de tareas */
@@ -168,11 +176,33 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
         $imagenInput.click()
     })
     $imagenInput.addEventListener("change", (e)=>{
-        console.log(e.target.files[0]);
         const file = e.target.files[0]
-        const reader =  new FileReader()
 
         if (!file) return; // Si no hay archivo, no hagas nada
+
+         // Validación de tipo de archivo
+        if (!file.type.startsWith("image/")) {
+            // Por favor selecciona un archivo de imagen válido.
+            $mensajeAdvertencia.textContent = "Por favor selecciona un archivo de imagen válido."
+            $mensajeAdvertencia.style.display = "block"
+            return;
+        }else{
+            $mensajeAdvertencia.style.display = "none"
+            // $nombreImagen.textContent = file.name
+        }
+
+        // Validación de tamaño máximo 2MB
+        const MAX_SIZE_MB = 2;
+        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+            $mensajeAdvertencia.textContent = `La imagen debe pesar menos de ${MAX_SIZE_MB}MB.`
+            $mensajeAdvertencia.style.display = "block"
+            return;
+        }else{
+            $mensajeAdvertencia.style.display = "none"
+            // $nombreImagen.textContent = file.name
+        }
+        const reader =  new FileReader()
+
 
         reader.onload = ()=>{
             $imagenInsertada.src = reader.result
@@ -190,179 +220,92 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     })
     
     /*-----------------------------------------------------------------------------------Carga de vistas */
-    $enlacesVistas.forEach((enlace)=>{
-        enlace.addEventListener("click",async (e)=>{
-            const enlaceReal = e.target.closest("a"); // <-- siempre busca el <a>
+    let vistaActual = null; // variable para guardar la vista activa
+    // $enlacesVistas.forEach((enlace)=>{
+    //     enlace.addEventListener("click",async (e)=>{
+    //         const enlaceReal = e.target.closest("a"); // <-- siempre busca el <a>
+    //         const vista = enlaceReal?.dataset.vista;
+    //         $enlacesVistas.forEach(el => el.classList.remove("active"));
+    //         enlaceReal.classList.add("active");
+    //         await aView( $contenedorDinamico, vista)
+    //         vistaActual = vista
+    //     })
+    // })
+
+    function setupListeners() {
+        $enlacesVistas.forEach((enlace) => {
+            enlace.addEventListener("click", async (e) => {
+            const enlaceReal = e.target.closest("a"); 
             const vista = enlaceReal?.dataset.vista;
-            
+            if (!vista) return;
             
             $enlacesVistas.forEach(el => el.classList.remove("active"));
             enlaceReal.classList.add("active");
-            await aView( $contenedorDinamico, vista)
-        })
-    })
+
+            await aView($contenedorDinamico, vista);
+            vistaActual = vista; // Actualiza la variable global
+            });
+        });
+    }
 
     /*-----------------------------------------------------------------Funcionalidad de tareas */
+    let validacionDeTareas = validarTareas($form)
     // crear y edidtar tareas
     $form.addEventListener("submit", async (e)=>{
         e.preventDefault()
-
-        if($form.id.value === ""){
-            // metodo POST para agregar una tareas
-            await aTask.addTask($form) 
-            // Luego de crear/editar/eliminar la tarea:
-            d.dispatchEvent(new CustomEvent("tareasActualizadas"));
- 
-            panelTask.classList.remove("isActive")     
+        if(validacionDeTareas){
+            if($form.id.value === ""){
+                // metodo POST para agregar una tareas
+                await aTask.addTask($form) 
+                await aReminder();
+                // Luego de crear/editar/eliminar la tarea:
+                d.dispatchEvent(new CustomEvent("tareasActualizadas"));
+     
+                panelTask.classList.remove("isActive")
+                $form.reset()     
+            }
+            else{
+                // metodo PUT para editar una tarea
+                await aTask.editTask($form)
+                await aReminder();
+                d.dispatchEvent(new CustomEvent("tareasActualizadas"));
+                panelTask.classList.remove("isActive")
+                $form.reset()     
+    
+            }
+        }else{
+            return
         }
-        else{
-            // metodo PUT para editar una tarea
-            await aTask.editTask($form)
-            d.dispatchEvent(new CustomEvent("tareasActualizadas"));
-
-        }
-            /*
-
-        // Limpia la vista actual
-        $taskList.innerHTML = ""; 
-
-        // Llama a getAll otra vez con los mismos parámetros
-
-        aTask.getAll(FECHA,{
-            $taskList,
-            $taskContainer,
-            $template,
-            $fragment
-        })
-        
-        let progress = await aTask.progressTasks()
-        circleProgress($circle, $tCompleted, $tTotal,progress)
-        */
     })
     // eliminar tareas
     d.addEventListener("click",async (e)=>{
         if(e.target.matches("#delete")){
             let isConfirmed = confirm("¿Estas seguro de que deseas eliminar la tarea?")
             if(isConfirmed){
-                aTask.deleteTask($form)
-                panelTask.classList.remove("isActive")     
+                await aTask.deleteTask($form)
                 d.dispatchEvent(new CustomEvent("tareasActualizadas"));
+                panelTask.classList.remove("isActive")     
+                $form.reset()     
                 
             }else{
                 e.preventDefault()
             }
         }
     })
-
+    // Funciona para el renderizado de las vistas
+    d.addEventListener("tareasActualizadas", async () => {
+        if (vistaActual) {
+            await aView($contenedorDinamico, vistaActual);
+            console.log("Recargada vista actual:", vistaActual);
+        } else {
+            console.log("vistaActual es null al actualizar tareas");
+        }
+        // await aView($contenedorDinamico, "vistas/vistaDia.html");
+    });
+    setupListeners();
 
 })    
-    /*
-    panelActive(panelTask, $button)
-    checkbox()
-    allocation($form)
-
-    // agregar subtareas 
-    $subtaskButton.addEventListener("click", (e)=>{
-        subtask($subtaskContainer)
-    });
-
-    // Grafica de progreso
-    let progress = await aTask.progressTasks()
-    circleProgress($circle, $tCompleted, $tTotal,progress)
-    
-    // metodo AJAX
-    // metodo get para poder visualizar las tareas en la pag
-    aTask.getAll({
-        $taskList,
-        $taskContainer,
-        $template,
-        $fragment
-    })
-    
-    // Metodos de insercion de datos
-    $form.addEventListener("submit", (e)=>{
-        e.preventDefault()
-
-        if($form.id.value === ""){
-            // metodo POST para agregar una tareas
-            aTask.addTask($form)
-        }else{
-            // metodo PUT para editar una tarea
-            aTask.editTask($form)
-        }
-
-        window.location.reload()
-    })
-
-    // metodo PATCH para editar una sola propiedad en una tarea
-    $taskList.addEventListener("change", (e)=>{
-        //console.log(e.target); //subtask-checkbox
-        if (e.target.matches(".checkbox")) {
-            let taskChecked = e.target.closest(".task-container").querySelector(".task")
-            let idTask = e.target.dataset.id;
-            let statusChecked = e.target.checked
-            
-            aTask.editChecked(taskChecked, idTask, statusChecked)
-            return
-        }
-        if (e.target.matches(".subtask-checkbox")) {
-            let subtaskChecked = e.target.closest(".subtask-elements").querySelector(".subtask-item")
-            let idSubtask = e.target.id.replace("s-", "");
-            let statusChecked = e.target.checked
-            // console.log(statusChecked);
-            
-             aTask.completeSubtaskChecked(subtaskChecked, idSubtask, statusChecked)
-             return
-        }
-    })
-    
-    // metodo DELETE para eliminar una tarea
-    d.addEventListener("click", (e)=>{
-        if(e.target.matches("#delete")){
-            let isConfirmed = confirm("¿Estas seguro de que deseas eliminar la tarea?")
-            if(isConfirmed){
-                aTask.deleteTask($form)
-                window.location.reload()
-            }else{
-                e.preventDefault()
-            }
-        }
-        
-        // Eliminacion de subtareas
-        if(e.target.classList.contains("remove-subtask")){
-            e.target.parentElement.remove()
-        }
-
-        // subtareas
-        let taskElement = e.target.closest(".task"); // Asegura que el click venga de `.task`
-        if (taskElement) {
-            let subtaskContainer = taskElement.closest(".task-container")?.querySelector(".subtask-elements");
-            
-            if (subtaskContainer) {
-                subtaskContainer.classList.toggle("subtask-active");
-            }
-        }
-        console.log(e.target.matches(".fotoDePerfil"))
-        console.log(e.target.matches("#perfil"))
-
-        if (e.target.matches(".fotoDePerfil")) {
-            const menu = document.getElementById("perfilMenu");
-            const perfil = document.getElementById("perfil")
-            menu.classList.toggle("active");
-            perfil.classList.toggle("active");
-        }
-
-
-    })
-    
-    // Bienvenida con nombre de usuario
-    aTask.welcomeUser({welcomeUser, nameUser, emailUser})
-    // cierre de sesion
-    $logout.addEventListener("click", ()=>{
-        aUser.logoutUser()
-    })
-*/ 
-    
+ 
 
     
     

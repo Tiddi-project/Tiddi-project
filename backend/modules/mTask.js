@@ -7,7 +7,7 @@ const mTask = {
             // const [results] = await db.query("SELECT * FROM tasks WHERE user_id = ?;", [userId])
             const [results] = await db.execute(`
                 SELECT 
-                    t.id AS task_id, t.title, t.description, t.complete, t.priority,t.deadline,t.color, t.imagen_url,
+                    t.id AS task_id, t.title, t.description, t.complete, t.priority,t.deadline,t.color, t.imagen_url, t.reminder_min,
                     JSON_ARRAYAGG(
                         JSON_OBJECT('id', s.id, 'title', s.title, 'complete', s.complete)
                     ) AS subtasks
@@ -28,7 +28,7 @@ const mTask = {
     },
     addTask : async (task, connection)=>{
             let [taskResult] = await connection.execute(
-                "insert into tasks (title, description, user_id, priority, deadline, color, imagen_url) values (?,?,?,?,?,?,?)", [task.title, task.description, task.userId, task.priority, task.deadline, task.color, task.imagen_url ]
+                "insert into tasks (title, description, user_id, priority, deadline, color, imagen_url, reminder_min) values (?,?,?,?,?,?,?,?)", [task.title, task.description, task.userId, task.priority, task.deadline, task.color, task.imagen_url, task.reminder ]
             );
 
             // Obtener el ID de la nueva tarea
@@ -48,12 +48,14 @@ const mTask = {
             color: task.color,
             imagen_url: task.imagen_url,
             id: task.id,
-            userId: task.userId
+            userId: task.userId,
+            reminder: task.reminder,
+            complete: task.completed
           });
           
         let [results] = await connection.execute(
-            "UPDATE tasks SET title= ? , description= ?, priority = ?, deadline = ?, color = ?, imagen_url = ? WHERE id = ? AND user_id = ?;", 
-            [task.title, task.description, task.priority, task.deadline, task.color, task.imagen_url, task.id,  task.userId]
+            "UPDATE tasks SET title= ? , description= ?, priority = ?, deadline = ?, color = ?, imagen_url = ?, reminder_min= ?, complete= ? WHERE id = ? AND user_id = ?;", 
+            [task.title, task.description, task.priority, task.deadline, task.color, task.imagen_url, task.reminder, task.completed, task.id,  task.userId]
         )
         return results
     },
@@ -61,8 +63,14 @@ const mTask = {
         await db.execute("DELETE FROM tasks WHERE id = ? AND user_id = ?;", [task.id, task.userId])
     },
     completeTask: async (task)=>{
-        await db.execute("UPDATE tasks SET complete= ? WHERE id = ? AND user_id = ?;", [task.completed, task.id, task.userId])
+        console.log(task);
+        const [result] = await db.execute("UPDATE tasks SET complete= ? WHERE id = ? AND user_id = ?;", [task.completed, task.id, task.userId])
 
+        if (result.affectedRows === 0) {
+            // No se actualizó ninguna tarea, probablemente porque no encontró la tarea o no pertenece al usuario
+            return { success: false, message: "Tarea no encontrada o sin permiso" };
+        }
+        return { success: true };
     },
     progressTasks: async (userId)=>{
        

@@ -6,7 +6,7 @@ const error = {
                 message: err.message || "La solicitud tiene datos incorrectos o mal formateados",
             });
         }
-    },
+    }, 
     e401: (err, req, res, next) => {
         if (!res.headersSent) {
             res.status(401).json({

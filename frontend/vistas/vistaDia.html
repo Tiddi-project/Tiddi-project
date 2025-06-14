@@ -6,17 +6,43 @@
 
 <!-- seccion de las tareas por dia -->
 <section class="desplazarFecha">
-    <button class="diaAnterior">
+    <button class="diaAnterior" title="Día anterior">
         <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     </button>
     <span class="diaActual"></span>
-    <button class="diaSiguiente">
+    <button class="diaSiguiente" title="Día siguiente">
         <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
     </button>
+    <button class="filtros" title="Filtro">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+            stroke="grey" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            viewBox="0 0 24 24">
+            <!-- Línea superior -->
+            <line x1="3" y1="8" x2="21" y2="8" />
+            <!-- Círculo sobre línea superior -->
+            <circle cx="12" cy="8" r="2" fill="currentColor" />
+            
+            <!-- Línea inferior -->
+            <line x1="3" y1="16" x2="21" y2="16" />
+            <!-- Círculo sobre línea inferior -->
+            <circle cx="16" cy="16" r="2" fill="currentColor" />
+        </svg>
+
+
+    </button>
+    <div class="filtros__contenedor">
+        <label for="filtro__prioridad">Prioridad</label>
+        <select name="filtroPrioridad" id="filtro__prioridad">
+            <option value="todos" selected>Todos</option>
+            <option value="baja">Bajo</option>
+            <option value="media">Medio</option>
+            <option value="alta">Alto</option>
+        </select>
+    </div>
 </section>
 
 <section class="contenedorDeTarea">
@@ -35,11 +61,19 @@
                     <circle cx="60" cy="60" r="50" stroke="#ddd" stroke-width="10" fill="none"/>
                     
                     <!-- Círculo de progreso con animación -->
-                    <circle id="progress-circle" cx="60" cy="60" r="50"
-                    stroke="#4caf50" stroke-width="10" fill="none"
+                    <circle 
+                    id="progress-circle" 
+                    cx="60" 
+                    cy="60" 
+                    r="50"
+                    stroke="#4caf50" 
+                    stroke-width="10" 
+                    fill="none"
                     stroke-linecap="round"
                     stroke-dasharray="314"
-                    stroke-dashoffset="314" />
+                    stroke-dashoffset="314" 
+                    />
+                    />
                 </svg>
                 <div class="progress-text" id="progress-text">
                     <span class="task-completed"></span>
@@ -62,10 +96,12 @@
             <label  class="newCheckbox"></label>
             <div  class="task">
                 <h3 class="title"></h3>
-                <p class="description"></p>
+                <!-- <p class="description"></p> -->
+                 <p class="horaTarea"></p>
+                 <span class="color-priority"></span>
                 
             </div>
-            <button type="button" class="btn-edit">
+            <button type="button" class="btn-edit" title="Editar tarea">
                 <img src="./assets/right-btn.png" alt="mostrar tarea completa" class="edit">
             </button>
         </div>
