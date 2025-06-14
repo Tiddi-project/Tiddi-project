@@ -14,6 +14,8 @@ create table tasks (
 )
 -- Esta columna guardará solo la ruta o nombre del archivo - no la imagen como tal
 ALTER TABLE users ADD COLUMN profile_picture VARCHAR(255);
+-- recordatorio en minutos para que aparezca la notificacion
+ALTER TABLE tasks ADD COLUMN reminder_min INT DEFAULT 0;
 
 -- TABLA DE USUARIOS
 create table users (
@@ -30,6 +32,8 @@ ALTER TABLE tasks ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCA
 
 -- prioridad en la tarea
 ALTER TABLE tasks ADD COLUMN priority ENUM('baja', 'media', 'alta') NOT NULL DEFAULT 'baja';
+
+
 
 -- creacion de tabla para subtareas
 CREATE TABLE subtasks (

@@ -33,11 +33,26 @@ const mUser = {
         let [results] = await db.query("SELECT * FROM users WHERE email = ?;",[email])
         return results
     },
-    updateUser: async (userId, imagen)=>{
-        console.log("--------Este es el modelo-------");
-        console.log(imagen);
-        // console.log(datos);
-        await db.execute("UPDATE users SET profile_picture= ? WHERE id = ?;", [imagen, userId ])
+    updateUser: async (userId, cambios)=>{
+         // Prepara dinámicamente la consulta
+        const campos = [];
+        const valores = [];
+        console.log(cambios);
+        for (const campo in cambios) {
+            campos.push(`${campo} = ?`);
+            valores.push(cambios[campo]);
+        }
+
+        valores.push(userId); // último valor: WHERE id = ?
+
+        const sql = `UPDATE users SET ${campos.join(', ')} WHERE id = ?`;
+
+        console.log("SQL:", sql);
+        console.log("Valores:", valores);
+
+        await db.execute(sql, valores);
+
+        // await db.execute("UPDATE users SET profile_picture= ? WHERE id = ?;", [imagen, userId ])
     },
     perfilUser: async (userId)=>{
         const add = "select * from users where id =?;"

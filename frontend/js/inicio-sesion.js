@@ -29,16 +29,16 @@ d.addEventListener("DOMContentLoaded", async (e)=>{
     d.addEventListener("click", (e)=>{
         if(e.target.matches(".eye-close")){
             d.querySelector(".eye-close").classList.toggle("eye-open")
-            // d.getElementById("password").setAttribute("type", "text")
-
             if (e.target.classList.contains("eye-open")) {
                 d.getElementById("password").setAttribute("type", "text")
             } else {
                 d.getElementById("password").setAttribute("type", "password")
             }
         }
-        // if(e.target.matches(".toastButton")){
-        //     toast("Toast active", $toastContainer)
-        // }
+        if(e.target.className === "enlace"){
+            console.dir(e.target.className);
+
+        }
+        
     })
 })

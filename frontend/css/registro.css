@@ -139,19 +139,33 @@ a{
 .registro-form h2{
     font-size: 3rem;
 }
+/* .nameRegistro,
+.emailRegistro, 
+.passwordUno, .passwordDos{ */
 .registro-form input{
-    width: 70%;
+    /* width: 70%; */
     height: 35px;
     padding-left: 2rem;
-    margin-top: 1.5rem;
     border: none;   
     background-color: var(--color-sesion);
     font-family: var(--font-size);
+    outline: none;
+    /* border: thin solid red ; */
 }
+.nameRegistro,
+.emailRegistro {
+    width: 70%;
+    margin-top: 1rem;
+    /* height: 35px; */
+} 
+/* .passwordUno, .passwordDos{
+
+} */
 .registro-form input[type="submit"]{
     width: 40%;
     height: 30px;
     padding: 0;
+    margin-top: 1rem;
     border-radius: 10px;
     border: none;
     background-color: var(--color-color-buttom);
@@ -177,6 +191,48 @@ a{
     color: #ff0000  ;
     margin-top: 0.5rem;
 }
+/* manejo de la visualizacion de contraseña */
+.password-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: 37px;
+    padding-right: 1rem;
+    margin-top: 1rem;
+    background-color: var(--color-sesion);
+}
+.password-container img {
+    width: 10%;
+    cursor: pointer;
+    object-fit: cover; /* recorta si es necesario */
+}
+.passwordUno, .passwordDos{
+    width: 90%;
+    /* height: 100%; */
+    /* padding-left: 1rem; */
+    border: none;   
+    background-color: transparent;
+    font-family: var(--font-size);
+    border: thin solid red ;
+}
+.eye-close, .eye-open {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 10%;           /* Puedes ajustar este tamaño según tu diseño */
+    height: 35px;         /* Debe tener altura para verse */
+    display: inline-block;
+    cursor: pointer;
+}
+.eye-close {
+    background-image: url("../assets/eye-closed-svgrepo-com.svg");
+}
+.eye-open {
+    background-image: url("../assets/eye-svgrepo-com.svg");
+
+}
+/*  */
 .registro-form input[type="submit"]:hover {
     font-weight: bold;
 } 

@@ -33,16 +33,23 @@
             <article class="registro-acceso">
                 <form class="registro-form">
                     <h2>Registro</h2>
-                    <input type="text" name="nameRegistro" placeholder="Nombre"  autofocus required >
+                    <input type="text" name="nameRegistro" class="nameRegistro" placeholder="Nombre"  autofocus required >
                     <span class="testFail nameSpan"></span>
 
-                    <input type="email" name="emailRegistro" placeholder="Correo electronico"  required >
+                    <input type="email" name="emailRegistro" class="emailRegistro" placeholder="Correo electronico"  required >
                     <span class="testFail emailSpan"></span>
 
-                    <input type="password" name="passwordRegistro" placeholder="Contraseña" required >
+                    <div class="password-container">
+                        <input type="password" class="passwordUno" name="passwordRegistro" placeholder="Contraseña" required >
+                        <span class="eye-close uno"></span>
+                    </div>
                     <span class="testFail passSpan"></span>
 
-                    <input type="password" name="passwordConfirm"  placeholder="Confirmar contraseña" required >
+
+                    <div class="password-container">
+                        <input type="password" class="passwordDos" name="passwordConfirm"  placeholder="Confirmar contraseña" required >
+                        <span class="eye-close dos"></span>
+                    </div>
                     <span class="testFail confirmSpan"></span>
 
                     <input id="registro" type="submit" value="Registrarse">

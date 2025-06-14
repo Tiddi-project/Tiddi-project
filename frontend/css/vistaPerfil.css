@@ -50,10 +50,24 @@
 }
 .fotoPerfil__seccion {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 70%;
     /* border: thin solid red; */
 }
+/*  */
+.fotoPerfil__mensajeAdvertencia{
+    display: none;
+    color: red;
+    margin-bottom: 1rem;
+}
+.fotoPerfil__nombreArchivo{
+    display: block;
+    margin-bottom: 1rem;
+
+}
+/*  */
 .fotoPerfil__upload {
     width: 200px;
     height: 30px;
@@ -124,7 +138,7 @@
     /* background-color: rgb(225, 225, 225); */
     height: 30px;
     padding-left: 1rem;
-    border: thin solid red   ;
+    /* border: thin solid red   ; */
 }
 /* ------------------------------------------------- seccion uno de form para nombre y correo */
 

@@ -16,6 +16,9 @@ const aTask = {
                 throw {status: res.status, message: res.statusText, dir:res}
             }
 
+            return data
+
+            /*
             // Filtramos solo las tareas que coincidan con la fecha
             const fechaCorta  = fecha.toLocaleDateString("sv-SE");
             let tareasDelDia = data.filter(task => {
@@ -23,7 +26,7 @@ const aTask = {
                 let fechaTarea = new Date(task.deadline).toLocaleDateString("sv-SE");
                 return fechaTarea === fechaCorta;
             });
-            // console.log(fechaCorta);
+            
 
             // 🧼 Limpiar el contenedor antes de renderizar
             option.$taskList.innerHTML = "";
@@ -33,10 +36,6 @@ const aTask = {
             }).length
             circleProgress(tareasCompletadas, tareasDelDia.length)
 
-            // console.log(`La fecha es: ${fechaCorta}
-            //             tareas completadas: ${tareasCompletadas}
-            //             total tareas en el dia: ${tareasDelDia.length}    
-            // `);
 
             // Restriccion en caso de no haber tareas relacionadas con el usuario
             if (tareasDelDia.length === 0) {
@@ -113,6 +112,7 @@ const aTask = {
                 clone.querySelector(".edit").dataset.deadline = toLocalDatetimeInputValue(task.deadline)
                 clone.querySelector(".edit").dataset.colorTarea = task.color
                 clone.querySelector(".edit").dataset.imagen = task.imagen_url
+                clone.querySelector(".edit").dataset.reminder = task.reminder_min || 0
                 clone.querySelector(".edit").dataset.subtask = JSON.stringify(task.subtasks)
 
                 // uniendo el formato
@@ -122,6 +122,7 @@ const aTask = {
 
             option.$taskList.appendChild(option.$fragment)
 
+            */
 
         } catch (error) {
             let message = error.statusText || "Se ha producido un error"
@@ -164,6 +165,7 @@ const aTask = {
             formData.append("title", form.titleTask.value);
             formData.append("description", form.descriptionTask.value);
             formData.append("deadline", form.fechaHora.value);
+            formData.append("reminder", form.reminder.value);
             formData.append("priority", form.priority.value);
             formData.append("completed", false);
             formData.append("color", form.colorTarea.value);
@@ -198,40 +200,25 @@ const aTask = {
         try {
             let idTask = form.id.value
             if (!idTask) throw { status: 400, message: "El ID de la tarea es obligatorio" }
-
+            
             // determinar el estado de la tarea (completed or uncompleted)
             let taskStatus = await fetch(`http://localhost:3000/task/${idTask}`, {
                 method: "GET",
                 credentials: "include"
-              })
+            })
             if(!taskStatus.ok) throw {status: taskStatus.status, message: taskStatus.statusText}
             let dataStatus = await taskStatus.json()
-            let isCompleted  = dataStatus.completed
-            
-            // Peticion para la edicion de la tarea
-            /*
-            let res = await fetch(`http://localhost:3000/edit/${idTask}`, {
-                method: "PUT",
-                credentials: "include",
-                headers: {"content-type": "application/json; charset=utf-8"},
-                body: JSON.stringify({
-                    title: form.titleTask.value,
-                    description: form.descriptionTask.value,
-                    completed:isCompleted,
-                    priority:form.priority.value,
-                    deadline: form.fechaHora.value,
-                    color: form.colorTarea.value,
-                    subtasks
-                })
-            })
-            */
+            console.log(dataStatus);
+            let isCompleted  = dataStatus.complete === 1? true:false;
+
             let formData = new FormData(); // tu formulario con inputs
             formData.append("title", form.titleTask.value)
             formData.append("description", form.descriptionTask.value)
-            formData.append("deadline", form.fechaHora.value)
             formData.append("priority", form.priority.value)
-            formData.append("completed",isCompleted)
+            formData.append("deadline", form.fechaHora.value)
             formData.append("color",form.colorTarea.value)
+            formData.append("reminder", form.reminder.value)
+            formData.append("completed",isCompleted.toString())
 
             // ingreso de subtareas
             let subtasks = []
@@ -251,7 +238,9 @@ const aTask = {
 
             if (form.imagen && form.imagen.files.length > 0) {
                 formData.append("imagen", form.imagen.files[0]);
-            } 
+            } else {
+                formData.append("imagen", form.imagen.dataset.imagen); // <-- clave
+            }
             let res = await fetch(`http://localhost:3000/edit/${idTask}`, {
                 method: "PUT",
                 credentials: "include",

@@ -21,5 +21,25 @@ d.addEventListener("DOMContentLoaded", (e)=>{
         aUser.signinUser($form, $toastContainer) 
         // window.location.reload()
     })
+    d.addEventListener("click", (e)=>{
+            if(e.target.matches(".eye-close.uno")){
+                d.querySelector(".uno").classList.toggle("eye-open")
+                if (e.target.classList.contains("eye-open")) {
+                    d.querySelector(".passwordUno").setAttribute("type", "text")
+                } else {
+                    d.querySelector(".passwordUno").setAttribute("type", "password")
+                }
+            }
+            if(e.target.matches(".eye-close.dos")){
+                console.log("funciona");
+                d.querySelector(".dos").classList.toggle("eye-open")
+
+                if (e.target.classList.contains("eye-open")) {
+                    d.querySelector(".passwordDos").setAttribute("type", "text")
+                } else {
+                    d.querySelector(".passwordDos").setAttribute("type", "password")
+                }
+            }
+        })
     
 })

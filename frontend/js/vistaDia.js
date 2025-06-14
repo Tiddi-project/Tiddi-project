@@ -1,8 +1,8 @@
 import checkbox from "./exports/checkbox.js"
 import allocation from "./exports/allocation.js"
-// import aUser from "../ajax/aUser.js"
 import aTask from "../ajax/aTask.js"
 import {diaAnterior, diaSiguiente} from './exports/funciones.js';
+import { getAndRenderTasks } from "./exports/renderizadoTareas.js";
 
 
 export async function initVistaDia() {
@@ -12,6 +12,9 @@ export async function initVistaDia() {
     const $contenedorDiaActual = d.querySelector(".diaActual")
     const $diaAnterior = d.querySelector(".diaAnterior")
     const $diaSiguiente = d.querySelector(".diaSiguiente")
+    const $btnFiltro = d.querySelector(".filtros")
+    const $filtroContenedor = d.querySelector(".filtros__contenedor")
+    const $filtroPrioridad = d.getElementById("filtro__prioridad")
     // package task ↓
     const panelTask = d.querySelector(".task-form")
     const $taskList = d.querySelector(".task-list")
@@ -31,11 +34,11 @@ export async function initVistaDia() {
         year:"numeric"
     })
 
-
     // Visualizacion de la fecha del dia
     $contenedorDiaActual.textContent = contenidoFechaAMostrar
 
-    aTask.getAll(FECHA,{
+
+    await getAndRenderTasks(FECHA, {
         $taskList,
         $taskContainer,
         $template,
@@ -52,8 +55,8 @@ export async function initVistaDia() {
             month: "long",
             year:"numeric"
         })
-        // aTask.viewCalendarMonth(FECHA, $calendario)
-        aTask.getAll(FECHA,{
+        
+        getAndRenderTasks(FECHA, {
             $taskList,
             $taskContainer,
             $template,
@@ -72,8 +75,8 @@ export async function initVistaDia() {
             month: "long",
             year:"numeric"
         })
-        // aTask.viewCalendarMonth(FECHA, $calendario)
-        aTask.getAll(FECHA,{
+        
+        getAndRenderTasks(FECHA, {
             $taskList,
             $taskContainer,
             $template,
@@ -88,11 +91,6 @@ export async function initVistaDia() {
     // Bienvenida con nombre de usuario
     aTask.usernameTitle(welcomeUser)
 
-    // Grafica de progreso
-    // let progress = await aTask.progressTasks()
-    // circleProgress($circle, $tCompleted, $tTotal,progress)
-
-
     // metodo AJAX
     // metodo PATCH para editar una sola propiedad en una tarea
     $taskList.addEventListener("change", async (e)=>{
@@ -102,7 +100,13 @@ export async function initVistaDia() {
             let statusChecked = e.target.checked
             
             await aTask.editChecked(idTask, statusChecked)
-            await aTask.getAll(FECHA,{
+            // await aTask.getAll(FECHA,{
+            //     $taskList,
+            //     $taskContainer,
+            //     $template,
+            //     $fragment
+            // })
+            getAndRenderTasks(FECHA, {
                 $taskList,
                 $taskContainer,
                 $template,
@@ -114,21 +118,59 @@ export async function initVistaDia() {
             let subtaskChecked = e.target.closest(".subtask-elements").querySelector(".subtask-item")
             let idSubtask = e.target.id.replace("s-", "");
             let statusChecked = e.target.checked
+            
             await aTask.completeSubtaskChecked(subtaskChecked, idSubtask, statusChecked)
+            getAndRenderTasks(FECHA, {
+                $taskList,
+                $taskContainer,
+                $template,
+                $fragment
+            })
             return
         }
+        getAndRenderTasks(FECHA, {
+                $taskList,
+                $taskContainer,
+                $template,
+                $fragment
+            })
     })
 
     // Bienvenida con nombre de usuario
-    aTask.usernameTitle(welcomeUser)
+    await aTask.usernameTitle(welcomeUser)
+
+    // Activacion de filtro
+    $btnFiltro.addEventListener("click", (e)=>{
+        $filtroContenedor.classList.toggle("filtroAtive")
+    })
+    $filtroPrioridad.addEventListener("change", (e)=>{
+        const prioridad = e.target.value
+        console.log(prioridad);
+        getAndRenderTasks(FECHA, {
+            $taskList,
+            $taskContainer,
+            $template,
+            $fragment
+        }, prioridad)
+        
+    })
     
     // funcion para renderizar la vista desde index
     //evento "tareasActualizadas"
     d.addEventListener("tareasActualizadas", async () => {
         console.log("La vista día se actualiza...");
-        await aTask.getAll(FECHA, { $taskList, $taskContainer, $template, $fragment });
+        // await aTask.getAll(FECHA, { $taskList, $taskContainer, $template, $fragment });
+        getAndRenderTasks(FECHA, {
+            $taskList,
+            $taskContainer,
+            $template,
+            $fragment
+        })
     });
 }
+
+
+
 // $taskList.addEventListener("click", async (e) => {
 //     if (e.target.matches(".checkbox")) {
 //         let taskContainer = e.target.closest(".task-container");
