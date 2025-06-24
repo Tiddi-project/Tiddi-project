@@ -2,7 +2,7 @@
 export default function toast(message, contenedor, status){
     const divElement = document.createElement("div")
     divElement.classList.add("toast")
-    if(status === 201){
+    if(status === 201 || status === 200){
 
         divElement.innerHTML = `
             <svg class="svgToast" xmlns="http://www.w3.org/2000/svg"

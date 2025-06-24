@@ -1,7 +1,7 @@
 import aTask from "../../ajax/aTask.js";
 import circleProgress from "./circleProgress.js";
 
-export async function getAndRenderTasks(fecha, opciones, prioridad="todos"){
+export async function getAndRenderTasks(fecha, opciones, prioridad="todos", estado="todos"){
     // Valores del ajax
     let resultadoAjax = await aTask.getAll()
 
@@ -13,14 +13,14 @@ export async function getAndRenderTasks(fecha, opciones, prioridad="todos"){
         return fechaTarea === fechaCorta;
     });
 
-    renderTasks(tareasDelDia, opciones, prioridad)
+    renderTasks(tareasDelDia, opciones, prioridad, estado)
     // Llamar a la función que actualiza el progreso visual
     circleProgress(tareasDelDia)
 
     
 }
 
-function renderTasks(tareasDelDia, option, filtroPrioridad){
+function renderTasks(tareasDelDia, option, filtroPrioridad, filtroEstado){
 
 
     // 🧼 Limpiar el contenedor antes de renderizar
@@ -44,9 +44,15 @@ function renderTasks(tareasDelDia, option, filtroPrioridad){
             return task.priority?.toLowerCase() === filtroPrioridad;
         });
     }
-
-
+    if (filtroEstado !== "todos") {
+        tareasDelDia = tareasDelDia.filter(task => {
+            if (filtroEstado === "enProceso") return task.complete === 0;
+            if (filtroEstado === "completados") return task.complete === 1;
+        });
+    }
+    // console.log(tareasDelDia);
     tareasDelDia.forEach((task, index) => {
+        // console.log(task);
         // tareasMap[task.task_id] = task;
         // creamos un clone de template
         let clone = document.importNode(option.$template, true)

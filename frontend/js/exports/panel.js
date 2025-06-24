@@ -4,27 +4,53 @@ export default function panelActive(panelTask, button){
     button.addEventListener("click",(e)=>{
         panelTask.classList.add("isActive")
         panelTask.querySelector(".add").textContent = "Agregar"
+
         // Limpiar campo oculto id al abrir para crear
         panelTask.querySelector('input[name="id"]').value = ""
+
+        // Limpiar las imagenes
+        panelTask.querySelector('.testTaskImageFail').style.display = "none"
+        panelTask.querySelector('#imagen').value = ""
+
+        // Limpiar las advertencias
+        panelTask.querySelector('.testTaskTitleFail').value = ""
+        panelTask.querySelector('.testTaskDescFail').value = ""
+        panelTask.querySelector('.testTaskImageFail').value = ""
+
+        // Limpiar subtareas al cancelar
+        const subtasksContainer = panelTask.querySelector(".subtask__container").querySelectorAll(".subtask-item"); 
+        subtasksContainer.forEach(subtask => {
+            subtask.remove()
+        });
+        // se resetea el formulario
+        panelTask.reset()
 
     })
 
     panelTask.querySelector(".button-cancel").addEventListener("click", (e)=>{
-         panelTask.classList.remove("isActive")
-            // permite que al hacer click en cancelar se elimine la imagen
-            panelTask.querySelector(".imagen-insertada").src = ""
-            panelTask.querySelector(".imagen-insertada").style.display = "none"
-            panelTask.querySelector(".btn-eliminar-imagen").style.display = "none"
-            // se resetea el formulario
-            panelTask.reset()
-            // Limpiar campo oculto id al abrir para crear
-            panelTask.querySelector('input[name="id"]').value = ""
-            panelTask.querySelector('.testTaskImageFail').style.display = "none"
-            // Limpiar subtareas al cancelar
-            const subtasksContainer = panelTask.querySelector(".subtask__container").querySelectorAll(".subtask-item"); 
-            subtasksContainer.forEach(subtask => {
-                subtask.remove()
-            });
+        panelTask.classList.remove("isActive")
+        // permite que al hacer click en cancelar se elimine la imagen
+        panelTask.querySelector(".imagen-insertada").src = ""
+        panelTask.querySelector(".imagen-insertada").style.display = "none"
+        panelTask.querySelector(".btn-eliminar-imagen").style.display = "none"
+        // Limpiar campo oculto id al abrir para crear
+        panelTask.querySelector('input[name="id"]').value = ""
+
+        // Limpiar las imagenes
+        panelTask.querySelector('.testTaskImageFail').style.display = "none"
+        panelTask.querySelector('#imagen').value = ""
+
+        // Limpiar las advertencias
+        panelTask.querySelector('.testTaskTitleFail').value = ""
+        panelTask.querySelector('.testTaskDescFail').value = ""
+        panelTask.querySelector('.testTaskImageFail').value = ""
+        // Limpiar subtareas al cancelar
+        const subtasksContainer = panelTask.querySelector(".subtask__container").querySelectorAll(".subtask-item"); 
+        subtasksContainer.forEach(subtask => {
+            subtask.remove()
+        });
+        // se resetea el formulario
+        panelTask.reset()
             
     })
 

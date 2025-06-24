@@ -1,7 +1,7 @@
 // toast para recordatorio
 function toastReminder(contenedor, titulo, fecha){
     const divElement = document.createElement("div")
-    divElement.classList.add("toast")
+    divElement.classList.add("toast__content")
     divElement.innerHTML = `
         <svg class="bell-shake" width="30" height="30" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@ function toastReminder(contenedor, titulo, fecha){
 
 
 
-export const aReminder = async () =>{
+export const aReminder = async (contenedorToast) =>{
     try {
        // Peticion
         let res = await fetch("http://localhost:3000/tasks",{
@@ -38,18 +38,11 @@ export const aReminder = async () =>{
             throw {status: res.status, message: res.statusText, dir:res}
         }
 
-        const contenedor = document.querySelector(".toast__reminder")
+        // const contenedor = document.querySelector(".toast__reminder")
         data.forEach(tarea => {
             // administrar las horas
+            // console.log(tarea.reminder_min);
             if(tarea.reminder_min > 0 ){
-                // 2025-06-11T16:57:00.000Z
-                // const fechaDeTarea = new Date(tarea.deadline)   // fecha programada
-                // const minRecordar = parseInt(tarea.reminder_min)    // minutos antes
-                // // Calcula fecha de alarma y diferencia de tiempo
-                // const fechaARecordar = new Date(fechaDeTarea.getTime() - minRecordar * 60000);
-                // const FechaATiemporReal = new Date();
-                // const msARecordar = fechaARecordar.getTime() - FechaATiemporReal.getTime();
-                
                 const fechaDeTarea = new Date(tarea.deadline);
                 const minRecordar = parseInt(tarea.reminder_min);
                 const fechaARecordar = new Date(fechaDeTarea.getTime() - minRecordar * 60000);
@@ -57,13 +50,13 @@ export const aReminder = async () =>{
                 const msARecordar = fechaARecordar - ahora
                 
                 
-                // ✅ Si la tarea ya venció o el recordatorio ya pasó, no hacer nada
+                // Si la tarea ya venció o el recordatorio ya pasó, no hacer nada
                 if (fechaDeTarea < ahora || msARecordar <= 0) {
                
                     return;
                 }
                 setTimeout(() => {
-                    toastReminder(contenedor, tarea.title, fechaDeTarea.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))
+                    toastReminder(contenedorToast, tarea.title, fechaDeTarea.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))
 
                     // Reproducir sonido
                     const sonido = new Audio("../assets/alarma-reminder.mp3");

@@ -24,11 +24,12 @@ main {
 }
 /* Estilos para el desplazamiento de fechas */
 .desplazarFecha{
+    position: relative;
     display: flex;
-    justify-content: center;
+    width: 604.578px;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 2rem;
-    /* align-self: flex-start; */
 }
 button {
     border: none;
@@ -43,6 +44,44 @@ button {
 .flecha:hover {
     color: black;
 }
+/* filtros */
+/*
+.filtros{
+    width: 30px;
+    height: 30px;
+}
+.filtros__contenedor{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    padding: 1rem;
+    font-size: 1.3rem;
+    background-color: white;
+    border-radius: 5px;
+}
+.filtros__contenedor-sub{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.filtros__contenedor-sub:nth-child(1){
+    margin-bottom: 1rem;
+}
+.filtros__contenedor select{
+    width: 70px;
+    text-align: center;
+    margin-left: 1rem;
+    border: none;
+    outline: none;
+}
+.filtroAtive{
+    display: block;
+}
+*/
+
+
 .mesActual{
     font-size: 2rem;
     color: rgb(0, 0, 0);
@@ -83,14 +122,10 @@ button {
     height: 80vh;
     width: 96%;
 }
-/* width: 96%;
-height: 80vh;
-display: grid;
-grid-template-columns: repeat(7, 1fr);
-gap: 0.5rem;
-padding: 0.3rem;
-background-color: white;
-overflow: hidden;  */
+.dia-actual{
+    background-color: #218625;
+    color: white;
+}
 .calendario__dia {
     position: relative;
     /* aspect-ratio: 1 / 1.3; */

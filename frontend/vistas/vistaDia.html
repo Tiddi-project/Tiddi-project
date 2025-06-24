@@ -35,13 +35,23 @@
 
     </button>
     <div class="filtros__contenedor">
-        <label for="filtro__prioridad">Prioridad</label>
-        <select name="filtroPrioridad" id="filtro__prioridad">
-            <option value="todos" selected>Todos</option>
-            <option value="baja">Bajo</option>
-            <option value="media">Medio</option>
-            <option value="alta">Alto</option>
-        </select>
+        <div class="filtros__contenedor-sub">
+            <label for="filtro__prioridad">Prioridad</label>
+            <select name="filtroPrioridad" id="filtro__prioridad">
+                <option value="todos" selected>Todos</option>
+                <option value="baja">Bajo</option>
+                <option value="media">Medio</option>
+                <option value="alta">Alto</option>
+            </select>
+        </div>
+        <div class="filtros__contenedor-sub">
+            <label for="filtro__estado">Estado</label>
+            <select name="filtroEstado" id="filtro__estado">
+                <option value="todos" selected>Todos</option>
+                <option value="enProceso">En proceso</option>
+                <option value="completados">Completados</option>
+            </select>
+        </div>
     </div>
 </section>
 

@@ -12,7 +12,8 @@ import routesCheck from "./routes/rAuth.js"
 import routesSubtask from "./routes/rSubtask.js"
 import {isAuthenticated} from "./middlewares/auth.js"
 import FileStore from "session-file-store"
-
+import comentarios from "./routes/rComentarios.js"
+import restablecer from "./routes/rRestablecer.js"
 
 // crear el servidor
 const app = express()
@@ -47,7 +48,7 @@ app.use(
     }),
     secret: "mi_llave",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
       httpOnly: true,
       secure: false,  // Cambia a 'true' en producción si usas HTTPS
@@ -58,6 +59,8 @@ app.use(
 );
 
 
+app.use(comentarios)
+app.use(restablecer)
 app.use(routesCheck)
 app.use(routesUser)
 app.use(isAuthenticated, routesTask)

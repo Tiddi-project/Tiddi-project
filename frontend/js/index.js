@@ -2,10 +2,7 @@ import { checkAuth } from "../ajax/auth.js"
 import aTask from "../ajax/aTask.js"
 import aUser from "../ajax/aUser.js"
 import subtask from "./exports/subtarea.js"
-// import checkbox from "./exports/checkbox.js"
-// import allocation from "./exports/allocation.js"
 import panelActive from "./exports/panel.js"
-// import circleProgress from "./exports/circleProgress.js"
 import conexion from "./exports/conexion.js"
 import aView from "../ajax/aViews.js"
 import { aReminder } from "../ajax/aReminder.js"
@@ -13,6 +10,7 @@ import validarTareas from "./exports/validacionTareas.js"
 
 const d = document
 const $logout = d.getElementById("logout")
+const $vistaAdmin = d.getElementById("li__admin")
 
 /*---- Variables para el panel de tareas ----*/
 const panelTask = d.querySelector(".task-form")
@@ -23,8 +21,6 @@ const $imagenbtn = d.querySelector(".img-btn")
 const $imagenInsertada = d.querySelector(".imagen-insertada")
 const $btnEliminarImagen = d.querySelector(".btn-eliminar-imagen")
 const $mensajeAdvertencia = d.querySelector(".testTaskImageFail")
-
-// const welcomeUser = d.querySelector(".title-main")
 
 /* --------sliderbar------------ */
 const logo = d.getElementById("logoT")
@@ -38,20 +34,16 @@ const nombreDeUsuarioSidebar = d.querySelector(".nombreUsuarioSidebar")
 
 /*------------subtareas------------------ */ 
 const $subtaskContainer = d.querySelector(".subtask__container")
-const $subtaskElement = d.querySelector(".subtask-elements")
 const $subtaskButton = d.querySelector(".subtask-button")
-const $removeSubtask = d.querySelector(".remove-subtask")
-const $tasks = d.querySelectorAll(".task")
 
 /*------------vistas------------------ */ 
 const $mainContent = d.querySelector(".main-content")
 const $enlacesVistas = d.querySelectorAll(".nav-item a")
 const $contenedorDinamico = d.getElementById("main-content")
+const $toastReminder = d.querySelector(".toast__reminder")
 
 // package task ↓
-const $taskList = d.querySelector(".task-list")
-const $taskContainer = d.querySelector(".task-container")
-
+let vistaActual
 /*
 const $template = d.querySelector("template").content
 const $fragment = d.createDocumentFragment()
@@ -70,6 +62,11 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
         window.location.href = "http://localhost:3000/inicio-sesion.html"; 
         return;
     }
+    if(user.role === "admin"){
+        $vistaAdmin.style.display = "flex"
+    }else{
+        $vistaAdmin.style.display = "none"
+    }
 
     // Funcion para identificar si el usuario se queda sin conexion internet
     conexion()
@@ -77,15 +74,16 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     //  Asignacion de la foto de perfil
     $fotoDePerfil.src = user.profile_picture || '../assets/foto-de-perfil.png';
 
-    // 🚨 Agrega esta línea para cargar la vista del día automáticamente:
+    // cargar la vista del día automáticamente:
     await aView($contenedorDinamico, "vistas/vistaDia.html");
+    vistaActual = "vistas/vistaDia.html";
     const enlaceInicial = d.querySelector('.nav-item a[data-vista="vistas/vistaDia.html"]');
     if (enlaceInicial) {
         enlaceInicial.classList.add("active");
     }
     
     // recordatorios
-    await aReminder()
+    aReminder($toastReminder)
 
     // Bienvenida con nombre de usuario
     await aTask.welcomeUser({ nombreDeUsuarioSidebar})
@@ -142,7 +140,7 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     })
 
     /*--------------------------------------------------------------------------Manejo de panel de tareas */
-    // permite la aparicion del panel de tareas
+    // permite que aparezca y desaparezca el panel de tareas mediante click
     panelActive(panelTask, $button) 
 
     // agregar subtareas en el panel de tareas
@@ -220,7 +218,7 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     })
     
     /*-----------------------------------------------------------------------------------Carga de vistas */
-    let vistaActual = null; // variable para guardar la vista activa
+    // let vistaActual = null; 
     // $enlacesVistas.forEach((enlace)=>{
     //     enlace.addEventListener("click",async (e)=>{
     //         const enlaceReal = e.target.closest("a"); // <-- siempre busca el <a>
@@ -231,33 +229,34 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     //         vistaActual = vista
     //     })
     // })
+    // let vistaActual = "vistas/vistaDia.html"; // variable para guardar la vista activa
 
     function setupListeners() {
         $enlacesVistas.forEach((enlace) => {
             enlace.addEventListener("click", async (e) => {
-            const enlaceReal = e.target.closest("a"); 
-            const vista = enlaceReal?.dataset.vista;
-            if (!vista) return;
-            
-            $enlacesVistas.forEach(el => el.classList.remove("active"));
-            enlaceReal.classList.add("active");
+                const enlaceReal = e.target.closest("a"); 
+                const vista = enlaceReal?.dataset.vista;
+                if (!vista) return;
+                
+                $enlacesVistas.forEach(el => el.classList.remove("active"));
+                enlaceReal.classList.add("active");
 
-            await aView($contenedorDinamico, vista);
-            vistaActual = vista; // Actualiza la variable global
+                await aView($contenedorDinamico, vista);
+                vistaActual = vista; // Actualiza la variable global
             });
         });
     }
 
     /*-----------------------------------------------------------------Funcionalidad de tareas */
     let validacionDeTareas = validarTareas($form)
-    // crear y edidtar tareas
+    // crear y editar tareas
     $form.addEventListener("submit", async (e)=>{
         e.preventDefault()
         if(validacionDeTareas){
             if($form.id.value === ""){
                 // metodo POST para agregar una tareas
                 await aTask.addTask($form) 
-                await aReminder();
+                aReminder($toastReminder);
                 // Luego de crear/editar/eliminar la tarea:
                 d.dispatchEvent(new CustomEvent("tareasActualizadas"));
      
@@ -267,7 +266,7 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
             else{
                 // metodo PUT para editar una tarea
                 await aTask.editTask($form)
-                await aReminder();
+                aReminder($toastReminder);
                 d.dispatchEvent(new CustomEvent("tareasActualizadas"));
                 panelTask.classList.remove("isActive")
                 $form.reset()     
@@ -280,17 +279,41 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
     // eliminar tareas
     d.addEventListener("click",async (e)=>{
         if(e.target.matches("#delete")){
-            let isConfirmed = confirm("¿Estas seguro de que deseas eliminar la tarea?")
-            if(isConfirmed){
-                await aTask.deleteTask($form)
-                d.dispatchEvent(new CustomEvent("tareasActualizadas"));
-                panelTask.classList.remove("isActive")     
-                $form.reset()     
-                
-            }else{
-                e.preventDefault()
-            }
+            $form.querySelector(".modalEliminacion").style.display = "flex"
         }
+        if(e.target.matches("#eliminacionAceptar")){
+            await aTask.deleteTask($form)
+            
+            console.log("eliminacion actualizada");
+            panelTask.classList.remove("isActive")  
+            $form.querySelector(".modalEliminacion").style.display = "none"
+            $form.reset()     
+
+            // Se activa la recarga de la vsta
+            d.dispatchEvent(new CustomEvent("tareasActualizadas"));
+        }else if(e.target.matches("#eliminacionCancelar")){
+            $form.querySelector(".modalEliminacion").style.display = "none"
+            e.preventDefault()
+        }
+        /*
+        console.log("se activa la eliminacion");
+        let isConfirmed = confirm("¿Estas seguro de que deseas eliminar la tarea?")
+        if(isConfirmed){
+            // Se activa el ajax
+            await aTask.deleteTask($form)
+
+            
+            console.log("eliminacion actualizada");
+            panelTask.classList.remove("isActive")     
+            $form.reset()     
+
+            // Se activa la recarga de la vsta
+            d.dispatchEvent(new CustomEvent("tareasActualizadas"));
+            
+        }else{
+            e.preventDefault()
+        }
+        */
     })
     // Funciona para el renderizado de las vistas
     d.addEventListener("tareasActualizadas", async () => {
@@ -298,9 +321,8 @@ d.addEventListener("DOMContentLoaded",async (e)=>{
             await aView($contenedorDinamico, vistaActual);
             console.log("Recargada vista actual:", vistaActual);
         } else {
-            console.log("vistaActual es null al actualizar tareas");
+            console.log("vistaActual es null al actualizar tareas",vistaActual );
         }
-        // await aView($contenedorDinamico, "vistas/vistaDia.html");
     });
     setupListeners();
 

@@ -1,0 +1,211 @@
+/* ------Parte 1 - Titulo------- */
+.title__users{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+    align-items: center;  
+}
+.title__users-h2{
+    font-size: 1.6rem;
+    color: #218625;
+}
+
+/* ------Parte 2 - Filtro para busqueda de usuario------- */
+.search__users{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.filter__users{
+    display: none;
+    width: 200px;
+    height: 100%;
+    margin-left: 2rem;
+    padding-left: 1rem;
+}
+.filter__users.filter__active{
+    display: block;
+
+}
+
+/* ------Parte 3 - visualizacion de tabla para usuarios registrados------- */
+.container__users{
+    width: 100%;
+    height: 80%; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* border: thin solid red; */
+}
+.table__users{
+    width: 100%;
+    /* border: thin solid red; */
+    font-size: 1.3rem;
+}
+.table__header{
+    color: #218625;
+    border-bottom: thin solid grey;
+}
+.table__header th{
+    text-align: start;
+    padding: 0.5rem;
+}
+.table__header th:last-child{
+    padding-left: 2.2rem;
+}
+.table__body tr{
+    border-bottom: thin solid grey;
+}
+.table__body td{
+    text-align: start;
+    padding: 0.5rem;
+}
+.page__users{
+    width: 100%;
+    height: 10%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: thin solid red; */
+}
+.total__users{
+    width: 20%;
+    height: 100%;
+    color: grey;
+    font-size: 1.3rem;
+    /* border: thin solid red; */
+
+}
+.paginacion{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-right: 7rem;
+    /* border: thin solid red; */
+
+}
+
+/* Modal para la edicion de los usuarios */
+.modal__users{
+    position: absolute;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.50);
+    width: 100%;
+    height: 100%;
+    display: none;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+.modal__users.modal__users-Active{
+    display: flex;
+}
+.modal__users-form{
+    width: 50%;
+    min-width: 450px;
+    height: 70%;
+    min-height: 310px;
+    background-color: white;
+}
+.modal__users-encabezado{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 3.5rem;
+    
+    background-color: #218625;
+    color: white;
+}
+.modal__users-titulo{
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+.modal__users-cuerpo{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    /* border: thin solid red; */
+}
+
+/* Informacion del modal */
+.modal__cuerpo{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+    /* border: thin solid red; */
+}
+.span__idUser,
+.span__nombreUser,
+.span__correoUser,
+.span__estadoUser,
+.span__rolUser{
+    background-color: rgb(233, 233, 233);
+    padding: 0.5rem;
+}
+.modal__users-piecero{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: start;
+    padding-right: 2rem;
+    /* border: thin solid red; */
+}
+.modal__users-piecero button[type="submit"]{
+    font-size: 1.2rem;
+    border-radius: 5px;
+    background-color: #aaf334;
+    padding: 1rem;
+    cursor: pointer;
+}
+.modal__users-piecero button[type="submit"]:hover {
+  background-color: #8ecb2a; 
+}
+.modal__users-piecero button[type="button"]{
+    font-size: 1.2rem;
+    border-radius: 5px;
+    color: rgb(71, 70, 70);
+    background-color: rgb(236, 236, 236);
+    padding: 1rem;
+    cursor: pointer;
+}
+.modal__users-piecero button[type="button"]:hover {
+  background-color: rgb(212, 212, 212);
+}
+/* ------------------------------------------------------------------------------------------- */
+.adminToast{
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    z-index: 999;
+}
+.toastAdmin{
+    position: relative;
+    z-index: 999;
+    width: 300px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+}
+.adminToast svg {
+    margin: 0 2rem 0 2rem;
+}

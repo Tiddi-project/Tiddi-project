@@ -1,0 +1,364 @@
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 2rem;
+    /* border: thin solid red; */
+}
+/* Estilos para el desplazamiento de fechas */
+.desplazarFecha{
+    position: relative;
+    display: flex;
+    /* width: 504.578px; */
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 2rem;
+    /* border: thin solid red; */
+    /* align-self: flex-start; */
+}
+button {
+    border: none;
+    margin: 0 1rem;
+    background-color: transparent;
+    cursor: pointer;
+}
+.flecha {
+    color: white;
+    background-color: grey;
+}
+.flecha:hover {
+    color: black;
+}
+/* filtros */
+
+.filtros{
+    width: 30px;
+    height: 30px;
+}
+.filtros__contenedor{
+    position: absolute;
+    right: 10rem;
+    top: 0;
+
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+    /* appearance: none; */
+    padding: 1rem;
+    font-size: 1.3rem;
+    background-color: white;
+    border-radius: 5px;
+}
+.filtros__contenedor-sub{
+    width: 100%;
+    /* border: thin solid red; */
+    display: flex;
+    justify-content: space-between;
+}
+.filtros__contenedor-sub:nth-child(1){
+    margin-bottom: 1rem;
+}
+.filtros__contenedor select{
+    width: 70px;
+    text-align: center;
+    margin-left: 1rem;
+    border: none;
+    outline: none;
+}
+.filtroAtive{
+    display: block;
+}
+
+/* ------------------------------------------------------ Listado de tareas */
+.contenedorDeTarea{
+    /* border: thin solid blue; */
+    width:80%;
+    min-width: 739.188px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+
+}
+.task-list {
+    grid-column: 1;
+    min-width: 375.594px;
+    height: 100%;
+    padding-top: 1rem;  
+    border-top: thin solid #b0b0b0;
+    overflow-y: auto;
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* border: thin solid red; */
+
+}
+.task-list::-webkit-scrollbar {
+    display: none;
+}
+/*--------------------------------------------------------- vista de tareas*/
+.task-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    border: thin solid rgb(211, 211, 211);
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    /* border: thin solid blue; */
+
+}
+.task-elements{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.task {
+    width: 80%;
+    padding-left: 1rem;
+    color: rgb(38, 50, 56);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} 
+.task .title{
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 0.5rem;
+    font-weight: normal;
+}
+/* .task p {
+    display: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 0.5rem;
+    color: rgb(38, 50, 56);
+} */
+.completed {
+    opacity: 0.5;
+}
+.btn-edit{
+   border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.color-priority{
+    width: 23px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    margin-left: 1.5rem;
+}
+.task-container img {
+    width: 2rem;
+}
+.mensaje {
+    font-size: 1.6rem;
+    color: rgb(65, 65, 65);
+
+}
+/*--------------------------------------------------------subtareas*/
+.subtask-elements{
+    width: 100%;
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1.5rem 0.5rem 1.5rem 1rem;
+    transition: width 0.5s ease;
+}
+.subtask-active{
+    display: flex;
+}
+.subtask-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center ;
+    padding-left: 2rem;
+    /* margin-top: 2rem; */
+    /* list-style: none; */
+}
+.subtask-item{
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.subtask-item-content {
+    margin-left: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(38, 50, 56);
+}
+/*--------------------------------------------------------- Barra de progreso*/
+.barraDeProgresoContenedor{
+    width: 100%;
+    min-width: 364.188px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: #16C47F; */
+    /* border: thin solid red; */
+}
+.barraDeProgreso {
+    grid-column: 2;
+    min-width: 322.547px;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px -1px rgb(0, 0, 0, 0.15),
+                -3px -3px 5px -1px rgb(0, 0, 0, 0.15);
+}
+.barraDeProgreso h2{
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.progress-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Animación suave */
+#progress-circle {
+    /* stroke-dasharray: 314; */
+    /* stroke-dashoffset: 160; */
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+.progress-text {
+    position: absolute;
+    top: 1;
+    left: 5;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    font-size: 20px;
+    font-weight: bold;
+    /* border: thin solid red; */
+
+}
+/*---------------------------------------------------- estilos en el checkbox task*/
+.checkbox {
+    appearance: none;
+}
+.checkbox + .newCheckbox::before {
+    content: "\2713";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 10px auto;
+    border: thin solid #878787;
+    /* border: thin solid #d3d3d3; */
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    color: transparent;
+    cursor: pointer;
+}
+.checkbox:checked +.newCheckbox::before {
+    border: thin solid #218625;;
+    /* border: thin solid red; */
+    color:  #218625;
+}
+/*---------------------------------------------------- estilos en el checkbox subtask*/
+.subtask-checkbox {
+    appearance: none;
+}
+.subtask-checkbox + .subtask-checkbox-label::before {
+    content: "\2713";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 10px auto;
+    border: thin solid #878787;
+    /* border: thin solid #d3d3d3; */
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    color: transparent;
+    cursor: pointer;
+}
+.subtask-checkbox:checked +.subtask-checkbox-label::before {
+    border: thin solid #218625;;
+    /* border: thin solid red; */
+    color:  #218625;
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+
+
+/* Para pantallas chicas un solo bloque vertical */
+@media (max-width: 900px) {
+    .contenedorDeTarea {
+        grid-template-columns: 1fr;
+        min-width: 300px;
+
+    }
+    .barraDeProgreso {
+        height: 100%;
+    }
+    .barraDeProgreso h2{
+        margin-bottom: 1rem;
+    }
+}
+/* Media Query para móvil */
+
+@media (max-width: 480px) {
+    main {
+        padding-left: 1rem;
+    }
+    
+    .desplazarFecha {
+        justify-content: space-between;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .contenedorDeTarea {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .barraDeProgreso {
+        min-width: 300px;
+        height: auto;
+        padding: 1rem 0;
+    }
+
+    .task {
+        width: 70%;
+    }
+
+    .task .title {
+        font-size: 1.3rem;
+    }
+
+    .filtros__contenedor {
+        font-size: 1.3rem;
+        padding: 0.5rem;
+    }
+}

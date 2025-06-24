@@ -123,13 +123,38 @@ export function obtenerRangoSemanal(fecha) {
 
     return `Semana del ${inicio} al ${fin}`;
 }
+
+// ------- Inicio de rangos de mes
+
+export function promedioMesAnterior(fecha) {
+    const anio = fecha.getFullYear();
+    const mes = fecha.getMonth();
+    return new Date(anio, mes - 1, 1); // Primer día del mes anterior
+}
+export function promedioMesSiguiente(fecha) {
+    const anio = fecha.getFullYear();
+    const mes = fecha.getMonth();
+    return new Date(anio, mes + 1, 1); // Primer día del mes siguiente
+}
+export function obtenerRangoMensual(fecha) {
+    return `Mes de ${fecha.toLocaleDateString("es-CO", { month: "long", year: "numeric" })}`;
+}
+
+// -------- Fin de rango de mes
 export function graficaProductividad (svgCirculo, datos){
     let totalTasks = datos.totalTareasEnLaSemana;
     let completedTasks = datos.totalTareasCompletadas;
     console.log(totalTasks);
     console.log(completedTasks);
     const circumference = 2 * Math.PI * 50; // Longitud total del círculo
-    let percent = (completedTasks / totalTasks) * 100;
+
+    let percent = 0;
+
+    if (totalTasks > 0) {
+        percent = (completedTasks / totalTasks) * 100;
+    }
+
+    // let percent = (completedTasks / totalTasks) * 100;
     let offset = circumference - (percent / 100) * circumference;
 
     svgCirculo.style.strokeDashoffset = offset;

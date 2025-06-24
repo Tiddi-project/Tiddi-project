@@ -6,9 +6,11 @@
     <title>Tiddi</title>
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/vistaDia.css">
     <link rel="stylesheet" href="./css/vistaMes.css">
     <link rel="stylesheet" href="./css/vistaPerfil.css">
     <link rel="stylesheet" href="./css/vistaEstadisticas.css">
+    <link rel="stylesheet" href="./css/vistaAdmin.css">
     <!-- <link rel="stylesheet" href="./css/slidebar.css"> -->
     <!-- Fuentes de google -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,6 +72,15 @@
                             <span class="span">Perfil</span>
                         </a>
                     </li>
+                    <li class="nav-item" title="Admim" id="li__admin">
+                        <a href="#" data-vista="vistas/vistaAdmin.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span class="span">Admin</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- Sección de perfil -->
@@ -80,32 +91,32 @@
                 <span class="nombre nombreUsuarioSidebar"></span>
 
                 <!-- Mini menu de perfil -->
+                <!-- TODO: Proximo a revision para mejorarlo semánticamente -->
+                <div id="perfilMenu" class="menu-perfil">
+                    <!-- <nav>
+                        <ul>
+                            <li class="nav-item">
+                                <a href="#" data-vista="vistas/vistaPerfil.html">
+                                    <img src="./assets/sidebar/usuario.png" alt="Icono" class="icono">
+                                    <span>Mi perfil</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav> -->
+                    <nav>
+                        <ul>
+                            <li class="nav-item">
+                                <a href="#">
+                                    <img src="./assets/sidebar/cerrar-sesion.png" alt="Icono" class="icono">
+                                    <span id="logout">Cerrar sesión</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> 
 
             </div>
 
-            <!-- TODO: Proximo a revision para mejorarlo semánticamente -->
-            <div id="perfilMenu" class="menu-perfil">
-                <!-- <nav>
-                    <ul>
-                        <li class="nav-item">
-                            <a href="#" data-vista="vistas/vistaPerfil.html">
-                                <img src="./assets/sidebar/usuario.png" alt="Icono" class="icono">
-                                <span>Mi perfil</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav> -->
-                <nav>
-                    <ul>
-                        <li class="nav-item">
-                            <a href="#">
-                                <img src="./assets/sidebar/cerrar-sesion.png" alt="Icono" class="icono">
-                                <span id="logout">Cerrar sesión</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div> 
 
         </aside>
         <!-- ---------------------------------------------------------------------VISTAS-->
@@ -164,9 +175,9 @@
             <div class="reminder-otions">
                 <label for="reminder">Recordar</label>
                 <select name="reminder" id="reminder" class="reminder">
-                    <option value="0">Ninguna</option>
+                    <option value="0" selected>Ninguna</option>
                     <option value="1">1 min</option>
-                    <option value="5" selected>5 min</option>
+                    <option value="5">5 min</option>
                     <option value="10">10 min</option>
                     <option value="15">15 min</option>
                     <option value="30">30 min</option>
@@ -218,9 +229,89 @@
                 <!-- Ingreso de las subtareas -->
             </div>
             <input type="hidden" name="id">
+
+
+            <div class="modalEliminacion">
+                <div class="eliminacionConfirmacion">
+                    <span>¿Esta seguro que desea eliminar la tarea?</span>
+                    <div class="eliminacionOpciones">
+                        <button type="button" id="eliminacionAceptar" class="elimanacionBoton">Aceptar</button>
+                        <button type="button" id="eliminacionCancelar" class="elimanacionBoton">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
         </form>
+        <div class="toast__reminder">
+            <!-- <div class="toast__content">Contenido del toast</div> -->
+        </div>
+        <!-- modal -->
+        <section class="modal__users">
+            <form class="modal__users-form">
+                <section class="modal__users-encabezado">
+                    <h2 class="modal__users-titulo"> Editar registro de usuario</h2>
+                </section>
+                <section class="modal__users-cuerpo">
+                    <section class="modal__cuerpo">
+                        <div class="modal__users-id">
+                            <span>ID</span>
+                            <span class="span__idUser"></span>
+                        </div>
+                        <div class="modal__users-rol">
+                            <span>Rol</span>
+                            <!-- <span class="span__rolUser"></span> -->
+                            <select name="rolUser" id="rolUser">
+                                <option value="admin">Admin</option>
+                                <option value="usuario">Usuario</option>
+                            </select>
+                        </div>
+                    </section>
+                    <section class="modal__cuerpo">
+                        <div class="modal__users-nombre">
+                            <span>Nombre</span>
+                            <span class="span__nombreUser"></span>
+                        </div>
+                        <div class="modal__users-estado">
+                            <span>Estado</span>
+                            <!-- <span class="span__estadoUser"></span> -->
+                            <select name="estadoUser" id="estadoUser">
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                            </select>
+                             <!-- <label class="switch">
+                                <input type="checkbox" name="estadoPerfil" id="estadoPerfil" checked>
+                                <span class="slider round"></span>
+                            </label> -->
+                        </div>
+                    </section>
+                    <section class="modal__cuerpo">
+                        <div class="modal__users-correo">
+                            <span>Correo</span>
+                            <span class="span__correoUser"></span>
+                        </div>
+                    </section>
+                    
+                </section>
+                <section class="modal__users-piecero">
+                    <button type="button" id="cancelarModalUser">Cancelar</button>
+                    <button type="submit" id="actualizarInfoUser">Actualizar</button>
+                </section>
+                
+            </form>
+        </section>
+        <div class="adminToast">
+            <!-- <div class="toast__content">Contenido del toast</div> -->
+        </div>
+        <section class="modal__desabilitarCuenta">
+            <div class="modal__desabilitarCuenta-ventana">
+                <span>¿Seguro que desea eliminar la cuenta?</span>
+                <div class="modal__desabilitarCuenta-opciones">
+                    <button type="button" class="desabilitarCuenta-aceptar">Aceptar</button>
+                    <button type="button" class="desabilitarCuenta-cancelar">Cancelar</button>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="toast__reminder"></div>
     <script src="./js/index.js" type="module"></script>
 </body>
 </html>

@@ -15,15 +15,12 @@ export async function initVistaDia() {
     const $btnFiltro = d.querySelector(".filtros")
     const $filtroContenedor = d.querySelector(".filtros__contenedor")
     const $filtroPrioridad = d.getElementById("filtro__prioridad")
+    const $filtroEstado = document.getElementById("filtro__estado");
     // package task ↓
-    const panelTask = d.querySelector(".task-form")
     const $taskList = d.querySelector(".task-list")
     const $taskContainer = d.querySelector(".task-container")
     const $template = d.querySelector("template").content
     const $fragment = d.createDocumentFragment()
-    const $circle = d.getElementById("progress-circle")
-    const $tCompleted = d.querySelector(".task-completed")
-    const $tTotal = d.querySelector(".task-total")
 
     // variables para el uso de fechas
     let FECHA = new Date()
@@ -37,13 +34,19 @@ export async function initVistaDia() {
     // Visualizacion de la fecha del dia
     $contenedorDiaActual.textContent = contenidoFechaAMostrar
 
+    // 1. Recuperar filtros guardados (al cargar la página o cambiar de fecha)
+    const prioridadGuardada = localStorage.getItem("filtroPrioridad") || "todos";
+    const estadoGuardado = localStorage.getItem("filtroEstado") || "todos";
 
+    // 2. Reflejar la selección en los filtros
+    $filtroPrioridad.value = prioridadGuardada;
+    $filtroEstado.value = estadoGuardado;
     await getAndRenderTasks(FECHA, {
         $taskList,
         $taskContainer,
         $template,
         $fragment
-    })
+    }, prioridadGuardada, estadoGuardado)
 
     // Si se le da click en el dia anterior
     $diaAnterior.addEventListener("click", (e)=>{
@@ -55,13 +58,14 @@ export async function initVistaDia() {
             month: "long",
             year:"numeric"
         })
-        
+        const prioridad = localStorage.getItem("filtroPrioridad") || "todos";
+        const estado = localStorage.getItem("filtroEstado") || "todos";
         getAndRenderTasks(FECHA, {
             $taskList,
             $taskContainer,
             $template,
             $fragment
-        })
+        }, prioridad, estado)
 
     })
 
@@ -76,12 +80,14 @@ export async function initVistaDia() {
             year:"numeric"
         })
         
+        const prioridad = localStorage.getItem("filtroPrioridad") || "todos";
+        const estado = localStorage.getItem("filtroEstado") || "todos";
         getAndRenderTasks(FECHA, {
             $taskList,
             $taskContainer,
             $template,
             $fragment
-        })
+        }, prioridad, estado)
 
     })
 
@@ -111,7 +117,7 @@ export async function initVistaDia() {
                 $taskContainer,
                 $template,
                 $fragment
-            })
+            }, prioridadGuardada, estadoGuardado)
             return
         }
         if (e.target.matches(".subtask-checkbox")) {
@@ -125,7 +131,7 @@ export async function initVistaDia() {
                 $taskContainer,
                 $template,
                 $fragment
-            })
+            }, prioridadGuardada, estadoGuardado)
             return
         }
         getAndRenderTasks(FECHA, {
@@ -133,7 +139,7 @@ export async function initVistaDia() {
                 $taskContainer,
                 $template,
                 $fragment
-            })
+            }, prioridadGuardada, estadoGuardado)
     })
 
     // Bienvenida con nombre de usuario
@@ -143,20 +149,41 @@ export async function initVistaDia() {
     $btnFiltro.addEventListener("click", (e)=>{
         $filtroContenedor.classList.toggle("filtroAtive")
     })
-    $filtroPrioridad.addEventListener("change", (e)=>{
-        const prioridad = e.target.value
-        console.log(prioridad);
+    // $filtroPrioridad.addEventListener("change", (e)=>{
+    //     const prioridad = e.target.value
+    //     console.log(prioridad);
+    //     getAndRenderTasks(FECHA, {
+    //         $taskList,
+    //         $taskContainer,
+    //         $template,
+    //         $fragment
+    //     }, prioridad)
+        
+    // })
+    
+    // funcion para renderizar la vista desde index
+    //evento "tareasActualizadas"
+    
+    function aplicarFiltros() {
+        const prioridad = $filtroPrioridad.value;
+        const estado = $filtroEstado.value;
+        // Guardar filtros
+        localStorage.setItem("filtroPrioridad", prioridad);
+        localStorage.setItem("filtroEstado", estado)
+
+        console.log("Prioridad:", prioridad, "Estado:", estado);
+
         getAndRenderTasks(FECHA, {
             $taskList,
             $taskContainer,
             $template,
             $fragment
-        }, prioridad)
-        
-    })
+        }, prioridad, estado);
+    }
+    $filtroPrioridad.addEventListener("change", aplicarFiltros);
+    $filtroEstado.addEventListener("change", aplicarFiltros);
     
-    // funcion para renderizar la vista desde index
-    //evento "tareasActualizadas"
+    
     d.addEventListener("tareasActualizadas", async () => {
         console.log("La vista día se actualiza...");
         // await aTask.getAll(FECHA, { $taskList, $taskContainer, $template, $fragment });
@@ -165,7 +192,7 @@ export async function initVistaDia() {
             $taskContainer,
             $template,
             $fragment
-        })
+        }, prioridadGuardada, estadoGuardado)
     });
 }
 

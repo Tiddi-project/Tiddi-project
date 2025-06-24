@@ -21,14 +21,17 @@ export  function calendario(contenedor, fecha, eventos){
             <h5></h5>
         </div>`;
     }
+  
 
     // Días del mes con eventos
     for (let i = 1; i <= totalDias; i++) {
-
+        
         // comparamos las fechas
         // const fechaComparar = new Date(anio, mes, i).toISOString().split('T')[0];
         const fechaComparar = new Date(anio, mes, i).toLocaleDateString("sv-SE");
-
+        const hoy = new Date().toLocaleDateString("sv-SE");
+        const esHoy = fechaComparar === hoy ? "dia-actual" : "";
+        
 
         // Filtramos los eventos del día
         const eventosDelDia =  eventos.filter(evento => {
@@ -69,7 +72,7 @@ export  function calendario(contenedor, fecha, eventos){
         contenedor.innerHTML += `
         <div class="calendario__dia">
             <div class="eventos">${eventosHTML}</div>
-            <h5>${i}</h5>
+            <h5 class="${esHoy}">${i}</h5>
         </div>`;
     }
 
@@ -100,11 +103,14 @@ export function calendarioPorSemana(contenedor, fecha, eventos){
 
     const hoy = new Date().toISOString().split("T")[0];
     console.log(hoy);
+
     diasSemana.forEach(dia=>{
-        // const fechaCorta = dia.split("T")[0]; // "2025-04-28"
         const fechaCorta = new Date(dia).toISOString().split("T")[0];
-        // const fechaCorta = new Date(dia).toLocaleDateString("sv-SE", { timeZone: "UTC" });
-        const esHoy = fechaCorta === hoy;
+        let diaNumero = new Date(fechaCorta).getDate()
+        let diaHoy = new Date(hoy).getDate()
+        
+        const esHoy = diaNumero === diaHoy;
+
         const eventosDelDia = eventos.filter((evento) => {
             // evento.deadline.startsWith(fechaCorta)
             if(!evento.deadline) return false;
@@ -251,5 +257,66 @@ export function tareasPorDiaSemana(contenedor, fecha, eventos, svg){
         
     })
     
+}
+
+export function tareasPorDiaDelMes(contenedor, fecha, eventos, svg) {
+  contenedor.innerHTML = "";
+  const $completadas = document.querySelector(".completadas__grafica-mes");
+  const $sinCompletar = document.querySelector(".sinCompletar__grafica-mes");
+  const $promedioMes = document.querySelector(".promedio__grafica-mes");
+  const $porcentaje = document.querySelector(".porcentaje__grafica-span-mes");
+
+  const anio = fecha.getFullYear();
+  const mes = fecha.getMonth();
+
+  let diasEnElMes = new Date(anio, mes + 1, 0).getDate();
+  let resumen = [];
+
+  for (let i = 1; i <= diasEnElMes; i++) {
+    let diaActual = new Date(anio, mes, i).toISOString().split("T")[0];
+
+    const eventosDelDia = eventos.filter(e => {
+      if (!e.deadline) return false;
+      let fechaEvento = new Date(e.deadline).toISOString().split("T")[0];
+      return fechaEvento === diaActual;
+    });
+
+    const completadas = eventosDelDia.filter(e => e.complete === 1).length;
+    const incompletas = eventosDelDia.filter(e => e.complete === 0).length;
+
+    resumen.push({
+      dia: i,
+      completadas,
+      incompletas,
+      total: completadas + incompletas
+    });
+  }
+
+  let totalComp = resumen.reduce((acc, dia) => acc + dia.completadas, 0);
+  let totalIncomp = resumen.reduce((acc, dia) => acc + dia.incompletas, 0);
+  let total = totalComp + totalIncomp;
+  let diasConTareas = resumen.filter(d => d.total > 0).length;
+
+  $completadas.textContent = totalComp;
+  $sinCompletar.textContent = totalIncomp;
+  $porcentaje.textContent = total > 0 ? `${((totalComp / total) * 100).toFixed(1)}%` : "0%";
+  $promedioMes.textContent = diasConTareas > 0 ? (totalComp / diasConTareas).toFixed(1) : "0";
+
+  let max = Math.max(...resumen.map(d => d.total), 1);
+
+  resumen.forEach(d => {
+    let altura = (d.total / max) * 100;
+    contenedor.innerHTML += `
+      <div class="tareasPorDiaContenedor">
+        <div class="CantidadTareas">${d.total}</div>
+        <div class="contenedor-barra">
+          <div class="barra-tarea" style="height: ${altura}%"></div>
+        </div>
+        <h5>${d.dia}</h5>
+      </div>
+    `;
+  });
+
+  graficaProductividad(svg, { totalTareasEnLaSemana: total, totalTareasCompletadas: totalComp });
 }
 

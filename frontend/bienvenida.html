@@ -125,13 +125,20 @@
                 </div>
             </article>
             <article class="contacto-formulario">
-                <form class="formulario" action="https://formsubmit.co/jcastilla65@hotmail.com" method="POST" target="_blank" >
+                <form class="formulario"  >
                     <legend class="formulario-titulo">Envíanos un mensaje</legend>
-                    <input type="text" name="nombre" placeholder="Nombre" title="Nombre solo permite letras y espacios" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
-                    <input type="email" name="pregunta-correo" placeholder="Correo" title="Correo incorrecto" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>
-                    <textarea name="pregunta-mensaje"  rows="8" cols="30" placeholder="Comentarios" data-pattern="^.{1,255}$" title="No puede exceder los 255 caracteres" required></textarea>
+                    <input type="text" name="nombreComentario" id="nombreComentario" placeholder="Nombre"  required>
+                    <span class="span__nombre"></span>
+
+                    <input type="email" name="correoComentario" id="correoComentario" placeholder="Correo"  required>
+                    <span class="span__correo"></span>
+
+
+                    <textarea name="mensajeComantario" id="mensajeComantario"  rows="8" cols="30" placeholder="Comentarios"  required></textarea>
+                    <span class="span__comentario"></span>
                     
-                    <input type="submit" value="Enviar">
+                    <!-- <input type="submit" value="Enviar"> -->
+                    <button type="submit">Enviar</button>
                 </form>
             </article>
         </section>
@@ -150,6 +157,8 @@
         </div>
         <div>COPYRIGHT ©2025 Tiddi.</div>
     </footer>
+    <div class="toast__contenedor">
+    </div>
     <script src="./js/bienvenida.js" type="module"></script>
 </body>
 </html>

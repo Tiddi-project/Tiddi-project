@@ -1,0 +1,162 @@
+:root{
+    --color-main: #93EB96;
+    --color-form:#59ED5E;
+    --color-footer: #BFE9A5;
+    /* --color-buttom:#FCCA4C; */
+    --color-color-buttom: #218625;
+    --color-tittle: #073509;
+    --color-sesion: #F0F0EC;
+    --font-size: "Inder";
+}
+/* Reseteo de propiedades por defecto */
+html{
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: var(--font-size);
+}
+*, *::after, *::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    /* outline: thin solid; */
+
+}
+body{
+    font-size: 1.6rem;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+a{
+    text-decoration: none;
+}
+
+/* ----------------------Inicio de los estilos de Tiddi---------------------------- */
+/* ----------------------------------------Tiddi header---------------------------- */
+.header{
+    position: fixed;
+    top: 0;
+    z-index: 998;
+    width: 100%;
+    height: 10vh;
+    transition: background-color 0.5s ease-in-out;
+}
+.header-nav{
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5rem;
+
+    align-items: center;
+}
+.nav-logo{
+    width: 120px;
+}
+.nav-items{
+    display: flex;
+    list-style-type: none;
+}
+.item-link{
+    margin-right: 4rem;
+    color: var(--color-tittle);
+    font-size: 2rem;
+    text-align: center;
+}
+.item-link:hover{
+    text-shadow: 0 0 1px #073509;
+}
+/*  */
+
+.contenedor__recuperacion{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+    background-color: var(--color-sesion);
+}
+.recuperacion {
+    width: 55%;
+    min-width: 611.250px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 35px;
+    background-color: white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+.recuperacion h2{
+    font-size: 2rem;
+    margin-bottom: 5rem ;
+}
+.form__reset{
+    /* border: thin solid red; */
+    width: 70%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form__reset input[type="password"]{
+    width: 50%;
+    height: 40px;
+    padding-left: 1rem;
+    background-color: rgb(240, 240, 240);
+    border: none;
+    outline: none;
+}
+.form__reset button[type="submit"]{
+    height: 35px;
+    padding: 1rem;
+    margin-top: 3rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-color-buttom);
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+/* --------------------------------------------------------- */
+.toastBox {
+    position: absolute;
+    z-index: 999;
+    left: 30%;
+    top: 15px;
+    
+}
+.toast {
+    position: relative;
+    width: 400px;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 500;
+    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    background-color: rgb(255, 255, 255);
+}
+.svgToast {
+    margin: 0 2rem 0 2rem;
+}
+.toast::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background-color: var(--color-color-buttom);
+    animation: anim 5s linear forwards;
+}
+@keyframes anim {
+    100% {
+        width: 0;
+    }
+}

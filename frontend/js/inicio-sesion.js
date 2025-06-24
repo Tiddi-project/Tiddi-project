@@ -16,12 +16,12 @@ d.addEventListener("DOMContentLoaded", async (e)=>{
     validacionInicioSesion($form)
     
     // ajax
-    d.addEventListener("submit", (e)=>{
+    d.addEventListener("submit", async (e)=>{
         e.preventDefault()
         if (e.target.matches(".acceso-form")) {
             // alert("el submit si esta funcionando")
             
-            aUser.loginUser($form, $toastContainer)
+            await aUser.loginUser($form, $toastContainer)
             // aUser.loginUser(e.target); // Pasar el formulario correcto
         }
     })

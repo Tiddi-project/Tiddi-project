@@ -1,72 +1,136 @@
 <span class="desempTitulo">Mi desempeño</span>
-<section class="desempEstadistica">
-    <!-- Tareas completadas por dia -->
-    <section class="desempEstadistica__uno">
-        <span class="desempEstadistica__uno-titulo">Tareas completadas por días</span>
-        <!-- Botones de desplazamiento -->
-        <div class="desplazarFecha desplazarFecha-promedio">
-            <button class="promedioSemanaAnterior">
-                <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-            </button>
-            <span class="promedioSemanaActual"></span>
-            <button class="promedioSemanaSiguiente">
-                <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-            </button>
-        </div>
-        <!--  -->
-        <div class="desempEstadistica__uno-grafica">
-        </div>
-        <div class="diaSemanaEstadisticaContenedor">
-            <div class="diaSemanaEstadistica"><h4>D</h4></div>
-            <div class="diaSemanaEstadistica"><h4>L</h4></div>
-            <div class="diaSemanaEstadistica"><h4>M</h4></div>
-            <div class="diaSemanaEstadistica"><h4>M</h4></div>
-            <div class="diaSemanaEstadistica"><h4>J</h4></div>
-            <div class="diaSemanaEstadistica"><h4>V</h4></div>
-            <div class="diaSemanaEstadistica"><h4>S</h4></div>
-        </div>
-    </section>
+<div class="desempEstadistica__tabs">
+    <button class="tab-semana active">Semana</button>
+    <button class="tab-mes">Mes</button>
+</div>
+<section class="desempEstadistica__contenedor">
+    <section class="desempEstadistica desempEstadistica--semana">
 
-    <!-- productividad total -->
-    <section class="desempEstadistica__dos">
+        <!-- Tareas completadas por dia -->
+        <section class="desempEstadistica__uno">
+            <span class="desempEstadistica__uno-titulo">Tareas completadas por días</span>
+            <!-- Botones de desplazamiento -->
+            <div class="desplazarFecha desplazarFecha-promedio">
+                <button class="promedioSemanaAnterior">
+                    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <span class="promedioSemanaActual"></span>
+                <button class="promedioSemanaSiguiente">
+                    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <!--  -->
+            <div class="desempEstadistica__uno-grafica-semana">
+            </div>
+            <div class="diaSemanaEstadisticaContenedor">
+                <div class="diaSemanaEstadistica"><h4>D</h4></div>
+                <div class="diaSemanaEstadistica"><h4>L</h4></div>
+                <div class="diaSemanaEstadistica"><h4>M</h4></div>
+                <div class="diaSemanaEstadistica"><h4>M</h4></div>
+                <div class="diaSemanaEstadistica"><h4>J</h4></div>
+                <div class="diaSemanaEstadistica"><h4>V</h4></div>
+                <div class="diaSemanaEstadistica"><h4>S</h4></div>
+            </div>
+        </section>
+
+        <!-- productividad total -->
+        <section class="desempEstadistica__dos">
+            <!-- Promedio de tareas completadas por dia -->
+            <div class="desempEstadistica__dos-porcentaje">
+                <span class="porcentaje__titulo">Porcentaje de productividad</span>
+                <div class="porcentaje__grafica">
+                    <svg class="svg" width="200" height="200" viewBox="0 0 120 120">
+                        <!-- Círculo de fondo -->
+                        <circle cx="60" cy="60" r="50" stroke="#ddd" stroke-width="10" fill="none"/>
+                        <!-- Círculo de progreso con animación -->
+                        <circle id="porcentaje__grafica-semana" cx="60" cy="60" r="50"
+                        stroke="#4caf50" stroke-width="10" fill="none"
+                        stroke-linecap="round"
+                        stroke-dasharray="314"
+                        stroke-dashoffset="314" />
+                    </svg>
+                    <span class="porcentaje__grafica-span"></span>
+                </div>
+            </div>
+
+            <!-- Total tareas completadas -->
+            <div class="desempEstadistica__dos-completadas">
+                <span class="completadas__titulo">Total tareas completadas</span>
+                <span class="completadas__grafica"></span>
+            </div>
+
+            <!-- Promedio de tareas sin completar por dia -->
+            <div class="desempEstadistica__dos-sinCompletar">
+                <span class="sinCompletar__titulo">Total de tareas sin completar</span>
+                <div class="sinCompletar__grafica"></div>
+            </div>
+        </section>
+
         <!-- Promedio de tareas completadas por dia -->
-        <div class="desempEstadistica__dos-porcentaje">
-            <span class="porcentaje__titulo">Porcentaje de productividad</span>
-            <div class="porcentaje__grafica">
-                <svg class="svg" width="200" height="200" viewBox="0 0 120 120">
-                    <!-- Círculo de fondo -->
+        <section class="desempEstadistica__tres">
+            <span class="desempEstadistica__tres-titulo">Promedio de tareas completadas por día</span>
+            <div class="desempEstadistica__tres-grafica"></div>
+        </section>
+    </section>
+    
+    <section class="desempEstadistica desempEstadistica--mes" >
+        
+        <div class="desempEstadistica__unoMes">
+            <span class="desempEstadistica__uno-titulo">Estadísticas del mes</span>
+            <div class="desplazarFecha desplazarFecha-promedio">
+                <button class="promedioMesAnterior">
+                    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <span class="promedioMesActual"></span>
+                <button class="promedioMesSiguiente">
+                    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <div class="desempEstadistica__uno-grafica-mes">
+            </div>
+
+        </div>
+
+        <div class="desempEstadistica__dos">
+            <div class="desempEstadistica__dos-porcentaje">
+                <span class="porcentaje__titulo">Porcentaje de productividad</span>
+                <div class="porcentaje__grafica">
+                    <svg class="svg" width="200" height="200" viewBox="0 0 120 120">
                     <circle cx="60" cy="60" r="50" stroke="#ddd" stroke-width="10" fill="none"/>
-                    <!-- Círculo de progreso con animación -->
-                    <circle id="porcentaje__grafica-semana" cx="60" cy="60" r="50"
-                    stroke="#4caf50" stroke-width="10" fill="none"
-                    stroke-linecap="round"
-                    stroke-dasharray="314"
-                    stroke-dashoffset="314" />
-                </svg>
-                <span class="porcentaje__grafica-span"></span>
+                    <circle id="porcentaje__grafica-mes" cx="60" cy="60" r="50"
+                            stroke="#4caf50" stroke-width="10" fill="none"
+                            stroke-linecap="round"
+                            stroke-dasharray="314"
+                            stroke-dashoffset="314" />
+                    </svg>
+                    <span class="porcentaje__grafica-span-mes"></span>
+                </div>
+            </div>
+
+            <div class="desempEstadistica__dos-completadas">
+                <span class="completadas__titulo">Total tareas completadas</span>
+                <span class="completadas__grafica-mes"></span>
+            </div>
+
+            <div class="desempEstadistica__dos-sinCompletar">
+            <span class="sinCompletar__titulo">Total tareas sin completar</span>
+            <div class="sinCompletar__grafica-mes"></div>
             </div>
         </div>
 
-        <!-- Total tareas completadas -->
-        <div class="desempEstadistica__dos-completadas">
-            <span class="completadas__titulo">Total tareas completadas</span>
-            <span class="completadas__grafica"></span>
-        </div>
-
-        <!-- Promedio de tareas sin completar por dia -->
-        <div class="desempEstadistica__dos-sinCompletar">
-            <span class="sinCompletar__titulo">Total de tareas sin completar</span>
-            <div class="sinCompletar__grafica"></div>
+        <div class="desempEstadistica__tres">
+            <span class="desempEstadistica__tres-titulo">Promedio de tareas completadas por día</span>
+            <div class="promedio__grafica-mes"></div>
         </div>
     </section>
+    
 
-    <!-- Promedio de tareas completadas por dia -->
-    <section class="desempEstadistica__tres">
-        <span class="desempEstadistica__tres-titulo">Promedio de tareas completadas por día</span>
-        <div class="desempEstadistica__tres-grafica"></div>
-    </section>
 </section>

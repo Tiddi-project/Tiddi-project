@@ -6,7 +6,7 @@ import upload from "../middlewares/multer.js"
 const routes = Router()
 /*------------------------------------------------------------------------creacion de tareas */
 // Mostrara la pagina principal
-routes.get("/tasks", cTask.getAll)  // complete para todas las tareas
+routes.get("/tasks", cTask.getAll)  // todas las tareas
 
 // Busqueda y creacion de tareas
 // routes.post("/task", cTask.addTask) // ruta sin el anexo de las imagenes

@@ -8,10 +8,18 @@
     font-weight: bold;
     color: #218625;
 }
-.desempEstadistica{
-    /* border: thin solid red; */
+
+.desempEstadistica__contenedor{
     width: 96%;
     height: 80%;
+    /* border: thin solid blue; */
+    
+}
+
+.desempEstadistica{
+    /* border: thin solid red; */
+    width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -19,6 +27,11 @@
     padding: 0.5rem;
     background-color: #f8f8f8;
 }
+.desempEstadistica--mes{
+    display: none;
+}
+
+
 /* -------------------------------------------------------------Tareas completadas por semana */
 .desempEstadistica__uno{
     display: flex;
@@ -37,7 +50,7 @@
     font-weight: bold;
 
 }
-.desempEstadistica__uno-grafica {
+.desempEstadistica__uno-grafica-semana {
     width: 90%;
     height: 70%;
     display: grid;
@@ -80,7 +93,8 @@
 .diaSemanaEstadistica{
     text-align: center;
 }
-.promedioSemanaActual {
+.promedioSemanaActual,
+.promedioMesActual {
     font-size: 1.3rem;
 }
 .desplazarFecha-promedio{
@@ -132,7 +146,7 @@
 .porcentaje__grafica-span{
     position:absolute;
     right: 1;
-    font-size: 4rem;
+    font-size: 3.5rem;
 }
 /* total de tareas completadas por dia */
 .desempEstadistica__dos-completadas {
@@ -223,6 +237,41 @@
 
 }
 
+/* ------------------------------------------------ seccion del mes */
+.desempEstadistica__unoMes{
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 10px;
+    background-color: white;
+
+}
+
+.desempEstadistica__uno-grafica-mes{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    gap: 0.8rem;
+    padding: 0.5rem;
+
+}
+.completadas__grafica-mes,
+.sinCompletar__grafica-mes,
+.promedio__grafica-mes{
+    font-size: 7rem;
+    color: rgb(33, 134, 37);
+}
+.porcentaje__grafica-span-mes{
+    position:absolute;
+    right: 1;
+    font-size: 3.5rem;
+}
 
 /* Tablet: cambia a una sola columna pero mantiene proporciones */
 @media screen and (max-width: 1024px) {
@@ -294,3 +343,26 @@
 }
 }
   
+
+/* ------------------------------------Nuevo */
+.desempEstadistica__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.desempEstadistica__tabs button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.desempEstadistica__tabs button.active {
+  background-color: #4caf50;
+  color: white;
+} 

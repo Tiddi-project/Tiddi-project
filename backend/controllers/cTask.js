@@ -164,6 +164,8 @@ const cTask = {
             const userId = req.session.user.id
             let {id} = req.params
             await mTask.deleteTask({id, userId})
+
+            return res.status(201).json({ message: "Tarea eliminada correctamente" });
         } catch (err) {
             error.e400(err, req, res)
         }

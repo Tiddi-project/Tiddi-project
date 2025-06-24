@@ -1,4 +1,5 @@
 import aUser from "../ajax/aUser.js"
+import { checkAuth } from "../ajax/auth.js"
 
 export async function initVistaPerfil() {
     const d = document
@@ -9,10 +10,13 @@ export async function initVistaPerfil() {
     const $formularioPerfil = d.querySelector(".perfilForm")
     const $mensajeAdvertencia = d.querySelector(".fotoPerfil__mensajeAdvertencia")
     const $nombreImagen = d.querySelector(".fotoPerfil__nombreArchivo")
+    const $fotoDePerfil = d.querySelector(".fotoDePerfil")
+    const $modalEliminacion = d.querySelector(".modal__desabilitarCuenta")
+
 
     // peticion para la asignacion de valores
     let datosDeUsuario = await aUser.perfilUser()
-
+    console.log(datosDeUsuario);
     // Asignacion de valores en los inputs
     if(!datosDeUsuario) return
     $formularioPerfil.nombrePerfil.value = datosDeUsuario.name
@@ -116,5 +120,25 @@ export async function initVistaPerfil() {
         }
 
         await aUser.updateUser(datosDeUsuario, $formularioPerfil)
+        
+        const user = await checkAuth();         
+        $fotoDePerfil.src = user.profile_picture || '../assets/foto-de-perfil.png';
+    })
+    d.addEventListener("click", async (e)=>{
+        if(e.target.closest(".informacionPersonal__btn")){
+            $modalEliminacion.classList.add("desabilitarCuentaActive")
+        }
+        if(e.target.closest(".desabilitarCuenta-cancelar")){
+            $modalEliminacion.classList.remove("desabilitarCuentaActive")
+        }
+        if(e.target.closest(".desabilitarCuenta-aceptar")){
+            await aUser.desabilitarCuenta(datosDeUsuario)
+            $modalEliminacion.classList.remove("desabilitarCuentaActive")
+            // let estado = await checkAuth()
+            // if(estado.status === "inactivo"){
+                //     return
+                // }
+            window.location.href = "http://localhost:3000/inicio-sesion.html"; 
+        }
     })
 }

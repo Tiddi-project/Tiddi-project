@@ -14,6 +14,10 @@ create table tasks (
 )
 -- Esta columna guardará solo la ruta o nombre del archivo - no la imagen como tal
 ALTER TABLE users ADD COLUMN profile_picture VARCHAR(255);
+ALTER TABLE users ADD COLUMN reset_token VARCHAR(255);
+ALTER TABLE users ADD COLUMN reset_token_expires DATETIME;
+ALTER TABLE users ADD COLUMN role ENUM('admin', 'usuario') DEFAULT 'usuario';
+ALTER TABLE users ADD COLUMN status ENUM('activo', 'inactivo') DEFAULT 'activo';
 -- recordatorio en minutos para que aparezca la notificacion
 ALTER TABLE tasks ADD COLUMN reminder_min INT DEFAULT 0;
 
