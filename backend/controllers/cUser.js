@@ -20,7 +20,7 @@ const cUser = {
     getUser: async (req, res)=>{
         try {
             let results = await mUser.oneUser()
-            res.json(results)
+            res.status(201).json(results)
         } catch (err) {
             error.e500(err, req, res)
         }
@@ -40,6 +40,11 @@ const cUser = {
             }
 
             let user = results[0]
+
+            // Verificar si el usuario está inactivo
+            if (user.status === "inactivo") {
+                return res.status(403).json({ message: "Tu cuenta está desactivada. Contacta al administrador." });
+            }
             let isMatch = await bcrypt.compare(password, user.password)
 
             if(!isMatch){
@@ -127,12 +132,96 @@ const cUser = {
             }
             console.log(cambios);
             await mUser.updateUser(userId, cambios)
-            res.status(200).json({status : true, message: "Perfil actualizado"})
+            // 🔥 ACTUALIZA LA SESIÓN CON LOS NUEVOS DATOS
+            if (cambios.name) req.session.user.name = cambios.name;
+            if (cambios.profile_picture) req.session.user.profile_picture = cambios.profile_picture;
+
+            req.session.save((err) => {
+                if (err) {
+                    console.error("Error al guardar la sesión:", err);
+                    return res.status(500).json({ message: "Error al actualizar sesión" });
+                }
+                return res.status(200).json({ status: true, message: "Perfil actualizado" });
+            });
+
+            // res.status(200).json({status : true, message: "Perfil actualizado"})
             
         } catch (err) {
             error.e500(err, req, res)
         }
     },
+    adminUpdate: async (req, res)=>{
+        try {
+            if(!req.session.user){
+                return res.status(401).json({ message: "No has iniciado sesión" });
+            }
+            console.log(req.body);
+            
+            const userId = req.session.user.id
+            const { id, estado, rol } = req.body;
+            
+            let resultado = await mUser.adminUpdate({ id, estado, rol })
+
+            if (resultado.affectedRows === 0) {
+                return res.status(404).json({ message: "Usuario no encontrado" });
+            }
+            return res.status(200).json({ message: "Usuario actualizado correctamente" });
+        } catch (err) {
+            error.e500(err, req, res)
+        }
+    },
+    disableAccount: async (req, res)=>{
+        try {
+            if(!req.session.user){
+                return res.status(401).json({ message: "No has iniciado sesión" });
+            }
+            console.log(req.body);
+            
+            const userId = req.session.user.id
+            const {estado} = req.body;
+            
+            await mUser.disableAccount(userId, estado)
+            // 🧼 Destruir la sesión para cerrar el acceso inmediatamente
+            req.session.destroy((err) => {
+                if (err) {
+                    return res.status(500).json({ message: "Error al cerrar la sesión" });
+                }
+
+                res.clearCookie("connect.sid"); // 🍪 Borra la cookie de sesión (si estás usando session-file-store)
+                return res.status(200).json({ message: "Cuenta desactivada y sesión cerrada" });
+            });
+
+            // return res.status(200).json({ message: "Usuario desabilitado correctamente" });
+        } catch (err) {
+            error.e500(err, req, res)
+        }
+    },
+    // recuperationUser: async (req, res)=>{
+    //     try {
+    //         let {correoUsuario} = req.body
+    //         const {user, token} = await mUser.recuperationUser(correoUsuario)
+
+    //         if (!user) {
+    //             let err = {status: 401,  message: `El usuario no fue encontrado en la BD`,
+    //             };
+    //             return error.e401(err, req, res);
+    //         }
+    //         const link = `http://localhost:3000/reestablecer.html?token=${token}`
+
+    //         // Envías el correo con el enlace
+    //         await sendEmail({
+    //             to: correoUsuario,
+    //             subject: "Recuperación de contraseña - TiDDi",
+    //             html: `<p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+    //                 <a href="${link}">${link}</a>`
+    //         })
+
+    //         res.json({ success: true, message: "Correo de recuperación enviado" })
+            
+    //     } catch (err) {
+    //         error.e500(err, req, res);
+    //     }
+    // }
 }
 
 export default cUser;

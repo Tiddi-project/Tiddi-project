@@ -14,9 +14,7 @@ export const checkAuth = async () =>{
         } else {
             return null;
         }
-        return data
-
-        
+          
     } catch (error) {
         let message = error.statusText || "Ha ocurrido un error"
         console.log(`Error: ${error.status}: ${message}`);

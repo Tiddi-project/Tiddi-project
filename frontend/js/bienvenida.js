@@ -1,13 +1,28 @@
+import { comment } from "../ajax/aComment.js"
 import conexion from "./exports/conexion.js"
 import barraNavegacion from "./exports/scroll-index.js"
+import validacionComentarios from "./exports/validacionComentario.js"
 
-const d = document,
-w = window,
-n = navigator
+const d = document
+const $formulario = d.querySelector(".formulario")
+const $toastContenedor = d.querySelector(".toast__contenedor")
+
 
 d.addEventListener("DOMContentLoaded", (e)=>{
     barraNavegacion(".header")
     conexion()
+
+    // Validacion de formulario para comentarios
+    let validacion = validacionComentarios($formulario)
+    $formulario.addEventListener("submit", async (e)=>{
+      e.preventDefault()
+      if(validacion()){
+        await comment($formulario, $toastContenedor)
+      }else{
+        return
+      }
+    })
+    
 })
 
 // Carrusel

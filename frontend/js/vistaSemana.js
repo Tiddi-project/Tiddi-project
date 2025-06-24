@@ -8,19 +8,20 @@ export async function initVistaSemana() {
     const $ContenedorSemanal = d.getElementById("semana")
     const $semanaAnterior = d.querySelector(".semanaAnterior")
     const $semanaSiguiente= d.querySelector(".semanaSiguiente")
+
+    // Variable para la fecha del dia
     let FECHA = new Date()
     let fechaActual = FECHA.toLocaleDateString("co-Co",{
         year: "numeric",
         month: "long"
     })
 
-
+    // Asignacion del contenedor con la fecha
     let semana = obtenerRangoSemanal(FECHA)
     $visualizacionFechaSemana.textContent = semana
 
+    // Trae las tareas de la semana correspondiente
     await aTask.viewCalendarWeek(FECHA, $ContenedorSemanal)
-
-
 
     // Si se le da click en la semana anterior
     $semanaAnterior.addEventListener("click", async (e)=>{
@@ -31,7 +32,6 @@ export async function initVistaSemana() {
     })
 
     // Si se le da click en la semana siguiente
-
     $semanaSiguiente.addEventListener("click", async (e)=>{
         FECHA = semanaSiguiente(FECHA)
 

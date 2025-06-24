@@ -1,4 +1,4 @@
-import { calendario, calendarioPorSemana, tareasPorDiaSemana } from "../js/exports/calendario.js";
+import { calendario, calendarioPorSemana, tareasPorDiaSemana, tareasPorDiaDelMes } from "../js/exports/calendario.js";
 import circleProgress from "../js/exports/circleProgress.js";
 
 const aTask = {
@@ -267,8 +267,9 @@ const aTask = {
                 credentials: "include"
             })
 
-            let data = res.json()
             if(!res.ok) throw {status: res.status, message: res.statusText}
+            let data = await res.json()
+            return data
         } catch (error) {
             let message = error.message || "Ha ocurrido un error en la eliminación"
             console.log(`Error ${error.status}: ${message}`);
@@ -455,7 +456,25 @@ const aTask = {
             <p> No se encontro el contenido solicitado  </p>
             `
         }
+    },
+    taskForMonth: async (fecha, contenedor, svg) => {
+        try {
+            let res = await fetch("http://localhost:3000/tasks", {
+            method: "GET",
+            credentials: "include"
+            });
+
+            if (!res.ok) throw { status: res.status, message: res.statusText };
+
+            let data = await res.json();
+            // console.log(data);
+            tareasPorDiaDelMes(contenedor, fecha, data, svg);
+        } catch (error) {
+            let message = error.statusText || "Se ha producido un error";
+            contenedor.innerHTML = `<h3>Error: ${message}</h3>`;
+        }
     }
+
 
 }
 

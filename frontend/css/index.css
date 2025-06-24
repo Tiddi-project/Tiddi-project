@@ -9,11 +9,13 @@ html {
     /* outline: thin solid; */
 }
 body{
+    /* position: relative; */
     width: 100%;   
     height: 100vh;
     overflow-x: hidden;
     background-color: #f8f8f8;
     /* border: thin solid red; */
+
 }
 body button {
     cursor: pointer;
@@ -22,6 +24,7 @@ body button:active {
     transform: scale(0.95);
 }
 .container-main {
+    position: relative;
     /* border: thin solid red; */
     width: 100%;
     min-width: 60%;
@@ -32,6 +35,7 @@ body button:active {
     background: transparent;
 }
 .main-content {
+    /* position: relative; */
     width: 100%;
     height: 100vh;
     padding-top: 2rem;
@@ -41,6 +45,7 @@ body button:active {
     /* border: thin solid red; */
 
 }
+
 .main-content-reduce {
     margin-left: 120px;
 
@@ -188,7 +193,7 @@ body button:active {
     color: white;
 }
 .ul-2 {
-    margin-top: 5rem;
+    margin-top: 3rem;
 }
 .nav svg{
     min-width: 40px; 
@@ -266,8 +271,10 @@ body button:active {
 .menu-perfil {
     position: absolute;
     z-index: 999;
-    left: 70%;
-    bottom: 13%;
+    /* left: 70%;
+    bottom: 13%; */
+    /* left: 100%;
+    bottom: 9rem; */
     width: 150px;
     display: none;
     padding: 10px 10px 0 10px;
@@ -649,88 +656,96 @@ body button:active {
     background-color: transparent;
     cursor: pointer;
 }
+/* ----------------------------------------ventana modal------------------------------------------ */
+.modalEliminacion{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.60);
+}
+.eliminacionConfirmacion{
+    width: 85%;
+    height: 30%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: white;
+}
+.eliminacionConfirmacion span{
+    width: 90%;
+    font-size: 1.2rem;
+    text-align: center;
+    
+}
+.eliminacionOpciones{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.elimanacionBoton{
+    width: 40%;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #218625;
+}
+.elimanacionBoton:hover{
+    background-color: #6dc570;
+
+}
 /* ------------------------------------------------------ Listado de tareas */
+/*
 .contenedorDeTarea{
-    /* border: thin solid blue; */
     width:100%;
     height: 100%;
     display: grid;
     grid-template-columns: 40% 60%;
     grid-template-rows: 1fr;
-
 }
 .task-list {
     grid-column: 1;
     min-width: 375.594px;
-    /* min-width: 440px; */
     height: 100%;
     padding-top: 1rem;  
     border-top: thin solid #b0b0b0;
     overflow-y: auto;
-    scrollbar-width: none;  /* Firefox */
+    scrollbar-width: none;  
     -ms-overflow-style: none;
-    /* border: thin solid red; */
-
 }
 .task-list::-webkit-scrollbar {
     display: none;
 }
-/*--------------------------------------------------------- filtro de tareas*/
-
-.filtros{
-    width: 30px;
-    height: 30px;
-}
-.filtros__contenedor{
-    display: none;
-    appearance: none;
-    padding: 1rem;
-    font-size: 1.3rem;
-    background-color: white;
-    /* border: thin solid red; */
-    border-radius: 5px;
-}
-.filtros__contenedor select{
-    width: 70px;
-    text-align: center;
-    margin-left: 1rem;
-    border: none;
-    outline: none;
-}
-.filtroAtive{
-    display: block;
-    /* appearance: auto; */
-}
-/* .filtros__contenedor select:active{
-    border: none;
-} */
+/*
 /*--------------------------------------------------------- vista de tareas*/
+/*
 .task-container {
     width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* padding: 1rem 0.5rem 1rem 1rem; */
     padding-left: 1rem;
     margin-top: 1rem;
     font-size: 1.3rem;
     border: thin solid rgb(211, 211, 211);
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    /* border: thin solid blue; */
-
 }
 .task-elements{
     width: 100%;
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
-    /* padding: 1.5rem 0.5rem 1.5rem 1rem; */
 }
 .task {
-    /* width: 90%; */
     width: 80%;
     padding-left: 1rem;
     color: rgb(38, 50, 56);
@@ -747,6 +762,7 @@ body button:active {
     margin-right: 0.5rem;
     font-weight: normal;
 }
+    */
 /* .task p {
     display: none;
     overflow: hidden;
@@ -755,15 +771,13 @@ body button:active {
     padding-right: 0.5rem;
     color: rgb(38, 50, 56);
 } */
+/*
 .completed {
-    /* background-color: #ccc; */
     opacity: 0.5;
-    /* text-decoration: line-through; */
 }
 .btn-edit{
    border: none;
     background-color: transparent;
-    /* border: thin solid red; */
     cursor: pointer;
 }
 .color-priority{
@@ -781,11 +795,12 @@ body button:active {
     color: rgb(65, 65, 65);
 
 }
+*/
 /*--------------------------------------------------------subtareas*/
+/*
 .subtask-elements{
     width: 100%;
     display: none;
-    /* flex-direction: column; */
     justify-content: flex-start;
     align-items: center;
     padding: 1.5rem 0.5rem 1.5rem 1rem;
@@ -801,8 +816,6 @@ body button:active {
     align-items: flex-start;
     justify-content: center ;
     padding-left: 2rem;
-    /* margin-top: 2rem; */
-    /* list-style: none; */
 }
 .subtask-item{
     width: 100%;
@@ -810,7 +823,6 @@ body button:active {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    /* border: thin solid red;   */
 }
 .subtask-item-content {
     margin-left: 1rem;
@@ -818,16 +830,14 @@ body button:active {
     white-space: nowrap;
     text-overflow: ellipsis;
     color: rgb(38, 50, 56);
-}
+}*/
 /*--------------------------------------------------------- Barra de progreso*/
+/*
 .barraDeProgresoContenedor{
-    /* width: 100%; */
     min-width: 460px;
     height: 100%;
     display: flex;
     justify-content: center;
-    /* background-color: #16C47F; */
-    /* border: thin solid red; */
 }
 .barraDeProgreso {
     grid-column: 2;
@@ -853,26 +863,21 @@ body button:active {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+}*/
 /* Animación suave */
+/*
 #progress-circle {
-    /* stroke-dasharray: 314; */
-    /* stroke-dashoffset: 160; */
     transition: stroke-dashoffset 1s ease-in-out;
 }
 .progress-text {
     position: absolute;
     top: 1;
     left: 5;
-    /* top: 50%;
-    left: 50%; */
-    /* transform: translate(-50%, -50%); */
     font-size: 20px;
     font-weight: bold;
-    /* border: thin solid red; */
-
-}
+}*/
 /*---------------------------------------------------- estilos en el checkbox task*/
+/*
 .checkbox {
     appearance: none;
 }
@@ -883,7 +888,6 @@ body button:active {
     height: 16px;
     margin: 10px auto;
     border: thin solid #878787;
-    /* border: thin solid #d3d3d3; */
     border-radius: 50%;
     text-align: center;
     line-height: 16px;
@@ -892,7 +896,6 @@ body button:active {
 }
 .checkbox:checked +.newCheckbox::before {
     border: thin solid #218625;;
-    /* border: thin solid red; */
     color:  #218625;
 }
 /*---------------------------------------------------- estilos en el checkbox subtask*/
@@ -906,7 +909,6 @@ body button:active {
     height: 16px;
     margin: 10px auto;
     border: thin solid #878787;
-    /* border: thin solid #d3d3d3; */
     border-radius: 50%;
     text-align: center;
     line-height: 16px;
@@ -915,30 +917,31 @@ body button:active {
 }
 .subtask-checkbox:checked +.subtask-checkbox-label::before {
     border: thin solid #218625;;
-    /* border: thin solid red; */
     color:  #218625;
 }
 
 /* ----------------------------------------------------------------------------------------RECORDATORIO */
-.toast__reminder {
+
+.toast__reminder{
     position: absolute;
+    top: 60px;
+    right: 50px;
     z-index: 999;
-    right: 30px;
-    top: 30px;
-    /* background-color: #000; */
 }
 
-.toast {
+.toast__content {
     position: relative;
-    width: 400px;
-    height: 80px;
+    z-index: 999;
+    width: 150px;
+    height: 45px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-weight: 500;
-    margin: 15px 0;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    background-color: rgb(255, 255, 255);
+    font-size: 1.6rem;
+    background-color: rgb(235, 235, 235);
+    /* background: rgba(0, 255, 0, 0.1); */
+    /* border: 2px solid green; */
 }
 .toast__reminder svg {
     margin: 0 2rem 0 2rem;
@@ -947,7 +950,7 @@ body button:active {
   animation: bell-shake 1s ease-in-out infinite;
   transform-origin: top center;
 }
-.toast::after{
+.toast__content::after{
     content: "";
     position: absolute;
     left: 0;
@@ -991,5 +994,45 @@ body button:active {
       min-width: unset;
       border: none;
     }
+    .menu-btn{
+    display: none; 
+
+    }
+
+    .slidebar {
+    width: 60px;  
+    padding-top: 1.5rem;
   }
+  .slidebar .span,
+  .slidebar .titleSpan,
+  .slidebar .logo-letras {
+    display: none;
+  }
+  .btn-task-sider {
+    width: 45px; 
+    font-size: 1.5rem;
+    margin: 2rem auto;
+  }
+  .menu-btn {
+    top: 2vh;
+    right: -1rem;
+    width: 3rem;
+    height: 3rem;
+  }
+  .nav a {
+    padding-left: 1rem;
+  }
+  .contenedorPerfil {
+    margin-top: 3rem;
+  }
+  .contenedorPerfil span {
+    font-size: 1.2rem;
+  }
+  .container-main{
+    margin-left: 6rem;
+  }
+}
+
+
+
   

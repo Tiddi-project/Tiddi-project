@@ -1,5 +1,7 @@
 import db from "../config/db.js"
 import bcrypt from "bcrypt"
+import crypto from "crypto"
+
 
 const mUser = {
     createUser: async (user)=>{
@@ -58,6 +60,25 @@ const mUser = {
         const add = "select * from users where id =?;"
         let [results] = await db.execute(add, [userId])
         return results
+    },
+    adminUpdate: async (userId)=>{
+        try {
+            const add = `UPDATE users SET role = ?, status = ? WHERE id = ?`
+            let [results] = await db.execute(add, [userId.rol, userId.estado, userId.id])
+            return results
+            
+        } catch (error) {
+            throw new Error("Error actualizando usuario en la base de datos");
+        }
+    },
+    disableAccount: async (userId, estado)=>{
+        try {
+            const add = `UPDATE users SET status = ? WHERE id = ?;`
+            await db.execute(add, [estado, userId])
+            
+        } catch (error) {
+            throw new Error("Error actualizando usuario en la base de datos");
+        }
     }
 }
 
