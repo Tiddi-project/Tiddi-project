@@ -61,7 +61,7 @@ export async function initVistaEstadisticas() {
     $promedioSemanaAnterior.addEventListener("click", async (e)=>{
         // FECHA = semanaAnterior(FECHA)
         FECHA = promedioSemanaAnterior(FECHA)
-        console.log(FECHA);
+        // console.log(FECHA);
         $promedioSemanaActual.textContent = obtenerRangoSemanal(FECHA)
         await aTask.taskForWeek(FECHA, $tareasPorDiaSemana, $graficaSemanaProductividad)
     })

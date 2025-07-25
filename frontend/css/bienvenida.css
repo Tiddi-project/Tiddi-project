@@ -442,3 +442,156 @@ body::selection{
 .svgToast {
     margin: 0 2rem 0 2rem;
 }
+
+/* -------------------------responsive--------------------------- */
+/* ---------------------------------- Diseño Responsivo ---------------------------------- */
+
+/* Tablet (768px o menos) */
+@media (max-width: 768px) {
+    .header{
+        height: auto;
+    }
+  .header-nav {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2rem;
+    height: auto;
+    margin: 0;
+  }
+
+  .nav-items {
+    flex-direction: wrap;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .item-link {
+    margin: 1rem 1rem;
+    font-size: 1.8rem;
+  }
+
+  .seccion-uno {
+    flex-direction: column;
+    height: auto;
+    padding-top: 12vh;
+  }
+
+  .seccion-informacion, .seccion-img {
+    width: 100%;
+    padding: 3rem;
+    text-align: center;
+    align-items: center;
+  }
+
+  .seccion-informacion div {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .descripcion-img, .descripcion-parrafo {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .seccion-descripcion {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .formulario {
+    position: static;
+    width: 90%;
+    margin-top: 2rem;
+  }
+
+  .formulario button[type="submit"] {
+    align-self: center;
+    margin: 2rem auto 0;
+  }
+
+  .contacto-anuncio {
+    width: 100%;
+    text-align: center;
+  }
+
+  .contacto-formulario {
+    width: 100%;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 2rem;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .redes {
+    margin: 0;
+  }
+}
+
+
+/* Móvil (480px o menos) */
+@media (max-width: 480px) {
+  html {
+    font-size: 55%;
+  }
+
+  .informacion-titulo {
+    font-size: 2.4rem;
+  }
+
+  .informacion-parrafo {
+    font-size: 1.6rem;
+  }
+
+  .descripcion-parrafo div {
+    width: 100%;
+  }
+
+  .anuncio-parrafo {
+    width: 90%;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .anuncio-parrafo img {
+    margin-left: 0;
+  }
+
+  .formulario-titulo {
+    font-size: 2.2rem;
+    padding-left: 0;
+    align-self: center;
+  }
+
+  .slide {
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .slide p {
+    width: 100%;
+    text-align: center;
+  }
+
+  .carrusel {
+    width: 90%;
+  }
+
+  .toast {
+    width: 90%;
+    height: auto;
+    padding: 1rem;
+    font-size: 1.4rem;
+  }
+
+  .toast__contenedor {
+    top: 2rem;
+    right: 1rem;
+  }
+}

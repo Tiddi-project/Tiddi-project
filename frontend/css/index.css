@@ -132,7 +132,9 @@ body button:active {
     margin-left: 1.6rem;  /* 10px */
     font-size: 2rem;
 }
-
+#li__admin{
+    display: none;
+}
 /*------------------------------------------------- Boton crear tarea--------------- */
 .btn-task-sider {
     width: 80%;
@@ -932,7 +934,7 @@ body button:active {
 .toast__content {
     position: relative;
     z-index: 999;
-    width: 150px;
+    width: 400px;
     height: 45px;
     display: flex;
     justify-content: flex-start;

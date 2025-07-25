@@ -1,0 +1,133 @@
+:root{
+    --color-main: #93EB96;
+    --color-form:#59ED5E;
+    --color-footer: #BFE9A5;
+    /* --color-buttom:#FCCA4C; */
+    --color-color-buttom: #218625;
+    --color-tittle: #073509;
+    --color-sesion: #F0F0EC;
+    --font-size: "Inder";
+}
+/* Reseteo de propiedades por defecto */
+html{
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: var(--font-size);
+}
+*, *::after, *::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    /* outline: thin solid; */
+
+}
+body{
+    width: 100%;
+    height: 100vh;
+    font-size: 1.6rem;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+a{
+    text-decoration: none;
+}
+/* ----------------- */
+.main__recuperacion{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: thin solid red; */
+    background-color: white;
+    /* box-shadow: 0 10px 30px rgba(0,0,0,0.1); */
+}
+.titulo__recuperacion{
+    /* border: thin solid red; */
+    display: flex;
+}
+.success-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    /* background-color: white; */
+    border-radius: 12px;
+    /* box-shadow: 0 10px 30px rgba(0,0,0,0.1); */
+    animation: fadeIn 1s ease-in-out;
+}
+
+.checkmark-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #4CAF50;
+    position: relative;
+    display: inline-block;
+    margin-right: 2rem;
+    animation: popIn 0.5s ease-out;
+}
+
+.checkmark-circle::after {
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: 28%;
+    width: 15px;
+    height: 25px;
+    border: solid white;
+    border-width: 0 6px 6px 0;
+    transform: rotate(45deg);
+    animation: drawCheck 0.4s ease forwards;
+}
+
+h1 {
+    margin-top: 1rem;
+    color: #218625;
+    font-size: 2rem;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+p {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    color: #555;
+    animation: fadeIn 1.4s ease-in-out;
+}
+
+.btn-login {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: background 0.3s;
+    animation: fadeIn 1.6s ease-in-out;
+}
+
+.btn-login:hover {
+    background-color: #45a049;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes drawCheck {
+    from { transform: rotate(45deg) scale(0); opacity: 0; }
+    to { transform: rotate(45deg) scale(1); opacity: 1; }
+}
+

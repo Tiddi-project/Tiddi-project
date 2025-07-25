@@ -22,5 +22,15 @@ d.addEventListener("DOMContentLoaded", ()=>{
         $form.reset()
     })
 
+    d.addEventListener("click", (e)=>{
+        if(e.target.matches(".eye-close")){
+            d.querySelector(".eye-close").classList.toggle("eye-open")
+            if (e.target.classList.contains("eye-open")) {
+                d.getElementById("newPassword").setAttribute("type", "text")
+            } else {
+                d.getElementById("newPassword").setAttribute("type", "password")
+            }
+        }
+    })
 
 })

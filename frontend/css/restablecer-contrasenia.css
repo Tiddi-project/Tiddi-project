@@ -95,19 +95,29 @@ a{
     margin-bottom: 5rem ;
 }
 .form__reset{
-    /* border: thin solid red; */
     width: 70%;
-    height: 20%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.form__reset input[type="password"]{
+.password-container{
     width: 50%;
+    min-width: 255.516px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0.5rem;
+    background-color: rgb(240, 240, 240);
+
+}
+.form__reset input{
+    width: 100%;
     height: 40px;
     padding-left: 1rem;
-    background-color: rgb(240, 240, 240);
+    /* background-color: rgb(240, 240, 240); */
+    background-color: transparent;
     border: none;
     outline: none;
 }
@@ -121,6 +131,25 @@ a{
     font-weight: bold;
     color: white;
     cursor: pointer;
+}
+
+/* eyes */
+
+.eye-close, .eye-open {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 10%;           /* Puedes ajustar este tamaño según tu diseño */
+    height: 35px;         /* Debe tener altura para verse */
+    display: inline-block;
+    cursor: pointer;
+}
+.eye-close {
+    background-image: url("../assets/eye-closed-svgrepo-com.svg");
+}
+.eye-open {
+    background-image: url("../assets/eye-svgrepo-com.svg");
+
 }
 /* --------------------------------------------------------- */
 .toastBox {

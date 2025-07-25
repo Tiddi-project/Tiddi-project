@@ -390,6 +390,7 @@ const aTask = {
                 throw {status: res.status, message: res.statusText, dir:res}
             }
             // vista de calendario mes
+            
             calendario(contenedorCalendario, fecha, data);
 
         } catch (error) {

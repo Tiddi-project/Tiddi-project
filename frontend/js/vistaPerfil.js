@@ -1,5 +1,6 @@
 import aUser from "../ajax/aUser.js"
 import { checkAuth } from "../ajax/auth.js"
+import toastPerfil from "./exports/toast-perfil.js"
 
 export async function initVistaPerfil() {
     const d = document
@@ -12,6 +13,8 @@ export async function initVistaPerfil() {
     const $nombreImagen = d.querySelector(".fotoPerfil__nombreArchivo")
     const $fotoDePerfil = d.querySelector(".fotoDePerfil")
     const $modalEliminacion = d.querySelector(".modal__desabilitarCuenta")
+    const $perfilToast = d.querySelector(".perfilToast")
+
 
 
     // peticion para la asignacion de valores
@@ -115,17 +118,18 @@ export async function initVistaPerfil() {
         const passwordActiva = d.querySelector(".informacionPerfil-dos").classList.contains("passActive");
 
         if (!hayImagen && !nombreHabilitado && !passwordActiva) {
-            alert("No realizaste ningún cambio.");
+            // alert("No realizaste ningún cambio");
+            toastPerfil("No realizaste ningún cambio", $perfilToast, "sin cambio")
             return;
         }
 
-        await aUser.updateUser(datosDeUsuario, $formularioPerfil)
+        await aUser.updateUser(datosDeUsuario, $formularioPerfil, $perfilToast)
         
         const user = await checkAuth();         
         $fotoDePerfil.src = user.profile_picture || '../assets/foto-de-perfil.png';
     })
     d.addEventListener("click", async (e)=>{
-        if(e.target.closest(".informacionPersonal__btn")){
+        if(e.target.closest("#eliminarCuenta")){
             $modalEliminacion.classList.add("desabilitarCuentaActive")
         }
         if(e.target.closest(".desabilitarCuenta-cancelar")){
