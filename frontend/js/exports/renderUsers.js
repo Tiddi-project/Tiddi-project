@@ -97,18 +97,18 @@ export default async function getAndRenderUsers(resultado, contenedorTable) {
                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                 </svg>
             </button>
-            <button class="eliminarUser" title="Eliminar" data-id="${usuario.id}" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="red"
-                stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-eliminarUser">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                <path d="M10 11v6" />
-                <path d="M14 11v6" />
-                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                </svg>
-            </button>
         </td>
       `;
+            // <button class="eliminarUser" title="Eliminar" data-id="${usuario.id}" >
+            //     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="red"
+            //     stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-eliminarUser">
+            //     <polyline points="3 6 5 6 21 6" />
+            //     <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+            //     <path d="M10 11v6" />
+            //     <path d="M14 11v6" />
+            //     <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+            //     </svg>
+            // </button>
       contenedorTable.appendChild($fila);
     });
 

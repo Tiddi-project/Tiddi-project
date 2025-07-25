@@ -14,6 +14,7 @@ routes.get("/user/:id", cUser.perfilUser)
 routes.patch("/user/:id", upload.single("imagen"), cUser.updatePerfilUser)
 routes.patch("/adminUpdate/:id", cUser.adminUpdate)
 routes.patch("/disableAccount/:id", cUser.disableAccount )
+routes.get("/activateAccount", cUser.activateAccount )
 // routes.post("/recuperation", cUser.recuperationUser)
 
 export default routes

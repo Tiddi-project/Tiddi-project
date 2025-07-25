@@ -2,14 +2,38 @@ import mUser from "../modules/mUser.js";
 import error from "../middlewares/error.js";
 import bcrypt from "bcrypt"
 import db from "../config/db.js"
+import crypto from "crypto";
+import { sendEmail } from "../middlewares/nodemailer.js";
 
 
 const cUser = {
     signUser: async (req, res)=>{
         try {
             let {name, email, password} = req.body
-            await mUser.createUser({name, email, password})
-            res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
+            
+            // Manejo del token
+            const activationToken = crypto.randomBytes(32).toString("hex");
+            const activationExpires = new Date(Date.now() + 1000 * 60 * 60); // 1 hora desde ahora
+
+            // Se envia a la base de datos
+            await mUser.createUser({name, email, password, activationToken, activationExpires})
+
+            // Si todo va bien se envia el enlace al correo - enlace de activación
+            const link = `http://localhost:3000/activateAccount?token=${activationToken}`; 
+
+            // Se prepara el envio del correo
+            await sendEmail({
+                to: email,
+                subject: "Activa tu cuenta",
+                html: `
+                    <h2>¡Bienvenido a TiDDi!</h2>
+                    <p>Gracias por registrarte. Por favor haz clic en el siguiente enlace para activar tu cuenta:</p>
+                    <a href="${link}">${link}</a>
+                    <p><b>Este enlace expirará en 1 hora.</b></p>
+                `
+            });
+            res.status(201).json({ success: true, message: "Usuario registrado, Revisa tu correo para activar tu cuenta"});
+            // res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
         } catch (err) {
             if (err.code === 409) {
                 return res.status(409).json({ success: false, message: err.message });
@@ -40,10 +64,17 @@ const cUser = {
             }
 
             let user = results[0]
+            // Verificación de cuenta pendiente
+            if (!user.is_verified) {
+                return res.status(403).json({
+                    success: false,
+                    message: "Debes verificar tu cuenta antes de iniciar sesión. Revisa tu correo.",
+                });
+            }
 
             // Verificar si el usuario está inactivo
             if (user.status === "inactivo") {
-                return res.status(403).json({ message: "Tu cuenta está desactivada. Contacta al administrador." });
+                return res.status(403).json({ message: "Cuenta desactivada, contacta al administrador" });
             }
             let isMatch = await bcrypt.compare(password, user.password)
 
@@ -196,6 +227,26 @@ const cUser = {
             error.e500(err, req, res)
         }
     },
+    activateAccount: async (req, res)=>{
+        try {
+            const { token } = req.query;
+
+            if (!token) {
+                return res.status(400).send("Token inválido");
+            }
+
+            await mUser.activateAccount(token)
+
+            res.redirect("/cuenta-activada.html");
+
+            // return res.status(200).json({ message: "Usuario desabilitado correctamente" });
+        } catch (err) {
+            error.e500(err, req, res)
+        }
+    },
+
+
+
     // recuperationUser: async (req, res)=>{
     //     try {
     //         let {correoUsuario} = req.body
@@ -223,5 +274,7 @@ const cUser = {
     //     }
     // }
 }
+
+
 
 export default cUser;

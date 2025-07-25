@@ -346,3 +346,149 @@ a{
         width: 0;
     }
 }
+
+/* ---------------------------- Diseño responsivo ---------------------------- */
+
+/* Tablet (≤ 768px) */
+@media (max-width: 768px) {
+    .header{
+        height: auto;
+    }
+  .sesion {
+    flex-direction: column;
+    width: 100%;
+    min-width: none;
+    height: auto;
+  }
+  .sesion-contenedor{
+    width: 100%;
+    min-width: none;
+
+  }
+  .sesion-mensaje,
+  .sesion-acceso {
+    width: 100%;
+    border-radius: 35px 35px 0 0;
+    /* padding: 2rem 2rem 4rem; */
+  }
+
+  .sesion-mensaje {
+    align-items: center;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+
+  .contenido-logo {
+    display: none;
+    width: 70%;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .sesion-mensaje h2,
+  .sesion-mensaje p {
+      padding: 1rem;
+      /* border: thin solid red; */
+    }
+    .sesion-mensaje h2{
+      font-size: 3rem;
+
+    }
+    .sesion-mensaje p{
+        width: 90%;
+      font-size: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 1.2rem;
+    }
+
+  .acceso-form {
+    width: 90%;
+    padding: 2rem 0;
+  }
+
+  .email,
+  .password-container,
+  .formulario-error {
+    width: 85%;
+  }
+
+  .envio,
+  .bton-registro {
+    width: 60%;
+  }
+
+  .toastBox {
+    left: 5%;
+    right: 5%;
+    width: 90%;
+  }
+
+  .toast {
+    width: 100%;
+  }
+}
+
+/* Móvil (≤ 480px) */
+@media (max-width: 480px) {
+  html {
+    font-size: 55%;
+  }
+
+  .header-nav {
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2rem;
+  }
+
+  .item-link {
+    font-size: 1.6rem;
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+
+  .sesion {
+    width: 95%;
+  }
+
+  .sesion-mensaje h2 {
+    font-size: 3rem;
+  }
+
+  .sesion-mensaje p {
+    font-size: 1.6rem;
+  }
+
+  .acceso-form h2 {
+    font-size: 2.4rem;
+  }
+
+  .envio,
+  .bton-registro {
+    font-size: 1.4rem;
+    height: 35px;
+  }
+
+  .enlace {
+    flex-direction: column;
+    font-size: 1.2rem;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .enlace-linea1::after,
+  .enlace-linea1::before {
+    content: none;
+  }
+
+  .toastBox {
+    left: 2%;
+    right: 2%;
+    width: 96%;
+  }
+
+  .toast {
+    height: auto;
+    padding: 1rem;
+    font-size: 1.4rem;
+  }
+}

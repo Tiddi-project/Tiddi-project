@@ -249,14 +249,23 @@
         <section class="modal__users">
             <form class="modal__users-form">
                 <section class="modal__users-encabezado">
-                    <h2 class="modal__users-titulo"> Editar registro de usuario</h2>
+                    <!-- <h2 class="modal__users-titulo"> Editar registro de usuario</h2> -->
+                    <h2 class="modal__users-titulo"> Perfil de usuario</h2>
                 </section>
                 <section class="modal__users-cuerpo">
-                    <section class="modal__cuerpo">
+                    <section class="modal__cuerpo end">
                         <div class="modal__users-id">
                             <span>ID</span>
                             <span class="span__idUser"></span>
                         </div>
+                        
+                    </section>
+                    <section class="modal__cuerpo">
+                        <div class="modal__users-nombre">
+                            <span>Nombre</span>
+                            <span class="span__nombreUser"></span>
+                        </div>
+
                         <div class="modal__users-rol">
                             <span>Rol</span>
                             <!-- <span class="span__rolUser"></span> -->
@@ -265,11 +274,12 @@
                                 <option value="usuario">Usuario</option>
                             </select>
                         </div>
+                        
                     </section>
                     <section class="modal__cuerpo">
-                        <div class="modal__users-nombre">
-                            <span>Nombre</span>
-                            <span class="span__nombreUser"></span>
+                        <div class="modal__users-correo">
+                            <span>Correo</span>
+                            <span class="span__correoUser"></span>
                         </div>
                         <div class="modal__users-estado">
                             <span>Estado</span>
@@ -284,12 +294,6 @@
                             </label> -->
                         </div>
                     </section>
-                    <section class="modal__cuerpo">
-                        <div class="modal__users-correo">
-                            <span>Correo</span>
-                            <span class="span__correoUser"></span>
-                        </div>
-                    </section>
                     
                 </section>
                 <section class="modal__users-piecero">
@@ -301,6 +305,8 @@
         </section>
         <div class="adminToast">
             <!-- <div class="toast__content">Contenido del toast</div> -->
+        </div>
+        <div class="perfilToast">
         </div>
         <section class="modal__desabilitarCuenta">
             <div class="modal__desabilitarCuenta-ventana">

@@ -19,8 +19,8 @@ const mUser = {
 
             // 2. Si no existe, insertar nuevo usuario
             const hash = await bcrypt.hash(user.password, 10)
-            const add = "insert into users (name, email, password) values (?,?,?)"
-            await db.execute(add, [user.name, user.email, hash])
+            const add = "insert into users (name, email, password, activation_token, activation_expires) values (?,?,?,?,?)"
+            await db.execute(add, [user.name, user.email, hash, user.activationToken, user.activationExpires])
 
         } catch (error) {
              throw error; // Lo pasamos al controlador
@@ -76,6 +76,26 @@ const mUser = {
             const add = `UPDATE users SET status = ? WHERE id = ?;`
             await db.execute(add, [estado, userId])
             
+        } catch (error) {
+            throw new Error("Error actualizando usuario en la base de datos");
+        }
+    },
+    activateAccount: async (token)=>{
+        try {
+            const [result] = await db.execute(
+                "SELECT * FROM users WHERE activation_token = ? AND activation_expires > NOW()",
+                [token]
+            );
+            if (result.length === 0) {
+                const error = new Error("El token es inválido o ha expirado");
+                error.status = 400;
+                throw error;
+            }
+
+            await db.execute(
+                "UPDATE users SET is_verified = 1, activation_token = NULL, activation_expires = NULL WHERE id = ?",
+                [result[0].id]
+            );
         } catch (error) {
             throw new Error("Error actualizando usuario en la base de datos");
         }

@@ -1,3 +1,4 @@
+import toastPerfil from "../js/exports/toast-perfil.js"
 import toast from "../js/exports/toast.js"
 
 
@@ -20,7 +21,7 @@ const aUser = {
             })
             let data = await res.json()
             if (!res.ok) throw {status: res.status, message: data.message}
-            toast("Registro exitoso", toastContainer, res.status)
+            toast("Revisa tu correo para activar tu cuenta", toastContainer, res.status)
             form.reset()
 
         } catch (error) {
@@ -123,7 +124,7 @@ const aUser = {
             console.log(`Error: ${error.status}: ${message}`);
         }
     },
-    updateUser: async (dataUser, formulario)=>{
+    updateUser: async (dataUser, formulario, contenedorToast)=>{
         try {
             // ID del usuario
             let userId = dataUser.id
@@ -157,8 +158,9 @@ const aUser = {
             
             if(!res.ok)  throw {status: res.status, message: res.statusText, dir:res}
             let data = await res.json()
-
-            alert("Perfil actualizado correctamente ✅");
+            // toast(data.message, contenedorToast, res.status)
+            toastPerfil(data.message, contenedorToast, res.status)
+            // alert("Perfil actualizado correctamente ✅");
             console.log(data);
             
         } catch (error) {

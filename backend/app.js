@@ -14,7 +14,8 @@ import {isAuthenticated} from "./middlewares/auth.js"
 import FileStore from "session-file-store"
 import comentarios from "./routes/rComentarios.js"
 import restablecer from "./routes/rRestablecer.js"
-
+import fs from "fs";
+ 
 // crear el servidor
 const app = express()
 const PORT = 3000
@@ -23,6 +24,34 @@ const PORT = 3000
 // const __dirname = process.cwd()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Limpieza de archivos de sesión corruptos al iniciar
+const sessionPath = path.join(__dirname, "sessions");
+
+// if (fs.existsSync(sessionPath)) {
+//   fs.readdirSync(sessionPath).forEach(file => {
+//     try {
+//       fs.unlinkSync(path.join(sessionPath, file));
+//     } catch (err) {
+//       console.warn("No se pudo eliminar el archivo de sesión:", file, err.message);
+//     }
+//   });
+// }
+
+if (fs.existsSync(sessionPath)) {
+  fs.readdirSync(sessionPath).forEach(file => {
+    const filePath = path.join(sessionPath, file);
+    try {
+      const stats = fs.statSync(filePath);
+      if (stats.size === 0) {
+        fs.unlinkSync(filePath); // Elimina solo archivos vacíos
+      }
+    } catch (err) {
+      console.warn("Error leyendo archivo de sesión:", file, err.message);
+    }
+  });
+}
+
 
 // uso de los middleware
 app.use(cors({
@@ -40,6 +69,9 @@ app.use(express.urlencoded({extended:true}))
 
 // Manejo de sesiones
 const fileStore = FileStore(session);
+
+
+
 app.use(
   session({
     store: new fileStore({
@@ -74,6 +106,8 @@ app.use(error.e401);
 app.use(error.e403);
 app.use(error.e404);
 app.use(error.e500);
+
+
 
 app.listen(PORT, ()=>{
     console.log(`Conexion establecida en http://localhost:${PORT}`);

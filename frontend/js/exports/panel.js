@@ -9,6 +9,10 @@ export default function panelActive(panelTask, button){
         panelTask.querySelector('input[name="id"]').value = ""
 
         // Limpiar las imagenes
+        panelTask.querySelector(".imagen-insertada").src = ""
+        panelTask.querySelector(".imagen-insertada").style.display = "none"
+        panelTask.querySelector(".btn-eliminar-imagen").style.display = "none"
+        //  Limpieza de imagen
         panelTask.querySelector('.testTaskImageFail').style.display = "none"
         panelTask.querySelector('#imagen').value = ""
 

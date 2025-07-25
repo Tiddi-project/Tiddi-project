@@ -105,12 +105,20 @@ export function calendarioPorSemana(contenedor, fecha, eventos){
     console.log(hoy);
 
     diasSemana.forEach(dia=>{
-        const fechaCorta = new Date(dia).toISOString().split("T")[0];
+         // comparamos las fechas
+        // const fechaComparar = new Date(anio, mes, i).toISOString().split('T')[0];
+        const fechaComparar = dia.toLocaleDateString("sv-SE");
+        const hoy = new Date().toLocaleDateString("sv-SE");
+        const esHoy = fechaComparar === hoy ? "dia-actual" : "";
+
+
+        const fechaCorta = dia.toISOString().split("T")[0];
+        /*
         let diaNumero = new Date(fechaCorta).getDate()
         let diaHoy = new Date(hoy).getDate()
         
         const esHoy = diaNumero === diaHoy;
-
+        */
         const eventosDelDia = eventos.filter((evento) => {
             // evento.deadline.startsWith(fechaCorta)
             if(!evento.deadline) return false;
@@ -119,7 +127,8 @@ export function calendarioPorSemana(contenedor, fecha, eventos){
             return eventoFecha === fechaCorta;
         }
         );
-        // console.log(eventosDelDia);
+        console.log(eventosDelDia);
+
         let eventosHTML = eventosDelDia
         .map(evento => 
             `<div class="evento" style="background-color: #${evento.color};">
@@ -130,12 +139,17 @@ export function calendarioPorSemana(contenedor, fecha, eventos){
             </div>`
         ).join("");
         
+        // contenedor.innerHTML += `
+        // <div class="semana__dia">
+        //     <h5 class="${esHoy ? "hoy" : ""}">${fechaCorta.slice(-2)}</h5>
+        // <div class="eventos_semana">${eventosHTML}</div>
+        // </div>`;
+        
         contenedor.innerHTML += `
         <div class="semana__dia">
-            <h5 class="${esHoy ? "hoy" : ""}">${fechaCorta.slice(-2)}</h5>
+            <h5 class="${esHoy}">${fechaCorta.slice(-2)}</h5>
         <div class="eventos_semana">${eventosHTML}</div>
         </div>`;
-        
         
     })
     

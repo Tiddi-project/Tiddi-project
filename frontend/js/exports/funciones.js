@@ -144,8 +144,8 @@ export function obtenerRangoMensual(fecha) {
 export function graficaProductividad (svgCirculo, datos){
     let totalTasks = datos.totalTareasEnLaSemana;
     let completedTasks = datos.totalTareasCompletadas;
-    console.log(totalTasks);
-    console.log(completedTasks);
+    // console.log(totalTasks);
+    // console.log(completedTasks);
     const circumference = 2 * Math.PI * 50; // Longitud total del círculo
 
     let percent = 0;

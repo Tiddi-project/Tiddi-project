@@ -261,6 +261,32 @@
     margin: 0;
     cursor: pointer;
 }
+.perfilToast{
+    position: absolute;
+    top: 10px;
+    /* right: 40%; */
+    z-index: 999;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* border: thick solid red; */
+}
+.perfilToast svg {
+    margin: 0 2rem 0 2rem;
+}
+.perfilToast__content {
+    position: relative;
+    z-index: 999;
+    width: 400px;
+    height: 45px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.6rem;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+}
 
 /* --------------------- Tablets (≤768px) --------------------- */
 @media (max-width: 768px) {
